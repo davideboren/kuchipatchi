@@ -7,6 +7,7 @@
 struct Frame{
   const uint8_t *bitmap;
   int xPos,yPos;
+  int xDir;
 
-  Frame(const uint8_t *bmp, int x, int y);
+  Frame(const uint8_t *bmp, int x, int y, int dir);
 };

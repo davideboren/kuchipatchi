@@ -20,12 +20,13 @@ void setup() {
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C); 
   display.clearDisplay();
   display.invertDisplay(true);
+  randomSeed(analogRead(0));
 
-  Monster Kuchipatchi(kuchipatchi1,kuchipatchi2);
-  //Frame kuchi(kuchipatchi1,64,32);
   Controller cpu;
-  cpu.drawFrame(Kuchipatchi.getFrame());
-  display.display();
+
+  MoverMon Kuchipatchi(kuchipatchi1,kuchipatchi2);
+  cpu.addMonster(Kuchipatchi);
+  cpu.activate();
 }
 
 void loop() {
