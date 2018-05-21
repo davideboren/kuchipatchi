@@ -1,3 +1,10 @@
+/*
+ * Kuchipatchi
+ * 
+ * Arduino Tamagotchi/Digimon Simulator 
+ * Using 0.96" OLED Screen
+ */
+
 #include <SPI.h>
 #include <Wire.h>
 #include <Adafruit_GFX.h>

@@ -1,7 +1,7 @@
 /*
  * Monster
  * 
- * AI for individual monster
+ * Base class for all monsters
  */
 
 Monster::Monster(){

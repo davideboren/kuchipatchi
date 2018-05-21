@@ -1,7 +1,7 @@
 /*
  * Monster.h
  * 
- * AI for individual monster
+ * Base class for all monsters
  */
 #ifndef MONSTER_H
 #define MONSTER_H
