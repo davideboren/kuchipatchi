@@ -16,6 +16,8 @@
 #include "Controller.h"
 #include "Monster.h"
 #include "MoverMon.h"
+#include "MonsterRef.h"
+#include "MonsterDB.h"
 
 #define OLED_RESET 4
 Adafruit_SSD1306 display(OLED_RESET);
@@ -29,6 +31,7 @@ void setup() {
   display.invertDisplay(true);
   randomSeed(analogRead(0));
 
+  //MonsterDB mdb;
   Controller cpu;
 
   MoverMon Kuchipatchi(kuchipatchi1,kuchipatchi2);

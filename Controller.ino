@@ -17,7 +17,7 @@ void Controller::addMonster(Monster &m){
 }
 
 void Controller::activate(){
-  while(1){  
+  while(1){
     m1->heartbeat();
     display.clearDisplay();
     drawFrame(m1->getFrame());

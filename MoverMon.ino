@@ -9,8 +9,8 @@ MoverMon::MoverMon(const uint8_t *bitmap1, const uint8_t *bitmap2){
   bmp2 = bitmap2;
   currentBmp = bitmap1;
   
-  xBoundL = -16;
-  xBoundR = 140;
+  xBoundL = 0;
+  xBoundR = 112;
 
   xDir = -1;
 }
@@ -42,6 +42,7 @@ void MoverMon::stand(){
 }
 
 void MoverMon::heartbeat(){
+  Serial.println(xPos);
   //Choose next move
   if(moveQueue.empty()){
     random(8)?walk():stand();

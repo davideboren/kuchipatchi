@@ -12,9 +12,9 @@ class Monster{
     int xPos, yPos;
   
   public:
-    virtual Frame getFrame();
     Monster();
     Monster(const uint8_t *bitmap1, const uint8_t *bitmap2);
+    virtual Frame getFrame();
     virtual void heartbeat();
 };
 
