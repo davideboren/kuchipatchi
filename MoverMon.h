@@ -5,6 +5,7 @@
  */
 
 #include <queue>
+#include "MonsterDB.h"
  
 class MoverMon : public Monster{
   int xDir;      //-1 == facing left, 1 == facing right
@@ -15,9 +16,11 @@ class MoverMon : public Monster{
   public:
     MoverMon(const uint8_t *bitmap1, const uint8_t *bitmap2);
     MoverMon(const uint8_t *bitmap1, const uint8_t *bitmap2, int xBndL, int xBndR);
-    void walk();
-    void stand();
+    MoverMon(MonsterDB &mdb, int monsterID);
+    void queueWalk();
+    void queueStand();
     void heartbeat();
     Frame getFrame();
+    bool inBounds();
 };
 

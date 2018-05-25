@@ -13,6 +13,9 @@ MoverMon::MoverMon(const uint8_t *bitmap1, const uint8_t *bitmap2){
   xBoundR = 112;
 
   xDir = -1;
+
+  age = 0;
+  lifespan = 50;
 }
 
 MoverMon::MoverMon(const uint8_t *bitmap1, const uint8_t *bitmap2, int xBndL, int xBndR){
@@ -26,15 +29,20 @@ MoverMon::MoverMon(const uint8_t *bitmap1, const uint8_t *bitmap2, int xBndL, in
   xDir = -1;
 }
 
+MoverMon::MoverMon(MonsterDB &mdb, int monsterID){
+  bmp1 = mdb.getSprite1(monsterID);
+  bmp2 = mdb.getSprite2(monsterID);
+}
 
-void MoverMon::walk(){
+
+void MoverMon::queueWalk(){
   moveQueue.push(1);
   moveQueue.push(1);
   moveQueue.push(2);
   moveQueue.push(2);
 }
 
-void MoverMon::stand(){
+void MoverMon::queueStand(){
   moveQueue.push(3);
   moveQueue.push(4);
   moveQueue.push(3);
@@ -42,20 +50,24 @@ void MoverMon::stand(){
 }
 
 void MoverMon::heartbeat(){
-  Serial.println(xPos);
+  //Increment Age
+  updateAge();
+  
   //Choose next move
   if(moveQueue.empty()){
-    random(8)?walk():stand();
+    random(8)?queueWalk():queueStand();
   }
 
   //Random Chance to turn around
-  if(!random(12)){ xDir *= -1; }
+  if(!random(12) && inBounds()){ 
+    xDir *= -1; 
+  }
   
   //Turn around if up against a boundary
-  if((xPos <= xBoundL) || (xPos >= xBoundR)){
+  if(!inBounds()){
     xDir *= -1;
   }
-  //
+  
   switch(moveQueue.front()){
     case 1: //Move with sprite 1
       currentBmp = bmp1;
@@ -77,5 +89,13 @@ void MoverMon::heartbeat(){
 
 Frame MoverMon::getFrame(){
   return Frame(currentBmp,xPos,yPos,xDir);
+}
+
+bool MoverMon::inBounds(){
+  if((xPos > xBoundL) && (xPos < xBoundR)){
+    return true;
+  } else {
+    return false;
+  }
 }
 

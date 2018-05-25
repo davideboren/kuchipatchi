@@ -8,8 +8,10 @@
  
 class Controller{
   private:
+    int monArrayPos = 0;
+    
   public:
-    Monster *m1;
+    Monster *mon[5];
     void drawFrame(Frame f);
     void addMonster(Monster &m);
     void activate();

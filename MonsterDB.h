@@ -1,3 +1,7 @@
+#ifndef MONSTERDB_H
+#define MONSTERDB_H
+
+#include "MonsterRef.h"
 struct MonsterDB{
   MonsterRef monsterLookups [];
   MonsterDB();
@@ -6,3 +10,4 @@ struct MonsterDB{
   const uint8_t * getSprite2(int id);
 };
 
+#endif

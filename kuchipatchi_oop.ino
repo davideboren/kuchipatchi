@@ -31,11 +31,7 @@ void setup() {
   display.invertDisplay(true);
   randomSeed(analogRead(0));
 
-  //MonsterDB mdb;
   Controller cpu;
-
-  MoverMon Kuchipatchi(kuchipatchi1,kuchipatchi2);
-  cpu.addMonster(Kuchipatchi);
   cpu.activate();
 }
 

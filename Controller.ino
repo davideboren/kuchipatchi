@@ -13,14 +13,23 @@ void Controller::drawFrame(Frame f){
 }
 
 void Controller::addMonster(Monster &m){
-  m1 = &m;
+  mon[monArrayPos] = &m;
+  monArrayPos++;
 }
 
 void Controller::activate(){
+  MonsterDB mdb;
+  MoverMon Kurotsubutchi(mdb.getSprite1(idKurotsubutchi),mdb.getSprite2(idKurotsubutchi));
+  //MoverMon Kurotsubutchi(mdb,idKuchipatchi);
+  addMonster(Kurotsubutchi);
+  
   while(1){
-    m1->heartbeat();
     display.clearDisplay();
-    drawFrame(m1->getFrame());
+    for(int i = 0; i < monArrayPos; i++){
+      
+      mon[i] -> heartbeat();
+      drawFrame(mon[i] -> getFrame());
+    }
     display.display();
     delay(500);
   }
