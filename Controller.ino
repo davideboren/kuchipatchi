@@ -19,8 +19,8 @@ void Controller::addMonster(Monster &m){
 
 void Controller::activate(){
   MonsterDB mdb;
-  MoverMon Kurotsubutchi(mdb.getSprite1(idKurotsubutchi),mdb.getSprite2(idKurotsubutchi));
-  //MoverMon Kurotsubutchi(mdb,idKuchipatchi);
+  //MoverMon Kurotsubutchi(mdb.getSprite1(idKurotsubutchi),mdb.getSprite2(idKurotsubutchi));
+  MoverMon Kurotsubutchi(mdb,idKuchipatchi);
   addMonster(Kurotsubutchi);
   
   while(1){
