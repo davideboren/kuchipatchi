@@ -8,7 +8,9 @@ struct ActiveMonsterDB{
   Monster * monsters_p[5];
 
   ActiveMonsterDB(MonsterDB mondb);
+  void addMonster(int id);
   void addMover(int id);
   Monster * getMonster(int pos);
+  int numActiveMonsters();
 };
 
