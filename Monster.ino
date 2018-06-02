@@ -24,8 +24,12 @@ Frame Monster::getFrame(){
   return Frame(currentBmp,xPos,yPos,-1);
 }
 
-void Monster::setSprites(const uint8_t *bitmap1, const uint8_t *bitmap2){
+void Monster::setSprite1(const uint8_t *bitmap1){
   bmp1 = bitmap1;
+  currentBmp = bmp1;
+}
+
+void Monster::setSprite2(const uint8_t *bitmap2){
   bmp2 = bitmap2;
 }
 

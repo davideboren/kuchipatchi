@@ -18,7 +18,8 @@ class Monster{
     Monster();
     Monster(const uint8_t *bitmap1, const uint8_t *bitmap2);
     virtual Frame getFrame();
-    void setSprites(const uint8_t *bitmap1, const uint8_t *bitmap2);
+    void setSprite1(const uint8_t *bitmap1);
+    void setSprite2(const uint8_t *bitmap2);
     virtual void heartbeat();
     bool agedOut();
 };

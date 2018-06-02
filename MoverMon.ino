@@ -3,6 +3,15 @@
  * 
  * AI for monster that moves left to right
  */
+MoverMon::MoverMon(){
+  xBoundL = 0;
+  xBoundR = 112;
+  xDir = -1;
+  age = 0;
+  lifespan = 100;
+  xPos = 56;
+  yPos = 32;
+}
 
 MoverMon::MoverMon(const uint8_t *bitmap1, const uint8_t *bitmap2){
   bmp1 = bitmap1;
@@ -27,10 +36,6 @@ MoverMon::MoverMon(const uint8_t *bitmap1, const uint8_t *bitmap2, int xBndL, in
   xBoundR = xBndR;
 
   xDir = -1;
-}
-
-MoverMon::MoverMon(){
-  
 }
 
 

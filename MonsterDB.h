@@ -4,7 +4,7 @@
 #include "MonsterRef.h"
 #include "Monster.h"
 struct MonsterDB{
-  MonsterRef monsterRepo [];
+  MonsterRef monsterRepo[10];
   MonsterDB();
 
   const uint8_t *   getSprite1(int id);

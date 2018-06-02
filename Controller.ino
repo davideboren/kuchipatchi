@@ -37,24 +37,20 @@ void Controller::saveMonsterID(int id){
 
 void Controller::activate(){
   MonsterDB mdb;
-  MoverMon m1;
+  MoverMon mover1;
 
-  const uint8_t *k1 = kuchipatchi1;
-  //saveMonsterID(idKuchipatchi);
-  
+  saveMonsterID(idKurotsubutchi);
   
   int monID = getSavedMonsterID();
   int monType = mdb.getMonsterType(monID);
   Serial.print("Got monster type: "); Serial.println(monType);
-  MoverMon kuchi(mdb.getSprite1(idKuchipatchi),mdb.getSprite2(idKuchipatchi));
-  addMonster(kuchi);
 
-  /*if(monType == 1){
-    m1.setSprites(mdb.getSprite1(monID),mdb.getSprite2(monID));
-    addMonster(m1);
-  }*/
-
-  
+  switch(monType){
+    case 1:
+      mover1.setSprite1(mdb.getSprite1(monID));
+      mover1.setSprite2(mdb.getSprite2(monID));
+      addMonster(mover1);
+  }
   
   while(1){
     display.clearDisplay();

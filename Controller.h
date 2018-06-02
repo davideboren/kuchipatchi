@@ -5,6 +5,7 @@
  */
  
 #include "Monster.h"
+#include "MonsterDB.h"
  
 class Controller{
   private:
