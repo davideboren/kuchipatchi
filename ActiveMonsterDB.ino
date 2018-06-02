@@ -14,7 +14,10 @@ void ActiveMonsterDB::addMonster(int id){
 
 void ActiveMonsterDB::addMover(int id){
   pacers[pacerCount] = MoverMon(mdb.getSprite1(id),mdb.getSprite2(id));
+  //vPacers.push_back(MoverMon(mdb.getSprite1(id),mdb.getSprite2(id)));
+  
   monsters_p[pMonCount] = &pacers[pacerCount];
+  //monsters_p[pMonCount] = &vPacers.front();
   pacerCount++;
   pMonCount++;
 }
