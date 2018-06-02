@@ -16,7 +16,7 @@ class MoverMon : public Monster{
   public:
     MoverMon(const uint8_t *bitmap1, const uint8_t *bitmap2);
     MoverMon(const uint8_t *bitmap1, const uint8_t *bitmap2, int xBndL, int xBndR);
-    MoverMon(MonsterDB &mdb, int monsterID);
+    MoverMon();
     void queueWalk();
     void queueStand();
     void heartbeat();

@@ -29,9 +29,8 @@ MoverMon::MoverMon(const uint8_t *bitmap1, const uint8_t *bitmap2, int xBndL, in
   xDir = -1;
 }
 
-MoverMon::MoverMon(MonsterDB &mdb, int monsterID){
-  bmp1 = mdb.getSprite1(monsterID);
-  bmp2 = mdb.getSprite2(monsterID);
+MoverMon::MoverMon(){
+  
 }
 
 
@@ -88,6 +87,7 @@ void MoverMon::heartbeat(){
 }
 
 Frame MoverMon::getFrame(){
+  //Serial.print("getFrame Addr: "); Serial.println((long)&currentBmp);
   return Frame(currentBmp,xPos,yPos,xDir);
 }
 

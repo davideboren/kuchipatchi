@@ -24,6 +24,11 @@ Frame Monster::getFrame(){
   return Frame(currentBmp,xPos,yPos,-1);
 }
 
+void Monster::setSprites(const uint8_t *bitmap1, const uint8_t *bitmap2){
+  bmp1 = bitmap1;
+  bmp2 = bitmap2;
+}
+
 
 //Age Functions
 void Monster::updateAge(){
