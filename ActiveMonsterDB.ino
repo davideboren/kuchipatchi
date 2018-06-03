@@ -1,7 +1,5 @@
 ActiveMonsterDB::ActiveMonsterDB(MonsterDB mondb){
   mdb = mondb;
-  pacerCount = 0;
-  pMonCount = 0;
 }
 
 void ActiveMonsterDB::addMonster(int id){
@@ -13,10 +11,8 @@ void ActiveMonsterDB::addMonster(int id){
 }
 
 void ActiveMonsterDB::addMover(int id){
-  pacers[pacerCount] = MoverMon(mdb.getSprite1(id),mdb.getSprite2(id));
-  monsters_p[pMonCount] = &pacers[pacerCount];
-  pacerCount++;
-  pMonCount++;
+  pacers.push_back(MoverMon(mdb.getSprite1(id),mdb.getSprite2(id)));
+  monsters_p.push_back(&pacers.back());
 }
 
 Monster * ActiveMonsterDB::getMonster(int pos){
@@ -24,6 +20,6 @@ Monster * ActiveMonsterDB::getMonster(int pos){
 }
 
 int ActiveMonsterDB::numActiveMonsters(){
-  return pMonCount;
+  return monsters_p.size();
 }
 

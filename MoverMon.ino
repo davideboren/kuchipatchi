@@ -8,7 +8,7 @@ MoverMon::MoverMon(){
   xBoundR = 112;
   xDir = -1;
   age = 0;
-  lifespan = 100;
+  lifespan = 1000;
   xPos = 56;
   yPos = 32;
 }
@@ -24,7 +24,7 @@ MoverMon::MoverMon(const uint8_t *bitmap1, const uint8_t *bitmap2){
   xDir = -1;
 
   age = 0;
-  lifespan = 50;
+  lifespan = 1000;
 }
 
 MoverMon::MoverMon(const uint8_t *bitmap1, const uint8_t *bitmap2, int xBndL, int xBndR){

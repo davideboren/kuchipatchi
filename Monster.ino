@@ -37,6 +37,7 @@ void Monster::setSprite2(const uint8_t *bitmap2){
 //Age Functions
 void Monster::updateAge(){
   age+=5;
+  //Serial.print("Age: ");Serial.println(age);
 }
 
 bool Monster::agedOut(){

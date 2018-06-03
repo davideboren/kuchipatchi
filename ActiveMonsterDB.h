@@ -1,11 +1,11 @@
+#include <vector>
+
 struct ActiveMonsterDB{
   MonsterDB mdb;
-  
-  int pacerCount;
-  MoverMon pacers[2];
 
-  int pMonCount;
-  Monster * monsters_p[5];
+  std::vector<MoverMon> pacers;
+
+  std::vector<Monster*> monsters_p;
 
   ActiveMonsterDB(MonsterDB mondb);
   void addMonster(int id);
