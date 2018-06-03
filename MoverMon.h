@@ -14,8 +14,7 @@ class MoverMon : public Monster{
   std::queue<int> moveQueue;
 
   public:
-    MoverMon(const uint8_t *bitmap1, const uint8_t *bitmap2);
-    MoverMon(const uint8_t *bitmap1, const uint8_t *bitmap2, int xBndL, int xBndR);
+    MoverMon(const uint8_t *bitmap1, const uint8_t *bitmap2,unsigned int age, unsigned int lifespan, int next);
     MoverMon();
     void queueWalk();
     void queueStand();

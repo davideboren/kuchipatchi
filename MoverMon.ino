@@ -7,13 +7,13 @@ MoverMon::MoverMon(){
   xBoundL = 0;
   xBoundR = 112;
   xDir = -1;
-  age = 0;
-  lifespan = 1000;
+  monsterAge = 0;
+  monsterLifespan = 500;
   xPos = 56;
   yPos = 32;
 }
 
-MoverMon::MoverMon(const uint8_t *bitmap1, const uint8_t *bitmap2){
+MoverMon::MoverMon(const uint8_t *bitmap1, const uint8_t *bitmap2,unsigned int age, unsigned int lifespan, int next){
   bmp1 = bitmap1;
   bmp2 = bitmap2;
   currentBmp = bitmap1;
@@ -23,27 +23,18 @@ MoverMon::MoverMon(const uint8_t *bitmap1, const uint8_t *bitmap2){
 
   xDir = -1;
 
-  age = 0;
-  lifespan = 1000;
+  monsterAge = age;
+  monsterLifespan = lifespan;
+
+  nextMonster = next;
 }
-
-MoverMon::MoverMon(const uint8_t *bitmap1, const uint8_t *bitmap2, int xBndL, int xBndR){
-  bmp1 = bitmap1;
-  bmp2 = bitmap2;
-  currentBmp = bitmap1;
-  
-  xBoundL = xBndL;
-  xBoundR = xBndR;
-
-  xDir = -1;
-}
-
 
 void MoverMon::queueWalk(){
   moveQueue.push(1);
   moveQueue.push(1);
   moveQueue.push(2);
   moveQueue.push(2);
+  Serial.println("Queued Walk");
 }
 
 void MoverMon::queueStand(){
@@ -51,14 +42,17 @@ void MoverMon::queueStand(){
   moveQueue.push(4);
   moveQueue.push(3);
   moveQueue.push(4);
+  Serial.println("Queued Stand");
 }
 
 void MoverMon::heartbeat(){
+  Serial.println("Heartbeat received");
   //Increment Age
   updateAge();
   
   //Choose next move
   if(moveQueue.empty()){
+    Serial.println("Entered moveQueue");
     random(8)?queueWalk():queueStand();
   }
 
