@@ -14,9 +14,9 @@ class Controller{
     
   public:
     Controller();
-    //Monster* mon[5];
+    Monster* mon[5];
     void drawFrame(Frame f);
-    //void addMonster(Monster &m);
+    void addMonster(Monster &m);
     int getSavedMonsterID();
     void saveMonsterID(int id);
     void activate();

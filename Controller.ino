@@ -19,6 +19,11 @@ void Controller::drawFrame(Frame f){
   }
 }
 
+void Controller::addMonster(Monster &m){
+  mon[monArrayPos] = &m;
+  monArrayPos++;
+}
+
 int Controller::getSavedMonsterID(){
   int id = 1;
   EEPROM.get(eMonsterIdAddr,id);
@@ -32,19 +37,27 @@ void Controller::saveMonsterID(int id){
 
 void Controller::activate(){
   MonsterDB mdb;
-  ActiveMonsterDB amdb(mdb);
+  MoverMon mover1;
 
-  //saveMonsterID(idKurotsubutchi);  
+  saveMonsterID(idKurotsubutchi);
+  
   int monID = getSavedMonsterID();
+  int monType = mdb.getMonsterType(monID);
+  Serial.print("Got monster type: "); Serial.println(monType);
 
-  amdb.addMonster(monID);
-  amdb.addMonster(idKuchipatchi);
+  switch(monType){
+    case 1:
+      mover1.setSprite1(mdb.getSprite1(monID));
+      mover1.setSprite2(mdb.getSprite2(monID));
+      addMonster(mover1);
+  }
   
   while(1){
     display.clearDisplay();
-    for(int i = 0; i < amdb.numActiveMonsters(); i++){
-      amdb.getMonster(i) -> heartbeat();
-      drawFrame(amdb.getMonster(i) -> getFrame());
+    for(int i = 0; i < monArrayPos; i++){
+      
+      mon[i] -> heartbeat();
+      drawFrame(mon[i] -> getFrame());
     }
     display.display();
     delay(500);
