@@ -3,9 +3,9 @@
 struct ActiveMonsterDB{
   MonsterDB mdb;
 
-  //std::vector<MoverMon> pacers;
+  std::vector<MoverMon> vPacers;
 
-  //std::vector<Monster*> monsters_p;
+  std::vector<Monster*> vMonsters_p;
 
   MoverMon pacers [5];
   int pacerPos;
