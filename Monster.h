@@ -10,8 +10,8 @@ class Monster{
   protected:
     const uint8_t *bmp1, *bmp2, *currentBmp;
     int xPos, yPos;
-    unsigned int age;
-    unsigned int lifespan;
+    unsigned int monsterAge;
+    unsigned int monsterLifespan;
     void updateAge();
   
   public:
@@ -21,7 +21,9 @@ class Monster{
     void setSprite1(const uint8_t *bitmap1);
     void setSprite2(const uint8_t *bitmap2);
     virtual void heartbeat();
+    virtual int getNextMonsterID();
     bool agedOut();
+    int nextMonster;
 };
 
 #endif

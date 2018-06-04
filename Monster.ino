@@ -36,15 +36,17 @@ void Monster::setSprite2(const uint8_t *bitmap2){
 
 //Age Functions
 void Monster::updateAge(){
-  age+=5;
+  monsterAge+=5;
+  Serial.print("Age Updated: ");Serial.println(monsterAge);
 }
 
 bool Monster::agedOut(){
-  return age >= lifespan;
+  return monsterAge >= monsterLifespan;
 }
 
-
-
+int Monster::getNextMonsterID(){
+  return nextMonster;
+}
 
 
 

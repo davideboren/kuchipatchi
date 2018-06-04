@@ -10,6 +10,7 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 #include <EEPROM.h>
+#include <vector>
 
 #include "Frame.h"
 #include "bitmaps.h"
@@ -31,7 +32,7 @@ void setup() {
   display.clearDisplay();
   display.invertDisplay(true);
   randomSeed(analogRead(0));
-
+  
   Controller cpu;
   cpu.activate();
 }

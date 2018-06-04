@@ -9,8 +9,7 @@ Controller::Controller(){
 }
 
 void Controller::drawFrame(Frame f){
-  Serial.print("Drawing bitmap at: ");
-  Serial.println((long)f.bitmap);
+  //Serial.print("Drawing bitmap at: ");Serial.println((long)f.bitmap);
 
   if(f.xDir == -1){
     display.drawScaledBitmap(f.xPos,f.yPos,f.bitmap,16,16,1,2);
@@ -41,10 +40,18 @@ void Controller::activate(){
   amdb.addMonster(idKuchipatchi);
   
   while(1){
+    Serial.println("Looping");
     display.clearDisplay();
     for(int i = 0; i < amdb.numActiveMonsters(); i++){
       amdb.getMonster(i) -> heartbeat();
-      drawFrame(amdb.getMonster(i) -> getFrame());
+      if(amdb.getMonster(i) -> agedOut()){
+        int nextMon = amdb.getMonster(i) -> getNextMonsterID();
+        amdb.deleteMonster(i);
+        amdb.addMonster(nextMon);
+        i--;   //Adjust loop position to account for removed entry
+      } else {
+        drawFrame(amdb.getMonster(i) -> getFrame());
+      }
     }
     display.display();
     delay(500);
