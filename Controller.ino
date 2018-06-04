@@ -37,7 +37,7 @@ void Controller::activate(){
   int monID = getSavedMonsterID();
 
   amdb.addMonster(monID);
-  amdb.addMonster(monID);
+  amdb.addMonster(idKuchipatchi);
   
   while(1){
     Serial.println("Looping");
@@ -54,7 +54,7 @@ void Controller::activate(){
       }
     }
     display.display();
-    delay(100);
+    delay(500);
   }
 }
 

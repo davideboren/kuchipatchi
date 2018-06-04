@@ -23,6 +23,8 @@ MoverMon::MoverMon(const uint8_t *bitmap1, const uint8_t *bitmap2,unsigned int a
 
   xDir = -1;
 
+  movequeuePos = 0;
+
   monsterAge = age;
   monsterLifespan = lifespan;
 
@@ -30,18 +32,22 @@ MoverMon::MoverMon(const uint8_t *bitmap1, const uint8_t *bitmap2,unsigned int a
 }
 
 void MoverMon::queueWalk(){
-  moveQueue.push(1);
-  moveQueue.push(1);
-  moveQueue.push(2);
-  moveQueue.push(2);
+  movequeue[0] = 1;
+  movequeue[1] = 1;
+  movequeue[2] = 2;
+  movequeue[3] = 2;
+  
+  movequeuePos = 0;
   Serial.println("Queued Walk");
 }
 
 void MoverMon::queueStand(){
-  moveQueue.push(3);
-  moveQueue.push(4);
-  moveQueue.push(3);
-  moveQueue.push(4);
+  movequeue[0] = 3;
+  movequeue[1] = 4;
+  movequeue[2] = 3;
+  movequeue[3] = 4;
+  
+  movequeuePos = 0;
   Serial.println("Queued Stand");
 }
 
@@ -51,7 +57,7 @@ void MoverMon::heartbeat(){
   updateAge();
   
   //Choose next move
-  if(moveQueue.empty()){
+  if(movequeuePos > 3){
     Serial.println("Entered moveQueue");
     random(8)?queueWalk():queueStand();
   }
@@ -66,7 +72,8 @@ void MoverMon::heartbeat(){
     xDir *= -1;
   }
   
-  switch(moveQueue.front()){
+  //switch(moveQueue.front()){
+  switch(movequeue[movequeuePos]){
     case 1: //Move with sprite 1
       currentBmp = bmp1;
       xPos += xDir*4;
@@ -82,7 +89,7 @@ void MoverMon::heartbeat(){
       currentBmp = bmp2;
       break;
   }
-  moveQueue.pop();
+  movequeuePos++;
 }
 
 Frame MoverMon::getFrame(){
