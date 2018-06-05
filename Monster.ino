@@ -1,6 +1,6 @@
 /*
  * Monster
- * 
+ *
  * Base class for all monsters
  */
 
@@ -14,7 +14,7 @@ Monster::Monster(const uint8_t *bitmap1, const uint8_t *bitmap2){
   bmp1 = bitmap1;
   bmp2 = bitmap2;
   currentBmp = bmp1;
-  
+
   xPos = 56; // Centered
   yPos = 32;
 };
@@ -50,8 +50,8 @@ int Monster::getNextMonsterID(){
 
 
 
-//Workaround for Arduino STL non-compliance
-namespace std {
+//Workaround for Arduino STL non-compliance (no need after removing std::queue)
+/*namespace std {
   void __throw_bad_alloc()
   {
     Serial.println("Unable to allocate memory");
@@ -62,4 +62,4 @@ namespace std {
     Serial.print("Length Error :");
     Serial.println(e);
   }
-}
+}*/
