@@ -3,6 +3,10 @@
  * 
  * Contains all sprites
  */
+ 
+//Monster Types
+enum MonsterType { Mover, Sitter };
+
 
 //Kuchipatchi
 int idKuchipatchi = 0;
