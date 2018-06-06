@@ -19,6 +19,7 @@ class Monster{
   public:
     Monster();
     Monster(const uint8_t *bitmap1, const uint8_t *bitmap2);
+    //virtual ~Monster();
     virtual Frame getFrame();
     void setSprite1(const uint8_t *bitmap1);
     void setSprite2(const uint8_t *bitmap2);

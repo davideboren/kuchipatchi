@@ -17,7 +17,7 @@ Monster::Monster(const uint8_t *bitmap1, const uint8_t *bitmap2){
 
   xPos = 56; // Centered
   yPos = 32;
-};
+}
 
 //Frame Functions
 Frame Monster::getFrame(){

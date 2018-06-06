@@ -31,6 +31,10 @@ MoverMon::MoverMon(const uint8_t *bitmap1, const uint8_t *bitmap2,unsigned int a
   nextMonster = next;
 }
 
+MoverMon::~MoverMon(){
+  Serial.println("Tearing down a monster");
+}
+
 void MoverMon::queueWalk(){
   movequeue[0] = 1;
   movequeue[1] = 1;

@@ -41,18 +41,20 @@ void Controller::activate(){
 
   amdb.addMonster(Kuchipatchi);
   amdb.addMonster(Kurotsubutchi);
-  //amdb.addMonster(Kurotsubutchi);
+
 
   while(1){
-    Serial.println("Looping");
     display.clearDisplay();
     for(int i = 0; i < amdb.numActiveMonsters(); i++){
+      Serial.print("Entering loop for mon_p: "); Serial.println(i);
+
       amdb.getMonster(i) -> heartbeat();
       if(amdb.getMonster(i) -> agedOut()){
         MonsterName nextMon = amdb.getMonster(i) -> getNextMonsterName();
         amdb.deleteMonster(i);
         amdb.addMonster(nextMon);
         i--;   //Adjust loop position to account for removed entry
+        Serial.print("i--, i = "); Serial.println(i);
       } else {
         drawFrame(amdb.getMonster(i) -> getFrame());
       }
