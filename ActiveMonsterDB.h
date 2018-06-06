@@ -1,4 +1,7 @@
-#include <vector>
+#ifndef ACTIVEMONSTERDB_H
+#define ACTIVEMONSTERDB_H
+
+#include "MonsterDB.h"
 
 struct ActiveMonsterDB{
   MonsterDB mdb;
@@ -13,3 +16,5 @@ struct ActiveMonsterDB{
   Monster * getMonster(int pos);
   int numActiveMonsters();
 };
+
+#endif
