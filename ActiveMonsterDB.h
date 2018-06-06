@@ -14,6 +14,7 @@ struct ActiveMonsterDB{
   int monSize;
 
   ActiveMonsterDB(MonsterDB mondb);
+  Monster* spawnMonster(int id);
   void addMonster(int id);
   void deleteMonster(int pos);
   void addMover(int id);

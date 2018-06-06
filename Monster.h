@@ -1,10 +1,12 @@
 /*
  * Monster.h
- * 
+ *
  * Base class for all monsters
  */
 #ifndef MONSTER_H
 #define MONSTER_H
+
+enum MonsterType { Mover, Sitter };
 
 class Monster{
   protected:
@@ -13,7 +15,7 @@ class Monster{
     unsigned int monsterAge;
     unsigned int monsterLifespan;
     void updateAge();
-  
+
   public:
     Monster();
     Monster(const uint8_t *bitmap1, const uint8_t *bitmap2);

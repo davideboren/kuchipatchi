@@ -7,11 +7,19 @@ ActiveMonsterDB::ActiveMonsterDB(MonsterDB mondb){
 void ActiveMonsterDB::addMonster(int id){
   Serial.print("Adding monster ID: "); Serial.println(id);
   switch(mdb.getMonsterType(id)){
-    case 1:
+    case Mover:
       addMover(id);
+      break;
+    case Sitter:
       break;
   }
   Serial.print("Added monster ID: "); Serial.println(id);
+}
+
+Monster* ActiveMonsterDB::spawnMonster(int id){
+  //switch(mdb.getMonsterType()){
+  //  case:
+  //}
 }
 
 void ActiveMonsterDB::deleteMonster(int pos){
