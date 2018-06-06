@@ -34,14 +34,14 @@ void Controller::activate(){
   ActiveMonsterDB amdb(mdb);
 
   //saveMonsterID(idKurotsubutchi);
-  int monID = getSavedMonsterID();
+  //int monID = getSavedMonsterID();
 
   //amdb.addMonster(monID);
   //amdb.addMonster(idKuchipatchi);
 
   amdb.addMonster(Kuchipatchi);
   amdb.addMonster(Kurotsubutchi);
-  amdb.addMonster(Kurotsubutchi);
+  //amdb.addMonster(Kurotsubutchi);
 
   while(1){
     Serial.println("Looping");

@@ -6,26 +6,32 @@ ActiveMonsterDB::ActiveMonsterDB(MonsterDB mondb){
 
 void ActiveMonsterDB::addMonster(MonsterName name){
   Serial.print("Adding monster ID: "); Serial.println(name);
-  switch(mdb.getMonsterType(name)){
+  /*switch(mdb.getMonsterType(name)){
     case Mover:
       addMover(name);
       break;
     case Sitter:
       break;
-  }
+  }*/
+  monsters_p[monSize] = spawnMonster(name);
+  monSize++;
   Serial.print("Added monster: "); Serial.println(name);
 }
 
 Monster* ActiveMonsterDB::spawnMonster(MonsterName name){
-  //switch(mdb.getMonsterType()){
-  //  case:
-  //}
+  switch(mdb.getMonsterType(name)){
+    case Mover:
+      return new MoverMon(mdb.getSprite1(name),mdb.getSprite2(name),0,mdb.getMonsterLifespan(name),mdb.getNextMonster(name));
+      break;
+  }
 }
 
 void ActiveMonsterDB::deleteMonster(int pos){
   Serial.print("Deleting monster at: "); Serial.println(pos);
-  monsters_p[pos] = 0;
+  //monsters_p[pos] = 0;
+  delete monsters_p[pos];
   monSize--;
+
   for(int i = pos; i < monSize; i++){
     monsters_p[pos] = monsters_p[pos+1];
   }

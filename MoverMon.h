@@ -4,14 +4,12 @@
  * AI for monster that moves left to right
  */
 
-#include <queue>
 #include "MonsterDB.h"
 
 class MoverMon : public Monster{
   int xDir;      //-1 == facing left, 1 == facing right
   int xBoundL, xBoundR;
 
-  std::queue<int> moveQueue;
   int movequeue[4];
   int movequeuePos;
 
