@@ -4,19 +4,19 @@ ActiveMonsterDB::ActiveMonsterDB(MonsterDB mondb){
   monSize = 0;
 }
 
-void ActiveMonsterDB::addMonster(int id){
-  Serial.print("Adding monster ID: "); Serial.println(id);
-  switch(mdb.getMonsterType(id)){
+void ActiveMonsterDB::addMonster(MonsterName name){
+  Serial.print("Adding monster ID: "); Serial.println(name);
+  switch(mdb.getMonsterType(name)){
     case Mover:
-      addMover(id);
+      addMover(name);
       break;
     case Sitter:
       break;
   }
-  Serial.print("Added monster ID: "); Serial.println(id);
+  Serial.print("Added monster: "); Serial.println(name);
 }
 
-Monster* ActiveMonsterDB::spawnMonster(int id){
+Monster* ActiveMonsterDB::spawnMonster(MonsterName name){
   //switch(mdb.getMonsterType()){
   //  case:
   //}
@@ -40,11 +40,11 @@ void ActiveMonsterDB::deleteMonster(int pos){
   vMonsters_p[vMonsters_p.size()] = 0;*/
 }
 
-void ActiveMonsterDB::addMover(int id){
+void ActiveMonsterDB::addMover(MonsterName name){
   //vPacers.push_back(MoverMon(mdb.getSprite1(id),mdb.getSprite2(id),0,mdb.getMonsterLifespan(id),mdb.getNextMonster(id)));
   //vMonsters_p.push_back(&vPacers.back());
 
-  pacers[pacerPos] = MoverMon(mdb.getSprite1(id),mdb.getSprite2(id),0,mdb.getMonsterLifespan(id),mdb.getNextMonster(id));
+  pacers[pacerPos] = MoverMon(mdb.getSprite1(name),mdb.getSprite2(name),0,mdb.getMonsterLifespan(name),mdb.getNextMonster(name));
   monsters_p[monSize] = &pacers[pacerPos];
   pacerPos++;
   monSize++;

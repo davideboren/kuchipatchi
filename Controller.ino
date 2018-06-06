@@ -1,6 +1,6 @@
 /*
  * Controller
- * 
+ *
  * Coordinates all on screen entities
  */
  #include <EEPROM.h>
@@ -33,19 +33,23 @@ void Controller::activate(){
   MonsterDB mdb;
   ActiveMonsterDB amdb(mdb);
 
-  //saveMonsterID(idKurotsubutchi);  
+  //saveMonsterID(idKurotsubutchi);
   int monID = getSavedMonsterID();
 
-  amdb.addMonster(monID);
-  amdb.addMonster(idKuchipatchi);
-  
+  //amdb.addMonster(monID);
+  //amdb.addMonster(idKuchipatchi);
+
+  amdb.addMonster(Kuchipatchi);
+  amdb.addMonster(Kurotsubutchi);
+  amdb.addMonster(Kurotsubutchi);
+
   while(1){
     Serial.println("Looping");
     display.clearDisplay();
     for(int i = 0; i < amdb.numActiveMonsters(); i++){
       amdb.getMonster(i) -> heartbeat();
       if(amdb.getMonster(i) -> agedOut()){
-        int nextMon = amdb.getMonster(i) -> getNextMonsterID();
+        MonsterName nextMon = amdb.getMonster(i) -> getNextMonsterName();
         amdb.deleteMonster(i);
         amdb.addMonster(nextMon);
         i--;   //Adjust loop position to account for removed entry
@@ -57,4 +61,3 @@ void Controller::activate(){
     delay(500);
   }
 }
-

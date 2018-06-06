@@ -3,10 +3,6 @@
 struct ActiveMonsterDB{
   MonsterDB mdb;
 
-  std::vector<MoverMon> vPacers;
-
-  std::vector<Monster*> vMonsters_p;
-
   MoverMon pacers [5];
   int pacerPos;
 
@@ -14,10 +10,10 @@ struct ActiveMonsterDB{
   int monSize;
 
   ActiveMonsterDB(MonsterDB mondb);
-  Monster* spawnMonster(int id);
-  void addMonster(int id);
+  Monster* spawnMonster(MonsterName name);
+  void addMonster(MonsterName name);
   void deleteMonster(int pos);
-  void addMover(int id);
+  void addMover(MonsterName name);
   Monster * getMonster(int pos);
   int numActiveMonsters();
 };

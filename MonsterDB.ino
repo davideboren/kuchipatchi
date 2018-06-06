@@ -1,26 +1,29 @@
 MonsterDB::MonsterDB(){
   unsigned int lifespanBaby =  2000;
   unsigned int lifespanAdult = 4000;
-  monsterRepo[idKurotsubutchi] = MonsterRef(kurotsubutchi1,kurotsubutchi2,Mover,lifespanBaby,idKuchipatchi,idKuchipatchi);
-  monsterRepo[idKuchipatchi] = MonsterRef(kuchipatchi1,kuchipatchi2,Mover,lifespanAdult,idKurotsubutchi,idKurotsubutchi);
+  //monsterRepo[idKurotsubutchi] = MonsterRef(kurotsubutchi1,kurotsubutchi2,Mover,lifespanBaby,idKuchipatchi,idKuchipatchi);
+  //monsterRepo[idKuchipatchi] = MonsterRef(kuchipatchi1,kuchipatchi2,Mover,lifespanAdult,idKurotsubutchi,idKurotsubutchi);
+  monsterRepo[Kurotsubutchi] = MonsterRef(kurotsubutchi1,kurotsubutchi2,Mover,lifespanBaby,Kuchipatchi,Kuchipatchi);
+  monsterRepo[Kuchipatchi] = MonsterRef(kuchipatchi1,kuchipatchi2,Mover,lifespanAdult,Kurotsubutchi,Kurotsubutchi);
+
 }
 
-const uint8_t * MonsterDB::getSprite1(int id){
-  return monsterRepo[id].sprite1;
+const uint8_t * MonsterDB::getSprite1(MonsterName name){
+  return monsterRepo[name].sprite1;
 }
 
-const uint8_t * MonsterDB::getSprite2(int id){
-  return monsterRepo[id].sprite2;
+const uint8_t * MonsterDB::getSprite2(MonsterName name){
+  return monsterRepo[name].sprite2;
 }
 
-MonsterType MonsterDB::getMonsterType(int id){
-  return monsterRepo[id].monsterType;
+MonsterType MonsterDB::getMonsterType(MonsterName name){
+  return monsterRepo[name].monsterType;
 }
 
-unsigned int MonsterDB::getMonsterLifespan(int id){
-  return monsterRepo[id].monsterLifespan;
+unsigned int MonsterDB::getMonsterLifespan(MonsterName name){
+  return monsterRepo[name].monsterLifespan;
 }
 
-int MonsterDB::getNextMonster(int id){
-  return random(2)?monsterRepo[id].nextMonster[0]:monsterRepo[id].nextMonster[1];
+MonsterName MonsterDB::getNextMonster(MonsterName name){
+  return random(2)?monsterRepo[name].nextMonster[0]:monsterRepo[name].nextMonster[1];
 }

@@ -44,22 +44,6 @@ bool Monster::agedOut(){
   return monsterAge >= monsterLifespan;
 }
 
-int Monster::getNextMonsterID(){
+MonsterName Monster::getNextMonsterName(){
   return nextMonster;
 }
-
-
-
-//Workaround for Arduino STL non-compliance (no need after removing std::queue)
-/*namespace std {
-  void __throw_bad_alloc()
-  {
-    Serial.println("Unable to allocate memory");
-  }
-
-  void __throw_length_error( char const*e )
-  {
-    Serial.print("Length Error :");
-    Serial.println(e);
-  }
-}*/

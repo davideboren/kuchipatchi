@@ -23,9 +23,9 @@ class Monster{
     void setSprite1(const uint8_t *bitmap1);
     void setSprite2(const uint8_t *bitmap2);
     virtual void heartbeat();
-    virtual int getNextMonsterID();
+    virtual MonsterName getNextMonsterName();
     bool agedOut();
-    int nextMonster;
+    MonsterName nextMonster;
 };
 
 #endif

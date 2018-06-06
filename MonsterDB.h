@@ -7,11 +7,11 @@ struct MonsterDB{
   MonsterRef monsterRepo[10];
   MonsterDB();
 
-  const uint8_t *   getSprite1(int id);
-  const uint8_t *   getSprite2(int id);
-  MonsterType   getMonsterType(int id);
-  unsigned int  getMonsterLifespan(int id);
-  int getNextMonster(int id);
+  const uint8_t *   getSprite1(MonsterName name);
+  const uint8_t *   getSprite2(MonsterName name);
+  MonsterType   getMonsterType(MonsterName name);
+  unsigned int  getMonsterLifespan(MonsterName name);
+  MonsterName getNextMonster(MonsterName name);
 };
 
 #endif

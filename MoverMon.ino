@@ -1,6 +1,6 @@
 /*
  * MoverMon
- * 
+ *
  * AI for monster that moves left to right
  */
 MoverMon::MoverMon(){
@@ -13,11 +13,11 @@ MoverMon::MoverMon(){
   yPos = 32;
 }
 
-MoverMon::MoverMon(const uint8_t *bitmap1, const uint8_t *bitmap2,unsigned int age, unsigned int lifespan, int next){
+MoverMon::MoverMon(const uint8_t *bitmap1, const uint8_t *bitmap2,unsigned int age, unsigned int lifespan, MonsterName next){
   bmp1 = bitmap1;
   bmp2 = bitmap2;
   currentBmp = bitmap1;
-  
+
   xBoundL = 0;
   xBoundR = 112;
 
@@ -36,7 +36,7 @@ void MoverMon::queueWalk(){
   movequeue[1] = 1;
   movequeue[2] = 2;
   movequeue[3] = 2;
-  
+
   movequeuePos = 0;
   Serial.println("Queued Walk");
 }
@@ -46,7 +46,7 @@ void MoverMon::queueStand(){
   movequeue[1] = 4;
   movequeue[2] = 3;
   movequeue[3] = 4;
-  
+
   movequeuePos = 0;
   Serial.println("Queued Stand");
 }
@@ -55,7 +55,7 @@ void MoverMon::heartbeat(){
   Serial.println("Heartbeat received");
   //Increment Age
   updateAge();
-  
+
   //Choose next move
   if(movequeuePos > 3){
     Serial.println("Entered moveQueue");
@@ -63,15 +63,15 @@ void MoverMon::heartbeat(){
   }
 
   //Random Chance to turn around
-  if(!random(12) && inBounds()){ 
-    xDir *= -1; 
+  if(!random(12) && inBounds()){
+    xDir *= -1;
   }
-  
+
   //Turn around if up against a boundary
   if(!inBounds()){
     xDir *= -1;
   }
-  
+
   //switch(moveQueue.front()){
   switch(movequeue[movequeuePos]){
     case 1: //Move with sprite 1
@@ -104,4 +104,3 @@ bool MoverMon::inBounds(){
     return false;
   }
 }
-
