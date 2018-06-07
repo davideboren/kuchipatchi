@@ -1,7 +1,7 @@
 /*
  * Kuchipatchi
- * 
- * Arduino Tamagotchi/Digimon Simulator 
+ *
+ * Arduino Tamagotchi/Digimon Simulator
  * Using 0.96" OLED Screen
  */
 
@@ -19,7 +19,6 @@
 #include "MoverMon.h"
 #include "MonsterRef.h"
 #include "MonsterDB.h"
-#include "ActiveMonsterDB.h"
 
 #define OLED_RESET 4
 Adafruit_SSD1306 display(OLED_RESET);
@@ -28,11 +27,11 @@ Adafruit_SSD1306 display(OLED_RESET);
 
 void setup() {
   Serial.begin(9600);
-  display.begin(SSD1306_SWITCHCAPVCC, 0x3C); 
+  display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
   display.clearDisplay();
   display.invertDisplay(true);
   randomSeed(analogRead(0));
-  
+
   Controller cpu;
   cpu.activate();
 }
@@ -40,4 +39,3 @@ void setup() {
 void loop() {
 
 }
-

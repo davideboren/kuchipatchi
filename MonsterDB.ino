@@ -1,5 +1,5 @@
 MonsterDB::MonsterDB(){
-  unsigned int lifespanBaby =  150;
+  unsigned int lifespanBaby =  100;
   unsigned int lifespanAdult = 150;
   monsterRepo[Kurotsubutchi] = MonsterRef(kurotsubutchi1,kurotsubutchi2,Mover,lifespanBaby,Kuchipatchi,Kuchipatchi);
   monsterRepo[Kuchipatchi] = MonsterRef(kuchipatchi1,kuchipatchi2,Mover,lifespanAdult,Kurotsubutchi,Kurotsubutchi);
