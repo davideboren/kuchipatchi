@@ -6,8 +6,6 @@
 #ifndef MONSTER_H
 #define MONSTER_H
 
-enum MonsterType { Mover, Sitter };
-
 class Monster{
   protected:
     const uint8_t *bmp1, *bmp2, *currentBmp;

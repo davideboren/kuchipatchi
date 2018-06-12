@@ -9,6 +9,21 @@
 enum MonsterName {
   Kurotsubutchi,
   Kuchipatchi,
+  LAST_MON_NAME
+};
+
+enum MonsterType {
+  MOVER,
+  SITTER,
+  FLOATER
+};
+
+enum ActiveMonsterSlot {
+  PRIMARY,
+  VISITOR,
+  POOP,
+  BUBBLES,
+  LAST_MON_SLOT
 };
 
 

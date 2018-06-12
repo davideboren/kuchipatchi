@@ -9,15 +9,13 @@
 
 class Controller{
   private:
-    int monArrayPos = 0;
     int eMonsterIdAddr = 0;
-    int numActiveMons;
 
     Monster* activeMonsters[10];
-    void addMonster(MonsterName name);
+    void addMonster(MonsterName name, ActiveMonsterSlot slot);
     Monster* newMonster(MonsterName name);
-    void deleteMonster(int pos);
-    void evolveMonster(int pos);
+    void deleteMonster(int slot);
+    void evolveMonster(int slot);
 
   public:
     Controller();

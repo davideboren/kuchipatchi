@@ -6,13 +6,17 @@
  #include <EEPROM.h>
 
 Controller::Controller(){
-  numActiveMons = 0;
+
   MonsterDB mdb;
+
+  for(int slot = PRIMARY; slot != LAST_MON_SLOT; slot++){
+    activeMonsters[slot] = NULL;
+  }
+
 }
 
 void Controller::drawFrame(Frame f){
   //Serial.print("Drawing bitmap at: ");Serial.println((long)f.bitmap);
-
   if(f.xDir == -1){
     display.drawScaledBitmap(f.xPos,f.yPos,f.bitmap,16,16,1,2);
   } else if(f.xDir == 1){
@@ -22,45 +26,25 @@ void Controller::drawFrame(Frame f){
 
 Monster* Controller::newMonster(MonsterName name){
   switch(mdb.getMonsterType(name)){
-    case Mover:
+    case MOVER:
       return new MoverMon(mdb.getSprite1(name),mdb.getSprite2(name),0,mdb.getMonsterLifespan(name),mdb.getNextMonster(name));
       break;
   }
 }
 
-void Controller::addMonster(MonsterName name){
-  activeMonsters[numActiveMons] = newMonster(name);
-  Serial.print("Adding new monster @ "); Serial.println(numActiveMons);
-  numActiveMons++;
+void Controller::addMonster(MonsterName name, ActiveMonsterSlot slot){
+  activeMonsters[slot] = newMonster(name);
 }
 
-void Controller::deleteMonster(int pos){
-  if(activeMonsters[pos] != NULL){
-    Serial.print("Got delete for monster "); Serial.println(pos);
-    delete activeMonsters[pos];
-    activeMonsters[pos] = NULL;
-
-    //Cascade array
-    Serial.print("pos = "); Serial.print(pos); Serial.print(" numActiveMon-1 "); Serial.println(numActiveMons-1);
-    for(int i = pos; i < numActiveMons-1; i++){
-      activeMonsters[i] = activeMonsters[i+1];
-    }
-    if(pos != numActiveMons-1 ){
-      delete activeMonsters[numActiveMons-1 ];
-      activeMonsters[numActiveMons-1 ] = NULL;
-    }
-    numActiveMons--;
-  } else {
-    Serial.print("Tried to delete null pointer @ monster "); Serial.println(pos);
-  }
+void Controller::deleteMonster(int slot){
+  delete activeMonsters[slot];
+  activeMonsters[slot] = NULL;
 }
 
-void Controller::evolveMonster(int pos){
-  MonsterName nextMon = activeMonsters[pos] -> getNextMonsterName();
-  delete activeMonsters[pos];
-  Serial.print("Adding new monster @ "); Serial.println(pos);
-  activeMonsters[pos] = newMonster(nextMon);
-
+void Controller::evolveMonster(int slot){
+  MonsterName nextMon = activeMonsters[slot] -> getNextMonsterName();
+  delete activeMonsters[slot];
+  activeMonsters[slot] = newMonster(nextMon);
 }
 
 int Controller::getSavedMonsterID(){
@@ -81,23 +65,25 @@ void Controller::activate(){
 
   //amdb.addMonster(monID);
 
-  addMonster(Kuchipatchi);
-  addMonster(Kurotsubutchi);
+  addMonster(Kuchipatchi, PRIMARY);
+  addMonster(Kurotsubutchi, VISITOR);
 
 
   while(1){
     display.clearDisplay();
-    for(int i = 0; i < numActiveMons; i++){
-      Serial.print("Entering loop for monster "); Serial.println(i);
+    for(int monSlot = PRIMARY; monSlot != LAST_MON_SLOT; monSlot++){
+      if(activeMonsters[monSlot] != NULL){
+        Serial.print("Entering loop for monster "); Serial.println(monSlot);
 
-      activeMonsters[i] -> heartbeat();
+        activeMonsters[monSlot] -> heartbeat();
 
-      if(activeMonsters[i] -> agedOut()){
-        Serial.print("Monster aged out @ "); Serial.println(i);
-        evolveMonster(i);
-        i--;
-      } else {
-        drawFrame(activeMonsters[i] -> getFrame());
+        if(activeMonsters[monSlot] -> agedOut()){
+          Serial.print("Monster aged out @ "); Serial.println(monSlot);
+          evolveMonster(monSlot);
+          monSlot--;
+        } else {
+          drawFrame(activeMonsters[monSlot] -> getFrame());
+        }
       }
     }
     display.display();
