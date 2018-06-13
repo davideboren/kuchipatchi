@@ -13,10 +13,11 @@
 #include <vector>
 
 #include "Frame.h"
-#include "bitmaps.h"
+#include "Defs.h"
 #include "Controller.h"
 #include "Monster.h"
 #include "MoverMon.h"
+#include "Sitter.h"
 #include "MonsterRef.h"
 #include "MonsterDB.h"
 

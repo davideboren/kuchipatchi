@@ -21,9 +21,9 @@ MoverMon::MoverMon(const uint8_t *bitmap1, const uint8_t *bitmap2,unsigned int a
   xBoundL = 0;
   xBoundR = 112;
 
-  xDir = -1;
+  xDir = -1;  //-1 == facing left, 1 == facing right
 
-  movequeuePos = 0;
+  moveQueuePos = 0;
 
   monsterAge = age;
   monsterLifespan = lifespan;
@@ -36,22 +36,22 @@ MoverMon::~MoverMon(){
 }
 
 void MoverMon::queueWalk(){
-  movequeue[0] = 1;
-  movequeue[1] = 1;
-  movequeue[2] = 2;
-  movequeue[3] = 2;
+  moveQueue[0] = MOVE_X_SPRITE_1;
+  moveQueue[1] = MOVE_X_SPRITE_1;
+  moveQueue[2] = MOVE_X_SPRITE_2;
+  moveQueue[3] = MOVE_X_SPRITE_2;
 
-  movequeuePos = 0;
+  moveQueuePos = 0;
   Serial.println("Queued Walk");
 }
 
 void MoverMon::queueStand(){
-  movequeue[0] = 3;
-  movequeue[1] = 4;
-  movequeue[2] = 3;
-  movequeue[3] = 4;
+  moveQueue[0] = WAIT_SPRITE_1;
+  moveQueue[1] = WAIT_SPRITE_2;
+  moveQueue[2] = WAIT_SPRITE_1;
+  moveQueue[3] = WAIT_SPRITE_2;
 
-  movequeuePos = 0;
+  moveQueuePos = 0;
   Serial.println("Queued Stand");
 }
 
@@ -61,44 +61,40 @@ void MoverMon::heartbeat(){
   updateAge();
 
   //Choose next move
-  if(movequeuePos > 3){
+  if(moveQueuePos > 3){
     Serial.println("Entered moveQueue");
     random(8)?queueWalk():queueStand();
   }
 
   //Random Chance to turn around
-  if(!random(12) && inBounds()){
-    xDir *= -1;
+  if(xPos <= xBoundL){
+    xDir = 1;
+  } else if(xPos >= xBoundR){
+    xDir = -1;
+  } else if(!random(12) && inBounds()){
+    xDir = -1;
   }
 
   //Turn around if up against a boundary
-  if(!inBounds()){
-    xDir *= -1;
-  }
 
   //switch(moveQueue.front()){
-  switch(movequeue[movequeuePos]){
-    case 1: //Move with sprite 1
+  switch(moveQueue[moveQueuePos]){
+    case MOVE_X_SPRITE_1: //Move with sprite 1
       currentBmp = bmp1;
       xPos += xDir*4;
       break;
-    case 2: //Move with sprite 2
+    case MOVE_X_SPRITE_2: //Move with sprite 2
       currentBmp = bmp2;
       xPos += xDir*4;
       break;
-    case 3: //Sit with sprite 1
+    case WAIT_SPRITE_1: //Sit with sprite 1
       currentBmp = bmp1;
       break;
-    case 4: //Sit with sprite 2
+    case WAIT_SPRITE_2: //Sit with sprite 2
       currentBmp = bmp2;
       break;
   }
-  movequeuePos++;
-}
-
-Frame MoverMon::getFrame(){
-  //Serial.print("getFrame Addr: "); Serial.println((long)&currentBmp);
-  return Frame(currentBmp,xPos,yPos,xDir);
+  moveQueuePos++;
 }
 
 bool MoverMon::inBounds(){

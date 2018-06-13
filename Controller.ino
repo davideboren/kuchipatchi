@@ -29,6 +29,9 @@ Monster* Controller::newMonster(MonsterName name){
     case MOVER:
       return new MoverMon(mdb.getSprite1(name),mdb.getSprite2(name),0,mdb.getMonsterLifespan(name),mdb.getNextMonster(name));
       break;
+    case SITTER:
+      return new Sitter(mdb.getSprite1(name),0,mdb.getMonsterLifespan(name),mdb.getNextMonster(name));
+      break;
   }
 }
 
@@ -43,8 +46,16 @@ void Controller::deleteMonster(int slot){
 
 void Controller::evolveMonster(int slot){
   MonsterName nextMon = activeMonsters[slot] -> getNextMonsterName();
+
+  int currentX = activeMonsters[slot] -> getXPos();
+  int currentY = activeMonsters[slot] -> getYPos();
+
   delete activeMonsters[slot];
+
   activeMonsters[slot] = newMonster(nextMon);
+
+  activeMonsters[slot] -> setXPos(currentX);
+  activeMonsters[slot] -> setYPos(currentY);
 }
 
 int Controller::getSavedMonsterID(){
@@ -58,6 +69,24 @@ void Controller::saveMonsterID(int id){
   EEPROM.put(eMonsterIdAddr,id);
 }
 
+void Controller::updateMonsters(){
+  for(int monSlot = PRIMARY; monSlot != LAST_MON_SLOT; monSlot++){
+    if(activeMonsters[monSlot] != NULL){
+      Serial.print("Entering loop for monster "); Serial.println(monSlot);
+
+      activeMonsters[monSlot] -> heartbeat();
+
+      if(activeMonsters[monSlot] -> agedOut()){
+        Serial.print("Monster aged out @ "); Serial.println(monSlot);
+        evolveMonster(monSlot);
+        monSlot--;
+      } else {
+        drawFrame(activeMonsters[monSlot] -> getFrame());
+      }
+    }
+  }
+}
+
 void Controller::activate(){
 
   //saveMonsterID(idKurotsubutchi);
@@ -65,28 +94,15 @@ void Controller::activate(){
 
   //amdb.addMonster(monID);
 
-  addMonster(Kuchipatchi, PRIMARY);
+  addMonster(Mimitchi, PRIMARY);
   addMonster(Kurotsubutchi, VISITOR);
+  addMonster(Kuchipatchi, POOP);
 
 
   while(1){
     display.clearDisplay();
-    for(int monSlot = PRIMARY; monSlot != LAST_MON_SLOT; monSlot++){
-      if(activeMonsters[monSlot] != NULL){
-        Serial.print("Entering loop for monster "); Serial.println(monSlot);
-
-        activeMonsters[monSlot] -> heartbeat();
-
-        if(activeMonsters[monSlot] -> agedOut()){
-          Serial.print("Monster aged out @ "); Serial.println(monSlot);
-          evolveMonster(monSlot);
-          monSlot--;
-        } else {
-          drawFrame(activeMonsters[monSlot] -> getFrame());
-        }
-      }
-    }
+    updateMonsters();
     display.display();
-    delay(500);
+    delay(100);
   }
 }

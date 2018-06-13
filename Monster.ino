@@ -19,9 +19,26 @@ Monster::Monster(const uint8_t *bitmap1, const uint8_t *bitmap2){
   yPos = 32;
 }
 
-//Frame Functions
+//Getters
 Frame Monster::getFrame(){
-  return Frame(currentBmp,xPos,yPos,-1);
+  return Frame(currentBmp,xPos,yPos,xDir);
+}
+
+int Monster::getXPos(){
+  return xPos;
+}
+
+int Monster::getYPos(){
+  return yPos;
+}
+
+//Setters
+void Monster::setXPos(int x){
+  xPos = x;
+}
+
+void Monster::setYPos(int y){
+  yPos = y;
 }
 
 void Monster::setSprite1(const uint8_t *bitmap1){

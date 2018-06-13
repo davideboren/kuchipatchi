@@ -16,6 +16,7 @@ class Controller{
     Monster* newMonster(MonsterName name);
     void deleteMonster(int slot);
     void evolveMonster(int slot);
+    void updateMonsters();
 
   public:
     Controller();
