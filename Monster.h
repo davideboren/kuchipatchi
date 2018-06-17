@@ -37,10 +37,14 @@ class Monster{
     Frame getFrame();
     int getXPos();
     int getYPos();
+    int getXBoundL();
+    int getXBoundR();
+    int getPoopPos();
 
     //Setters
     void setXPos(int x);
     void setYPos(int y);
+    void setBoundsX(int xL, int xR);
     void setSprite1(const uint8_t *bitmap1);
     void setSprite2(const uint8_t *bitmap2);
 

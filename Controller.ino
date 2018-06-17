@@ -10,6 +10,10 @@ Controller::Controller(){
   MonsterDB mdb;
 
   frameDelay = 500;
+  offFrameSlack = 16;
+
+  xBoundL_vis = 64;
+  xBoundR_vis = 96 + offFrameSlack;
 
   for(int slot = PRIMARY; slot != LAST_MON_SLOT; slot++){
     activeMonsters[slot] = NULL;
@@ -32,7 +36,11 @@ Monster* Controller::newMonster(MonsterName name){
       return new MoverMon(mdb.getSprite1(name),mdb.getSprite2(name),0,mdb.getMonsterLifespan(name),mdb.getNextMonster(name));
       break;
     case SITTER:
-      return new Sitter(mdb.getSprite1(name),0,mdb.getMonsterLifespan(name),mdb.getNextMonster(name));
+      if(mdb.getSprite1(name) == mdb.getSprite2(name)){
+        return new Sitter(mdb.getSprite1(name),0,mdb.getMonsterLifespan(name),mdb.getNextMonster(name));
+      } else {
+        return new Sitter(mdb.getSprite1(name), mdb.getSprite2(name), 0,mdb.getMonsterLifespan(name),mdb.getNextMonster(name));
+      }
       break;
   }
 }
@@ -51,6 +59,8 @@ void Controller::evolveMonster(int slot){
 
   int currentX = activeMonsters[slot] -> getXPos();
   int currentY = activeMonsters[slot] -> getYPos();
+  int currentXBoundL = activeMonsters[slot] -> getXBoundL();
+  int currentXBoundR = activeMonsters[slot] -> getXBoundR();
 
   delete activeMonsters[slot];
 
@@ -58,6 +68,7 @@ void Controller::evolveMonster(int slot){
 
   activeMonsters[slot] -> setXPos(currentX);
   activeMonsters[slot] -> setYPos(currentY);
+  activeMonsters[slot] -> setBoundsX(currentXBoundL, currentXBoundR);
 }
 
 int Controller::getSavedMonsterID(){
@@ -75,12 +86,10 @@ void Controller::updateMonsters(){
   display.clearDisplay();
   for(int monSlot = PRIMARY; monSlot != LAST_MON_SLOT; monSlot++){
     if(activeMonsters[monSlot] != NULL){
-      //Serial.print("Entering loop for monster "); Serial.println(monSlot);
 
       activeMonsters[monSlot] -> heartbeat();
 
-      if(activeMonsters[monSlot] -> agedOut()){
-        Serial.print("Monster aged out @ "); Serial.println(monSlot);
+      if(activeMonsters[monSlot] -> agedOut() && monSlot != POOP){
         evolveMonster(monSlot);
         monSlot--;
       } else {
@@ -99,6 +108,52 @@ void Controller::sendMonsterToPos(int slot, int x){
   }
 }
 
+void Controller::visitorEvent(){
+  sendMonsterToPos(PRIMARY,24);
+  activeMonsters[PRIMARY] -> setBoundsX(0 - offFrameSlack ,32);
+
+  addMonster(Kurotsubutchi, VISITOR);
+  activeMonsters[VISITOR] -> setXPos(116);
+  sendMonsterToPos(VISITOR,80);
+  activeMonsters[VISITOR] -> setBoundsX(xBoundL_vis,xBoundR_vis + offFrameSlack);
+
+  for(int i = 0; i < 50; i++){
+    updateMonsters();
+  }
+
+  sendMonsterToPos(VISITOR,116);
+  deleteMonster(VISITOR);
+
+  activeMonsters[PRIMARY] -> setBoundsX(0,96);
+}
+
+void Controller::poopEvent(){
+  int dropZone = activeMonsters[PRIMARY] -> getPoopPos();
+  int monX = activeMonsters[PRIMARY] -> getXPos();
+  addMonster(Poop, POOP);
+  activeMonsters[POOP] -> setXPos(dropZone);
+
+  if(dropZone < monX){
+    activeMonsters[PRIMARY] -> setBoundsX(monX,112);
+  } else {
+    activeMonsters[PRIMARY] -> setBoundsX(-16,monX);
+  }
+
+  while(!activeMonsters[POOP] -> agedOut()){
+    updateMonsters();
+  }
+  deleteMonster(POOP);
+
+  activeMonsters[PRIMARY] -> setBoundsX(0,96);
+
+}
+
+void Controller::idleEvent(){
+  for(int d = 0; d < 60; d++){
+    updateMonsters();
+  }
+}
+
 void Controller::activate(){
 
   //saveMonsterID(idKurotsubutchi);
@@ -107,11 +162,15 @@ void Controller::activate(){
   //amdb.addMonster(monID);
 
   addMonster(Kuchipatchi, PRIMARY);
-  addMonster(Kuchipatchi, VISITOR);
-  //addMonster(Kuchipatchi, POOP);
+  //addMonster(Kuchipatchi, VISITOR);
+  //addMonster(Poop, POOP);
 
   for(int i = 0; i < 3; i++) {sendMonsterToPos(PRIMARY,random(0,28)*4);}
+  //visitorEvent();
+  //idleEvent();
+  //poopEvent();
   while(1){
     updateMonsters();
+    //sendMonsterToPos(PRIMARY,random(0,28)*4);
   }
 }

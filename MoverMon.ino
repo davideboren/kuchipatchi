@@ -79,6 +79,9 @@ void MoverMon::gotoRoutine(){
   if(xOffset == 0){
     taskDone = true;
     queueStand();
+    if(currentBmp == bmp1){
+      moveQueuePos++; //to avoid hanging on the same sprite twice
+    }
   } else if(moveQueuePos > 3) {
       xOffset < 0 ? xDir = -1 : xDir = 1;
       queueWalk();

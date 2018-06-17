@@ -32,6 +32,18 @@ int Monster::getYPos(){
   return yPos;
 }
 
+int Monster::getXBoundL(){
+  return xBoundL;
+}
+
+int Monster::getXBoundR(){
+  return xBoundR;
+}
+
+int Monster::getPoopPos(){
+  return xPos + (xDir * 32);
+}
+
 //Setters
 void Monster::setXPos(int x){
   xPos = x;
@@ -39,6 +51,11 @@ void Monster::setXPos(int x){
 
 void Monster::setYPos(int y){
   yPos = y;
+}
+
+void Monster::setBoundsX(int xL, int xR){
+  xBoundL = xL;
+  xBoundR = xR;
 }
 
 void Monster::setSprite1(const uint8_t *bitmap1){
