@@ -77,7 +77,8 @@ void MoverMon::gotoRoutine(){
   int xOffset = xDest - xPos;
 
   if(xOffset == 0){
-    setTask(IDLE);
+    taskDone = true;
+    queueStand();
   } else if(moveQueuePos > 3) {
       xOffset < 0 ? xDir = -1 : xDir = 1;
       queueWalk();

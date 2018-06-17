@@ -52,11 +52,7 @@ void Monster::setSprite2(const uint8_t *bitmap2){
 
 void Monster::setTask(MonsterTask task){
   currentTask = task;
-  if(currentTask == IDLE){
-    taskDone = true;
-  } else {
-    taskDone = false;
-  }
+  taskDone = false;
 }
 
 bool Monster::taskComplete(){
