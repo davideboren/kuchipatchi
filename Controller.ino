@@ -97,6 +97,7 @@ void Controller::sendMonsterToPos(int slot, int x){
   while(!activeMonsters[slot] -> taskComplete()){
     updateMonsters();
   }
+  Serial.println("Task Complete");
 }
 
 void Controller::activate(){
@@ -107,11 +108,12 @@ void Controller::activate(){
   //amdb.addMonster(monID);
 
   addMonster(Kuchipatchi, PRIMARY);
-  addMonster(Kuchipatchi, VISITOR);
+  //addMonster(Kuchipatchi, VISITOR);
   //addMonster(Kuchipatchi, POOP);
 
-  for(int i = 0; i < 3; i++) {sendMonsterToPos(PRIMARY,random(0,28)*4);}
+  //for(int i = 0; i < 3; i++) {sendMonsterToPos(PRIMARY,random(0,28)*4);}
   while(1){
-    updateMonsters();
+    //updateMonsters();
+    sendMonsterToPos(PRIMARY,random(0,28)*4);
   }
 }

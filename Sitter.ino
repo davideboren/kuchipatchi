@@ -51,7 +51,7 @@ void Sitter::heartbeat(){
       xPos += xDir*4;
       break;
     case WAIT_SPRITE_1: //Sit with sprite 1
-      Serial.println("Got WAIT_SPRITE_1");
+      //Serial.println("Got WAIT_SPRITE_1");
       break;
   }
   moveQueuePos++;
