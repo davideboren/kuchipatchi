@@ -8,7 +8,7 @@
 
 class MoverMon : public Monster{
   //int xDir;      //-1 == facing left, 1 == facing right
-  int xBoundL, xBoundR;
+  //int xBoundL, xBoundR;
 
   public:
     MoverMon(const uint8_t *bitmap1, const uint8_t *bitmap2,unsigned int age, unsigned int lifespan, MonsterName next);
@@ -16,6 +16,8 @@ class MoverMon : public Monster{
     ~MoverMon();
     void queueWalk();
     void queueStand();
+    void idleRoutine();
+    void gotoRoutine();
     void heartbeat();
     bool inBounds();
 };

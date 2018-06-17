@@ -50,6 +50,29 @@ void Monster::setSprite2(const uint8_t *bitmap2){
   bmp2 = bitmap2;
 }
 
+void Monster::setTask(MonsterTask task){
+  currentTask = task;
+  taskDone = false;
+}
+
+bool Monster::taskComplete(){
+  if(taskDone){
+    setTask(IDLE);
+    return true;
+  } else {
+    return false;
+  }
+}
+
+void Monster::goTo(int x){
+  if(xPos == x){
+    taskDone = true;
+  } else {
+    setTask(GOTO);
+    xDest = x;
+    moveQueuePos = 4;
+  }
+}
 
 //Age Functions
 void Monster::updateAge(){
@@ -58,7 +81,11 @@ void Monster::updateAge(){
 }
 
 bool Monster::agedOut(){
-  return monsterAge >= monsterLifespan;
+  if( (monsterAge >= monsterLifespan) && currentTask == IDLE){
+    return true;
+  } else {
+    return false;
+  }
 }
 
 MonsterName Monster::getNextMonsterName(){

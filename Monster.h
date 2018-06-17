@@ -6,10 +6,13 @@
 #ifndef MONSTER_H
 #define MONSTER_H
 
+#include "Defs.h"
+
 class Monster{
   protected:
     const uint8_t *bmp1, *bmp2, *currentBmp;
     int xPos, yPos;
+    int xDest;
     unsigned int monsterAge;
     unsigned int monsterLifespan;
 
@@ -19,11 +22,16 @@ class Monster{
     MoveQueueAction moveQueue[4];
     int moveQueuePos;
 
+    MonsterTask currentTask;
+    bool taskDone;
+
   public:
 
     //Constructors
     Monster();
     Monster(const uint8_t *bitmap1, const uint8_t *bitmap2);
+
+    int xBoundL, xBoundR;
 
     //Getters
     Frame getFrame();
@@ -37,6 +45,10 @@ class Monster{
     void setSprite2(const uint8_t *bitmap2);
 
     virtual void heartbeat();
+
+    void setTask(MonsterTask task);
+    bool taskComplete();
+    void goTo(int x);
 
     virtual MonsterName getNextMonsterName();
     bool agedOut();

@@ -18,6 +18,8 @@ MoverMon::MoverMon(const uint8_t *bitmap1, const uint8_t *bitmap2,unsigned int a
   bmp2 = bitmap2;
   currentBmp = bitmap1;
 
+  currentTask = IDLE;
+
   xBoundL = 0;
   xBoundR = 112;
 
@@ -55,18 +57,13 @@ void MoverMon::queueStand(){
   Serial.println("Queued Stand");
 }
 
-void MoverMon::heartbeat(){
-  Serial.println("Heartbeat received");
-  //Increment Age
-  updateAge();
-
+void MoverMon::idleRoutine(){
   //Choose next move
   if(moveQueuePos > 3){
     Serial.println("Entered moveQueue");
     random(8)?queueWalk():queueStand();
   }
 
-  //Random Chance to turn around
   if(xPos <= xBoundL){
     xDir = 1;
   } else if(xPos >= xBoundR){
@@ -74,10 +71,36 @@ void MoverMon::heartbeat(){
   } else if(!random(12) && inBounds()){
     xDir = -1;
   }
+}
 
-  //Turn around if up against a boundary
+void MoverMon::gotoRoutine(){
+  int xOffset = xDest - xPos;
 
-  //switch(moveQueue.front()){
+  if(xOffset == 0){
+    taskDone = true;
+    queueStand();
+  } else if(moveQueuePos > 3) {
+      xOffset < 0 ? xDir = -1 : xDir = 1;
+      queueWalk();
+    }
+}
+
+void MoverMon::heartbeat(){
+  Serial.println("Heartbeat received");
+
+  updateAge();
+
+  switch(currentTask){
+    case IDLE:
+      idleRoutine();
+      break;
+    case GOTO:
+      //Serial.print("Going to: "); Serial.println(xDest);
+      //Serial.print("I'm at: "); Serial.println(xPos);
+      gotoRoutine();
+      break;
+  }
+
   switch(moveQueue[moveQueuePos]){
     case MOVE_X_SPRITE_1: //Move with sprite 1
       currentBmp = bmp1;

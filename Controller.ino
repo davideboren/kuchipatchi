@@ -9,6 +9,8 @@ Controller::Controller(){
 
   MonsterDB mdb;
 
+  frameDelay = 500;
+
   for(int slot = PRIMARY; slot != LAST_MON_SLOT; slot++){
     activeMonsters[slot] = NULL;
   }
@@ -70,9 +72,10 @@ void Controller::saveMonsterID(int id){
 }
 
 void Controller::updateMonsters(){
+  display.clearDisplay();
   for(int monSlot = PRIMARY; monSlot != LAST_MON_SLOT; monSlot++){
     if(activeMonsters[monSlot] != NULL){
-      Serial.print("Entering loop for monster "); Serial.println(monSlot);
+      //Serial.print("Entering loop for monster "); Serial.println(monSlot);
 
       activeMonsters[monSlot] -> heartbeat();
 
@@ -85,6 +88,15 @@ void Controller::updateMonsters(){
       }
     }
   }
+  display.display();
+  delay(frameDelay);
+}
+
+void Controller::sendMonsterToPos(int slot, int x){
+  activeMonsters[slot] -> goTo(x);
+  while(!activeMonsters[slot] -> taskComplete()){
+    updateMonsters();
+  }
 }
 
 void Controller::activate(){
@@ -94,15 +106,12 @@ void Controller::activate(){
 
   //amdb.addMonster(monID);
 
-  addMonster(Mimitchi, PRIMARY);
-  addMonster(Kurotsubutchi, VISITOR);
-  addMonster(Kuchipatchi, POOP);
+  addMonster(Kuchipatchi, PRIMARY);
+  addMonster(Kuchipatchi, VISITOR);
+  //addMonster(Kuchipatchi, POOP);
 
-
+  for(int i = 0; i < 3; i++) {sendMonsterToPos(PRIMARY,random(0,28)*4);}
   while(1){
-    display.clearDisplay();
     updateMonsters();
-    display.display();
-    delay(100);
   }
 }
