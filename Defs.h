@@ -12,6 +12,24 @@ enum MonsterType {
   FLOATER
 };
 
+enum MonsterStage {
+  EGG_STAGE,
+  BABY_STAGE,
+  TODDLER_STAGE,
+  TEEN_STAGE,
+  ADULT_STAGE,
+  POOP_STAGE,
+  SHIP_STAGE,
+  LAST_STAGE
+};
+
+enum Events {
+  IDLE_EVENT,
+  POOP_EVENT,
+  VISITOR_EVENT,
+  LAST_EVENT
+};
+
 enum ActiveMonsterSlot {
   PRIMARY,
   VISITOR,

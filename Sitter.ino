@@ -8,6 +8,7 @@ Sitter::Sitter(const uint8_t *bitmap1, unsigned int age, unsigned int lifespan, 
   currentBmp = bitmap1;
 
   xDir = -1;
+  xDir_walking = -1;
 
   moveQueuePos = 0;
 
@@ -15,6 +16,8 @@ Sitter::Sitter(const uint8_t *bitmap1, unsigned int age, unsigned int lifespan, 
   monsterLifespan = lifespan;
 
   nextMonster = next;
+
+  currentTask = IDLE;
 
   queueStand();
 }
@@ -29,6 +32,7 @@ Sitter::Sitter(const uint8_t *bitmap1, const uint8_t *bitmap2, unsigned int age,
   currentBmp = bitmap1;
 
   xDir = -1;
+  xDir_walking = -1;
 
   moveQueuePos = 0;
 
@@ -36,6 +40,8 @@ Sitter::Sitter(const uint8_t *bitmap1, const uint8_t *bitmap2, unsigned int age,
   monsterLifespan = lifespan;
 
   nextMonster = next;
+
+  currentTask = IDLE;
 
   queueStand();
 }
@@ -47,31 +53,59 @@ void Sitter::queueStand(){
   moveQueue[3] = WAIT_SPRITE_2;
 }
 
-void Sitter::heartbeat(){
-  Serial.println("Sitter received heartbeat");
-  Serial.print("Sitter xPos: "); Serial.println(xPos);
-  //Increment Age
-  updateAge();
+void Sitter::queueWalk(){
+  moveQueue[0] = MOVE_X_SPRITE_1;
+  moveQueue[1] = MOVE_X_SPRITE_2;
+  moveQueue[2] = MOVE_X_SPRITE_1;
+  moveQueue[3] = MOVE_X_SPRITE_2;
+}
 
-  //Flip Direction
-  if(bmp1 == bmp2){
-    xDir *= -1;
-  }
+void Sitter::idleRoutine(){
 
   if(moveQueuePos > 3){
     queueStand();
     moveQueuePos = 0;
   }
+}
 
-  //switch(moveQueue.front()){
-  switch(moveQueue[moveQueuePos]){
-    case MOVE_X_SPRITE_1: //Move with sprite 1
-      currentBmp = bmp1;
-      xPos += xDir*4;
+void Sitter::gotoRoutine(){
+  int xOffset = xDest - xPos;
+
+  if(xOffset == 0){
+    taskDone = true;
+    queueStand();
+  } else if(moveQueuePos > 3) {
+      xOffset < 0 ? xDir_walking = -1 : xDir_walking = 1;
+      queueWalk();
+    }
+}
+
+void Sitter::heartbeat(){
+  updateAge();
+
+  if(bmp1 == bmp2){
+    xDir *= -1;
+  }
+
+  switch(currentTask){
+    case IDLE:
+      idleRoutine();
       break;
-    case MOVE_X_SPRITE_2: //Move with sprite 2
+    case GOTO:
+      //Serial.print("Going to: "); Serial.println(xDest);
+      //Serial.print("I'm at: "); Serial.println(xPos);
+      gotoRoutine();
+      break;
+  }
+
+  switch(moveQueue[moveQueuePos]){
+    case MOVE_X_SPRITE_1:
+      currentBmp = bmp1;
+      xPos += xDir_walking*4;
+      break;
+    case MOVE_X_SPRITE_2:
       currentBmp = bmp2;
-      xPos += xDir*4;
+      xPos += xDir_walking*4;
       break;
     case WAIT_SPRITE_1: //Sit with sprite 1
       currentBmp = bmp1;

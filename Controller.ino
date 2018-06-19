@@ -117,14 +117,15 @@ void Controller::visitorEvent(){
   sendMonsterToPos(VISITOR,80);
   activeMonsters[VISITOR] -> setBoundsX(xBoundL_vis,xBoundR_vis + offFrameSlack);
 
-  for(int i = 0; i < 50; i++){
+  for(int i = 0; i < 10; i++){
     updateMonsters();
   }
 
-  sendMonsterToPos(VISITOR,116);
+  sendMonsterToPos(VISITOR,128);
   deleteMonster(VISITOR);
 
   activeMonsters[PRIMARY] -> setBoundsX(0,96);
+  sendMonsterToPos(PRIMARY,48);
 }
 
 void Controller::poopEvent(){
@@ -161,16 +162,20 @@ void Controller::activate(){
 
   //amdb.addMonster(monID);
 
-  addMonster(Kuchipatchi, PRIMARY);
-  //addMonster(Kuchipatchi, VISITOR);
-  //addMonster(Poop, POOP);
+  addMonster(Mimitchi, PRIMARY);
 
-  for(int i = 0; i < 3; i++) {sendMonsterToPos(PRIMARY,random(0,28)*4);}
-  //visitorEvent();
-  //idleEvent();
-  //poopEvent();
   while(1){
-    updateMonsters();
-    //sendMonsterToPos(PRIMARY,random(0,28)*4);
+    int randEvent = random(LAST_EVENT);
+    switch(randEvent){
+      case IDLE_EVENT:
+        idleEvent();
+        break;
+      case POOP_EVENT:
+        poopEvent();
+        break;
+      case VISITOR_EVENT:
+        visitorEvent();
+        break;
+    }
   }
 }

@@ -5,6 +5,7 @@
 #include "Monster.h"
 struct MonsterDB{
   MonsterRef monsterRepo[10];
+  int lifespans[LAST_STAGE];
   MonsterDB();
 
   const uint8_t *   getSprite1(MonsterName name);
@@ -12,6 +13,7 @@ struct MonsterDB{
   MonsterType   getMonsterType(MonsterName name);
   unsigned int  getMonsterLifespan(MonsterName name);
   MonsterName getNextMonster(MonsterName name);
+  MonsterStage getMonsterStage(MonsterName name);
 };
 
 #endif

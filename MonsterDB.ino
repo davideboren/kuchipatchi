@@ -1,11 +1,17 @@
 MonsterDB::MonsterDB(){
-  unsigned int lifespanBaby =  100;
-  unsigned int lifespanAdult = 150;
-  unsigned int lifespanPoop = 100;
-  monsterRepo[Kurotsubutchi] =  MonsterRef(kurotsubutchi1,kurotsubutchi2,MOVER,lifespanBaby,Kuchipatchi,Mimitchi);
-  monsterRepo[Kuchipatchi] =    MonsterRef(kuchipatchi1,kuchipatchi2,MOVER,lifespanAdult,Kurotsubutchi,Kurotsubutchi);
-  monsterRepo[Mimitchi] =       MonsterRef(mimitchi1,SITTER,lifespanAdult,Kurotsubutchi,Kurotsubutchi);
-  monsterRepo[Poop] =           MonsterRef(poop1, poop2, SITTER, lifespanPoop, Poop, Poop);
+
+  lifespans[EGG_STAGE] =      100;
+  lifespans[BABY_STAGE] =     100;
+  lifespans[TODDLER_STAGE] =  100;
+  lifespans[TEEN_STAGE] =     100;
+  lifespans[ADULT_STAGE] =    1000;
+  lifespans[POOP_STAGE] =     100;
+  lifespans[SHIP_STAGE] =     100;
+
+  monsterRepo[Kurotsubutchi] =  MonsterRef(kurotsubutchi1,kurotsubutchi2,MOVER,BABY_STAGE,Kuchipatchi,Mimitchi);
+  monsterRepo[Kuchipatchi] =    MonsterRef(kuchipatchi1,kuchipatchi2,MOVER,ADULT_STAGE,Kurotsubutchi,Kurotsubutchi);
+  monsterRepo[Mimitchi] =       MonsterRef(mimitchi1,SITTER,ADULT_STAGE,Kurotsubutchi,Kurotsubutchi);
+  monsterRepo[Poop] =           MonsterRef(poop1, poop2, SITTER, POOP_STAGE, Poop, Poop);
 
 }
 
@@ -21,8 +27,12 @@ MonsterType MonsterDB::getMonsterType(MonsterName name){
   return monsterRepo[name].monsterType;
 }
 
+MonsterStage MonsterDB::getMonsterStage(MonsterName name){
+  return monsterRepo[name].monsterStage;
+}
+
 unsigned int MonsterDB::getMonsterLifespan(MonsterName name){
-  return monsterRepo[name].monsterLifespan;
+  return lifespans[monsterRepo[name].monsterStage];
 }
 
 MonsterName MonsterDB::getNextMonster(MonsterName name){
