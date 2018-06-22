@@ -17,7 +17,7 @@ class Egg : public Monster{
 	public:
 
 		Egg();
-		Egg(const uint8_t *bitmap1, const uint8_t *bitmap2, const uint8_t *bitmap3, unsigned int age, MonsterName next);
+		Egg(MonsterName name, const uint8_t *bitmap1, const uint8_t *bitmap2, const uint8_t *bitmap3, unsigned int age, unsigned int lifespan, MonsterName next);
 
 		void queueStand();
 		void queueHatch1();

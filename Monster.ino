@@ -24,6 +24,10 @@ Monster::~Monster(){
 }
 
 //Getters
+MonsterName Monster::getName(){
+  return myName;
+}
+
 Frame Monster::getFrame(){
   return Frame(currentBmp,xPos,yPos,xDir);
 }

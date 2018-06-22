@@ -8,6 +8,7 @@ MonsterDB::MonsterDB(){
   lifespans[POOP_STAGE] =     100;
   lifespans[SHIP_STAGE] =     100;
 
+  monsterRepo[DigiEgg1] =       MonsterRef(degg1,degg2,degg3,EGG,EGG_STAGE,Kurotsubutchi,Kurotsubutchi);
   monsterRepo[Kurotsubutchi] =  MonsterRef(kurotsubutchi1,kurotsubutchi2,MOVER,BABY_STAGE,Kuchipatchi,Mimitchi);
   monsterRepo[Kuchipatchi] =    MonsterRef(kuchipatchi1,kuchipatchi2,MOVER,ADULT_STAGE,Kurotsubutchi,Kurotsubutchi);
   monsterRepo[Mimitchi] =       MonsterRef(mimitchi1,SITTER,ADULT_STAGE,Kurotsubutchi,Kurotsubutchi);
@@ -21,6 +22,10 @@ const uint8_t * MonsterDB::getSprite1(MonsterName name){
 
 const uint8_t * MonsterDB::getSprite2(MonsterName name){
   return monsterRepo[name].sprite2;
+}
+
+const uint8_t * MonsterDB::getSprite3(MonsterName name){
+  return monsterRepo[name].sprite3;
 }
 
 MonsterType MonsterDB::getMonsterType(MonsterName name){
@@ -41,6 +46,8 @@ MonsterName MonsterDB::getNextMonster(MonsterName name){
 
 Monster* MonsterDB::newMonster(MonsterName name){
   switch(getMonsterType(name)){
+    case EGG:
+      return new Egg(name, getSprite1(name), getSprite2(name), getSprite3(name),0,getMonsterLifespan(name), getNextMonster(name));
     case MOVER:
       return new MoverMon(getSprite1(name),getSprite2(name),getMonsterStage(name),0,getMonsterLifespan(name),getNextMonster(name));
       break;

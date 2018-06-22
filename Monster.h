@@ -35,8 +35,10 @@ class Monster{
 
     int xBoundL, xBoundR;
     MonsterStage monStage;
+    MonsterName myName;
 
     //Getters
+    MonsterName getName();
     Frame getFrame();
     int getXPos();
     int getYPos();

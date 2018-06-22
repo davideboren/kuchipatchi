@@ -150,8 +150,12 @@ void Controller::activate(){
   //int monID = getSavedMonsterID();
 
   //amdb.addMonster(monID);
+  addMonster(DigiEgg1, PRIMARY);
+  while(1){
+    updateMonsters();
+  }
 
-  addMonster(Kurotsubutchi, PRIMARY);
+  /*addMonster(Kurotsubutchi, PRIMARY);
   visitorEvent();
   while(1){
     int randEvent = random(LAST_EVENT);
@@ -166,5 +170,5 @@ void Controller::activate(){
         visitorEvent();
         break;
     }
-  }
+  }*/
 }
