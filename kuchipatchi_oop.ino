@@ -18,6 +18,8 @@
 #include "Monster.h"
 #include "MoverMon.h"
 #include "Sitter.h"
+#include "MoveInstruction.h"
+#include "Egg.h"
 #include "MonsterRef.h"
 #include "MonsterDB.h"
 

@@ -17,6 +17,7 @@ class Monster{
     unsigned int monsterLifespan;
 
     int xDir; //-1 == facing left, 1 == facing right
+    int yDir;
     void updateAge();
 
     MoveQueueAction moveQueue[4];
