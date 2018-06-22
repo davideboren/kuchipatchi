@@ -13,6 +13,7 @@ class Egg : public Monster{
 	private:
 		MoveInstruction moveInstrQueue[4];
 		int moveInstrQueuePos;
+		const uint8_t *bmp3;
 	public:
 
 		Egg();
@@ -21,6 +22,7 @@ class Egg : public Monster{
 		void queueStand();
 		void queueHatch1();
 		void queueHatch2();
+		void doMove(MoveInstruction move);
 
 		void heartbeat();
 

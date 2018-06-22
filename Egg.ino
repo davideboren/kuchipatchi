@@ -47,6 +47,32 @@ void Egg::queueStand(){
 	moveInstrQueuePos = 0;
 }
 
+void Egg::doMove(MoveInstruction move){
+
+	if(move.xDir != 0){
+		xDir = move.xDir;
+	}
+
+	if(move.yDir != 0){
+		yDir = move.yDir;
+	}
+
+	xPos = xPos + xDir*move.xDist;
+	yPos = yPos + yDir*move.yDist;
+
+	switch(move.sprite){
+		case 1:
+			currentBmp = bmp1;
+			break;
+		case 2:
+			currentBmp = bmp2;
+			break;
+		case 3:
+			currentBmp = bmp3;
+			break;
+	}
+}
+
 void Egg::heartbeat(){
 	updateAge();
 
