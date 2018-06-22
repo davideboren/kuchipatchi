@@ -19,6 +19,10 @@ Monster::Monster(const uint8_t *bitmap1, const uint8_t *bitmap2){
   yPos = 32;
 }
 
+Monster::~Monster(){
+
+}
+
 //Getters
 Frame Monster::getFrame(){
   return Frame(currentBmp,xPos,yPos,xDir);
@@ -42,6 +46,10 @@ int Monster::getXBoundR(){
 
 int Monster::getPoopPos(){
   return xPos + (xDir * 32);
+}
+
+MonsterStage Monster::getMonsterStage(){
+  return monStage;
 }
 
 //Setters
@@ -72,13 +80,12 @@ void Monster::setTask(MonsterTask task){
   taskDone = false;
 }
 
+void Monster::setXDir(int dir){
+  xDir = dir;
+}
+
 bool Monster::taskComplete(){
-  if(taskDone){
-    setTask(IDLE);
-    return true;
-  } else {
-    return false;
-  }
+  return taskDone;
 }
 
 void Monster::goTo(int x){

@@ -56,7 +56,8 @@ enum MonsterName {
 
 enum MonsterTask {
   IDLE,
-  GOTO
+  GOTO,
+  STAND
 };
 
 //Mimitchi

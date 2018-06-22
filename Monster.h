@@ -30,8 +30,10 @@ class Monster{
     //Constructors
     Monster();
     Monster(const uint8_t *bitmap1, const uint8_t *bitmap2);
+    virtual ~Monster();
 
     int xBoundL, xBoundR;
+    MonsterStage monStage;
 
     //Getters
     Frame getFrame();
@@ -40,6 +42,7 @@ class Monster{
     int getXBoundL();
     int getXBoundR();
     int getPoopPos();
+    MonsterStage getMonsterStage();
 
     //Setters
     void setXPos(int x);
@@ -47,6 +50,7 @@ class Monster{
     void setBoundsX(int xL, int xR);
     void setSprite1(const uint8_t *bitmap1);
     void setSprite2(const uint8_t *bitmap2);
+    void setXDir(int dir);
 
     virtual void heartbeat();
 

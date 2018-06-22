@@ -13,7 +13,7 @@ MoverMon::MoverMon(){
   yPos = 32;
 }
 
-MoverMon::MoverMon(const uint8_t *bitmap1, const uint8_t *bitmap2,unsigned int age, unsigned int lifespan, MonsterName next){
+MoverMon::MoverMon(const uint8_t *bitmap1, const uint8_t *bitmap2, MonsterStage stage, unsigned int age, unsigned int lifespan, MonsterName next){
   bmp1 = bitmap1;
   bmp2 = bitmap2;
   currentBmp = bitmap1;
@@ -27,6 +27,7 @@ MoverMon::MoverMon(const uint8_t *bitmap1, const uint8_t *bitmap2,unsigned int a
 
   moveQueuePos = 0;
 
+  monStage = stage;
   monsterAge = age;
   monsterLifespan = lifespan;
 
@@ -78,6 +79,7 @@ void MoverMon::gotoRoutine(){
 
   if(xOffset == 0){
     taskDone = true;
+    currentTask = STAND;
     queueStand();
     if(currentBmp == bmp1){
       moveQueuePos++; //to avoid hanging on the same sprite twice
@@ -86,6 +88,12 @@ void MoverMon::gotoRoutine(){
       xOffset < 0 ? xDir = -1 : xDir = 1;
       queueWalk();
     }
+}
+
+void MoverMon::standRoutine(){
+  if(moveQueuePos > 3){
+    queueStand();
+  }
 }
 
 void MoverMon::heartbeat(){
@@ -98,9 +106,10 @@ void MoverMon::heartbeat(){
       idleRoutine();
       break;
     case GOTO:
-      //Serial.print("Going to: "); Serial.println(xDest);
-      //Serial.print("I'm at: "); Serial.println(xPos);
       gotoRoutine();
+      break;
+    case STAND:
+      standRoutine();
       break;
   }
 

@@ -22,7 +22,6 @@ Controller::Controller(){
 }
 
 void Controller::drawFrame(Frame f){
-  //Serial.print("Drawing bitmap at: ");Serial.println((long)f.bitmap);
   if(f.xDir == -1){
     display.drawScaledBitmap(f.xPos,f.yPos,f.bitmap,16,16,1,2);
   } else if(f.xDir == 1){
@@ -30,23 +29,8 @@ void Controller::drawFrame(Frame f){
   }
 }
 
-Monster* Controller::newMonster(MonsterName name){
-  switch(mdb.getMonsterType(name)){
-    case MOVER:
-      return new MoverMon(mdb.getSprite1(name),mdb.getSprite2(name),0,mdb.getMonsterLifespan(name),mdb.getNextMonster(name));
-      break;
-    case SITTER:
-      if(mdb.getSprite1(name) == mdb.getSprite2(name)){
-        return new Sitter(mdb.getSprite1(name),0,mdb.getMonsterLifespan(name),mdb.getNextMonster(name));
-      } else {
-        return new Sitter(mdb.getSprite1(name), mdb.getSprite2(name), 0,mdb.getMonsterLifespan(name),mdb.getNextMonster(name));
-      }
-      break;
-  }
-}
-
 void Controller::addMonster(MonsterName name, ActiveMonsterSlot slot){
-  activeMonsters[slot] = newMonster(name);
+  activeMonsters[slot] = mdb.newMonster(name);
 }
 
 void Controller::deleteMonster(int slot){
@@ -64,7 +48,7 @@ void Controller::evolveMonster(int slot){
 
   delete activeMonsters[slot];
 
-  activeMonsters[slot] = newMonster(nextMon);
+  activeMonsters[slot] = mdb.newMonster(nextMon);
 
   activeMonsters[slot] -> setXPos(currentX);
   activeMonsters[slot] -> setYPos(currentY);
@@ -110,12 +94,15 @@ void Controller::sendMonsterToPos(int slot, int x){
 
 void Controller::visitorEvent(){
   sendMonsterToPos(PRIMARY,24);
+  activeMonsters[PRIMARY] -> setXDir(1);
   activeMonsters[PRIMARY] -> setBoundsX(0 - offFrameSlack ,32);
 
-  addMonster(Kurotsubutchi, VISITOR);
+  addMonster(mdb.getRandomMonster(activeMonsters[PRIMARY] -> getMonsterStage()), VISITOR);
   activeMonsters[VISITOR] -> setXPos(116);
   sendMonsterToPos(VISITOR,80);
   activeMonsters[VISITOR] -> setBoundsX(xBoundL_vis,xBoundR_vis + offFrameSlack);
+  activeMonsters[PRIMARY] -> setTask(IDLE);
+  activeMonsters[VISITOR] -> setTask(IDLE);
 
   for(int i = 0; i < 10; i++){
     updateMonsters();
@@ -126,6 +113,8 @@ void Controller::visitorEvent(){
 
   activeMonsters[PRIMARY] -> setBoundsX(0,96);
   sendMonsterToPos(PRIMARY,48);
+  activeMonsters[PRIMARY] -> setTask(IDLE);
+
 }
 
 void Controller::poopEvent(){
@@ -162,8 +151,8 @@ void Controller::activate(){
 
   //amdb.addMonster(monID);
 
-  addMonster(Mimitchi, PRIMARY);
-
+  addMonster(Kurotsubutchi, PRIMARY);
+  visitorEvent();
   while(1){
     int randEvent = random(LAST_EVENT);
     switch(randEvent){

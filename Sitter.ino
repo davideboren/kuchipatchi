@@ -1,4 +1,4 @@
-Sitter::Sitter(const uint8_t *bitmap1, unsigned int age, unsigned int lifespan, MonsterName next){
+Sitter::Sitter(const uint8_t *bitmap1, MonsterStage stage, unsigned int age, unsigned int lifespan, MonsterName next){
 
   xPos = 48;
   yPos = 32;
@@ -22,7 +22,7 @@ Sitter::Sitter(const uint8_t *bitmap1, unsigned int age, unsigned int lifespan, 
   queueStand();
 }
 
-Sitter::Sitter(const uint8_t *bitmap1, const uint8_t *bitmap2, unsigned int age, unsigned int lifespan, MonsterName next){
+Sitter::Sitter(const uint8_t *bitmap1, const uint8_t *bitmap2, MonsterStage stage, unsigned int age, unsigned int lifespan, MonsterName next){
 
   xPos = 48;
   yPos = 32;
@@ -36,6 +36,7 @@ Sitter::Sitter(const uint8_t *bitmap1, const uint8_t *bitmap2, unsigned int age,
 
   moveQueuePos = 0;
 
+  monStage = stage;
   monsterAge = age;
   monsterLifespan = lifespan;
 
@@ -92,9 +93,10 @@ void Sitter::heartbeat(){
       idleRoutine();
       break;
     case GOTO:
-      //Serial.print("Going to: "); Serial.println(xDest);
-      //Serial.print("I'm at: "); Serial.println(xPos);
       gotoRoutine();
+      break;
+    case STAND:
+      idleRoutine();
       break;
   }
 

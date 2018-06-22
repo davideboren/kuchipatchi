@@ -4,7 +4,7 @@ MonsterDB::MonsterDB(){
   lifespans[BABY_STAGE] =     100;
   lifespans[TODDLER_STAGE] =  100;
   lifespans[TEEN_STAGE] =     100;
-  lifespans[ADULT_STAGE] =    1000;
+  lifespans[ADULT_STAGE] =    100;
   lifespans[POOP_STAGE] =     100;
   lifespans[SHIP_STAGE] =     100;
 
@@ -37,4 +37,31 @@ unsigned int MonsterDB::getMonsterLifespan(MonsterName name){
 
 MonsterName MonsterDB::getNextMonster(MonsterName name){
   return random(2)?monsterRepo[name].nextMonster[0]:monsterRepo[name].nextMonster[1];
+}
+
+Monster* MonsterDB::newMonster(MonsterName name){
+  switch(getMonsterType(name)){
+    case MOVER:
+      return new MoverMon(getSprite1(name),getSprite2(name),getMonsterStage(name),0,getMonsterLifespan(name),getNextMonster(name));
+      break;
+    case SITTER:
+      if(getSprite1(name) == getSprite2(name)){
+        return new Sitter(getSprite1(name),getMonsterStage(name),0,getMonsterLifespan(name),getNextMonster(name));
+      } else {
+        return new Sitter(getSprite1(name), getSprite2(name),getMonsterStage(name), 0,getMonsterLifespan(name),getNextMonster(name));
+      }
+      break;
+    case FLOATER:
+      Serial.println("got floater");
+      break;
+  }
+  return NULL;
+}
+
+MonsterName MonsterDB::getRandomMonster(MonsterStage stage){
+  MonsterName rando;
+  do{
+    rando = static_cast<MonsterName>(random(LAST_MON_NAME));
+  }while(getMonsterStage(rando) != stage);
+  return rando;
 }

@@ -11,13 +11,14 @@ class MoverMon : public Monster{
   //int xBoundL, xBoundR;
 
   public:
-    MoverMon(const uint8_t *bitmap1, const uint8_t *bitmap2,unsigned int age, unsigned int lifespan, MonsterName next);
+    MoverMon(const uint8_t *bitmap1, const uint8_t *bitmap2, MonsterStage stage, unsigned int age, unsigned int lifespan, MonsterName next);
     MoverMon();
     ~MoverMon();
     void queueWalk();
     void queueStand();
     void idleRoutine();
     void gotoRoutine();
+    void standRoutine();
     void heartbeat();
     bool inBounds();
 };

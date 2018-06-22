@@ -14,6 +14,8 @@ struct MonsterDB{
   unsigned int  getMonsterLifespan(MonsterName name);
   MonsterName getNextMonster(MonsterName name);
   MonsterStage getMonsterStage(MonsterName name);
+  Monster* newMonster(MonsterName name);
+  MonsterName getRandomMonster(MonsterStage stage);
 };
 
 #endif

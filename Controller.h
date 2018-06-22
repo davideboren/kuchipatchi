@@ -13,11 +13,11 @@ class Controller{
 
     int eMonsterIdAddr = 0;
     int frameDelay;
+
     int xBoundL_vis, xBoundR_vis;
 
     Monster* activeMonsters[10];
     void addMonster(MonsterName name, ActiveMonsterSlot slot);
-    Monster* newMonster(MonsterName name);
     void deleteMonster(int slot);
     void evolveMonster(int slot);
     void sendMonsterToPos(int slot, int x);
