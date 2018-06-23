@@ -2,7 +2,7 @@ MonsterRef::MonsterRef(){
 
 }
 
-MonsterRef::MonsterRef(const uint8_t *s1, MonsterType type, MonsterStage stage, MonsterName next1, MonsterName next2){
+MonsterRef::MonsterRef(const uint8_t *s1, MonsterType type, MonsterStage stage, bool underwater, MonsterName next1, MonsterName next2){
   sprite1 = s1;
   sprite2 = s1;
 
@@ -10,11 +10,13 @@ MonsterRef::MonsterRef(const uint8_t *s1, MonsterType type, MonsterStage stage, 
 
   monsterStage = stage;
 
+  oceanType = underwater;
+
   nextMonster[0] = next1;
   nextMonster[1] = next2;
 }
 
-MonsterRef::MonsterRef(const uint8_t *s1, const uint8_t *s2, MonsterType type, MonsterStage stage, MonsterName next1, MonsterName next2){
+MonsterRef::MonsterRef(const uint8_t *s1, const uint8_t *s2, MonsterType type, MonsterStage stage, bool underwater, MonsterName next1, MonsterName next2){
   sprite1 = s1;
   sprite2 = s2;
 
@@ -22,11 +24,13 @@ MonsterRef::MonsterRef(const uint8_t *s1, const uint8_t *s2, MonsterType type, M
 
   monsterStage = stage;
 
+  oceanType = underwater;
+
   nextMonster[0] = next1;
   nextMonster[1] = next2;
 }
 
-MonsterRef::MonsterRef(const uint8_t *s1, const uint8_t *s2, const uint8_t *s3, MonsterType type, MonsterStage stage, MonsterName next1, MonsterName next2){
+MonsterRef::MonsterRef(const uint8_t *s1, const uint8_t *s2, const uint8_t *s3, MonsterType type, MonsterStage stage, bool underwater, MonsterName next1, MonsterName next2){
   sprite1 = s1;
   sprite2 = s2;
   sprite3 = s3;
@@ -34,6 +38,8 @@ MonsterRef::MonsterRef(const uint8_t *s1, const uint8_t *s2, const uint8_t *s3, 
   monsterType = type;
 
   monsterStage = stage;
+
+  oceanType = underwater;
 
   nextMonster[0] = next1;
   nextMonster[1] = next2;

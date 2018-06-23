@@ -1,18 +1,22 @@
 MonsterDB::MonsterDB(){
 
+  oceanTrue = true;
+  oceanFalse = false;
+  
+
   lifespans[EGG_STAGE] =      100;
-  lifespans[BABY_STAGE] =     100;
-  lifespans[TODDLER_STAGE] =  100;
-  lifespans[TEEN_STAGE] =     100;
-  lifespans[ADULT_STAGE] =    100;
-  lifespans[POOP_STAGE] =     100;
+  lifespans[BABY_STAGE] =     200;
+  lifespans[TODDLER_STAGE] =  200;
+  lifespans[TEEN_STAGE] =     200;
+  lifespans[ADULT_STAGE] =    200;
+  lifespans[POOP_STAGE] =     200;
   lifespans[SHIP_STAGE] =     100;
 
-  monsterRepo[DigiEgg1] =       MonsterRef(degg1,degg2,degg3,EGG,EGG_STAGE,Kurotsubutchi,Kurotsubutchi);
-  monsterRepo[Kurotsubutchi] =  MonsterRef(kurotsubutchi1,kurotsubutchi2,MOVER,BABY_STAGE,Kuchipatchi,Mimitchi);
-  monsterRepo[Kuchipatchi] =    MonsterRef(kuchipatchi1,kuchipatchi2,MOVER,ADULT_STAGE,Kurotsubutchi,Kurotsubutchi);
-  monsterRepo[Mimitchi] =       MonsterRef(mimitchi1,SITTER,ADULT_STAGE,Kurotsubutchi,Kurotsubutchi);
-  monsterRepo[Poop] =           MonsterRef(poop1, poop2, SITTER, POOP_STAGE, Poop, Poop);
+  monsterRepo[DigiEgg1] =       MonsterRef(degg1,degg2,degg3,EGG,EGG_STAGE,oceanFalse,Kurotsubutchi,Kurotsubutchi);
+  monsterRepo[Kurotsubutchi] =  MonsterRef(kurotsubutchi1,kurotsubutchi2,MOVER,BABY_STAGE,oceanTrue,Kuchipatchi,Mimitchi);
+  monsterRepo[Kuchipatchi] =    MonsterRef(kuchipatchi1,kuchipatchi2,MOVER,ADULT_STAGE,oceanFalse,Kurotsubutchi,Kurotsubutchi);
+  monsterRepo[Mimitchi] =       MonsterRef(mimitchi1,SITTER,ADULT_STAGE,oceanFalse,Kurotsubutchi,Kurotsubutchi);
+  monsterRepo[Poop] =           MonsterRef(poop1, poop2, SITTER, POOP_STAGE,oceanFalse, Poop, Poop);
 
 }
 
@@ -34,6 +38,10 @@ MonsterType MonsterDB::getMonsterType(MonsterName name){
 
 MonsterStage MonsterDB::getMonsterStage(MonsterName name){
   return monsterRepo[name].monsterStage;
+}
+
+bool MonsterDB::isUnderwater(MonsterName name){
+  return monsterRepo[name].oceanType;
 }
 
 unsigned int MonsterDB::getMonsterLifespan(MonsterName name){
@@ -65,11 +73,24 @@ Monster* MonsterDB::newMonster(MonsterName name){
   return NULL;
 }
 
-MonsterName MonsterDB::getRandomMonster(MonsterStage stage){
-  Serial.println(stage);
+ScreenFX* MonsterDB::newFX(FXType fx){
+  switch(fx){
+    case FLUSH_FX:
+      return new FlusherFX();
+      break;
+    case BUBBLE_FX:
+      return new BubbleFX();
+      break;
+    case EVOLVE_FX:
+      return new EvolveFX();
+      break;
+  }
+}
+
+MonsterName MonsterDB::getRandomMonster(MonsterName name){
   MonsterName rando;
   do{
     rando = static_cast<MonsterName>(random(LAST_MON_NAME));
-  }while(getMonsterStage(rando) != stage);
+  }while(getMonsterStage(rando) != getMonsterStage(name) || isUnderwater(rando) != isUnderwater(name));
   return rando;
 }

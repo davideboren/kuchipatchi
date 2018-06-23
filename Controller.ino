@@ -19,6 +19,10 @@ Controller::Controller(){
     activeMonsters[slot] = NULL;
   }
 
+  for(int slot = EVOLVE_FX_SLOT; slot != LAST_FX_SLOT; slot++){
+    activeFX[slot] = NULL;
+  }
+
 }
 
 void Controller::drawFrame(Frame f){
@@ -31,6 +35,15 @@ void Controller::drawFrame(Frame f){
 
 void Controller::addMonster(MonsterName name, ActiveMonsterSlot slot){
   activeMonsters[slot] = mdb.newMonster(name);
+
+  if(slot == PRIMARY){
+    if(mdb.isUnderwater(name) && activeFX[BUBBLE_FX_SLOT] == NULL){
+      activeFX[BUBBLE_FX_SLOT] = mdb.newFX(BUBBLE_FX);
+    }
+    else if(!mdb.isUnderwater(name) && activeFX[BUBBLE_FX_SLOT] != NULL){
+      deleteFX(BUBBLE_FX_SLOT);
+    }
+  }
 }
 
 void Controller::deleteMonster(int slot){
@@ -48,11 +61,27 @@ void Controller::evolveMonster(int slot){
 
   delete activeMonsters[slot];
 
-  activeMonsters[slot] = mdb.newMonster(nextMon);
+  //activeMonsters[slot] = mdb.newMonster(nextMon);
+  addMonster(nextMon, static_cast<ActiveMonsterSlot>(slot));
 
   activeMonsters[slot] -> setXPos(currentX);
   activeMonsters[slot] -> setYPos(currentY);
   activeMonsters[slot] -> setBoundsX(currentXBoundL, currentXBoundR);
+}
+
+void Controller::evoEvent(int slot){
+  sendMonsterToPos(slot, 48);
+  activeFX[EVOLVE_FX_SLOT] = mdb.newFX(EVOLVE_FX);
+  for(int i = 0; i < 10; i++){
+    updateAll();
+  }
+  evolveMonster(slot);
+  activeMonsters[slot] -> setTask(STAND);
+  for(int i = 0; i < 10; i++){
+    updateAll();
+  }
+  deleteFX(EVOLVE_FX_SLOT);
+  activeMonsters[slot] -> setTask(IDLE);
 }
 
 int Controller::getSavedMonsterID(){
@@ -85,10 +114,73 @@ void Controller::updateMonsters(){
   delay(frameDelay);
 }
 
+void Controller::hupdateMonsters(){
+  for(int monSlot = PRIMARY; monSlot != LAST_MON_SLOT; monSlot++){
+    if(activeMonsters[monSlot] != NULL){
+      activeMonsters[monSlot] -> heartbeat();
+
+      if(activeMonsters[monSlot] -> agedOut() && !activeMonsters[monSlot] -> isEventCapable()){
+        evolveMonster(monSlot);
+        monSlot--;
+      }
+    }
+  }
+}
+
+void Controller::drawMonsterFrames(){
+  for(int monSlot = PRIMARY; monSlot != LAST_MON_SLOT; monSlot++){
+    if(activeMonsters[monSlot] != NULL){
+      drawFrame(activeMonsters[monSlot] -> getFrame());
+    }
+  }
+}
+
+void Controller::updateFX(){
+  for(int fxSlot = EVOLVE_FX_SLOT; fxSlot != LAST_FX_SLOT; fxSlot++){
+    if(activeFX[fxSlot] != NULL){
+      activeFX[fxSlot] -> heartbeat();
+    }
+  }
+}
+
+void Controller::drawFXFrames(){
+  for(int fxSlot = EVOLVE_FX_SLOT; fxSlot != LAST_FX_SLOT; fxSlot++){
+    if(activeFX[fxSlot] != NULL){
+      for(int i = 0; i < activeFX[fxSlot] -> getActiveFrameNum(); i++){
+        drawFrame(activeFX[fxSlot] -> getFrame(i));
+      }
+    }
+  }
+}
+
+void Controller::deleteFX(int slot){
+  delete activeFX[slot];
+  activeFX[slot] = NULL;
+}
+
+void Controller::updateAll(){
+  display.clearDisplay();
+  hupdateMonsters();
+  updateFX();
+  drawMonsterFrames();
+  drawFXFrames();
+  display.display();
+  delay(250);
+
+  display.clearDisplay();
+  updateFX();
+  drawMonsterFrames();
+  drawFXFrames();
+  display.display();
+  delay(250);
+  
+}
+
 void Controller::sendMonsterToPos(int slot, int x){
   activeMonsters[slot] -> goTo(x);
   while(!activeMonsters[slot] -> taskComplete()){
-    updateMonsters();
+    //updateMonsters();
+    updateAll();
   }
 }
 
@@ -97,7 +189,7 @@ void Controller::visitorEvent(){
   activeMonsters[PRIMARY] -> setXDir(1);
   activeMonsters[PRIMARY] -> setBoundsX(0 - offFrameSlack ,32);
 
-  addMonster(mdb.getRandomMonster(activeMonsters[PRIMARY] -> getMonsterStage()), VISITOR);
+  addMonster(mdb.getRandomMonster(activeMonsters[PRIMARY] -> getName()), VISITOR);
   activeMonsters[VISITOR] -> setXPos(116);
   sendMonsterToPos(VISITOR,80);
   activeMonsters[VISITOR] -> setBoundsX(xBoundL_vis,xBoundR_vis + offFrameSlack);
@@ -105,7 +197,8 @@ void Controller::visitorEvent(){
   activeMonsters[VISITOR] -> setTask(IDLE);
 
   for(int i = 0; i < 10; i++){
-    updateMonsters();
+    //updateMonsters();
+    updateAll();
   }
 
   sendMonsterToPos(VISITOR,128);
@@ -130,17 +223,33 @@ void Controller::poopEvent(){
   }
 
   while(!activeMonsters[POOP] -> agedOut()){
-    updateMonsters();
+    //updateMonsters();
+    updateAll();
   }
-  deleteMonster(POOP);
+  flushPoop(dropZone);
+  //deleteMonster(POOP);
 
   activeMonsters[PRIMARY] -> setBoundsX(0,96);
 
 }
 
+void Controller::flushPoop(int poopXPos){
+  activeFX[FLUSH_FX_SLOT] = mdb.newFX(FLUSH_FX);
+  
+  while(!activeFX[FLUSH_FX_SLOT] -> finished()){
+    if(activeMonsters[POOP] != NULL && activeFX[FLUSH_FX_SLOT] -> getEffectPos() <= poopXPos){
+      deleteMonster(POOP);
+    }
+    updateAll();
+  }
+
+  deleteFX(FLUSH_FX_SLOT);
+}
+
 void Controller::idleEvent(){
   for(int d = 0; d < 30; d++){
-    updateMonsters();
+    //updateMonsters();
+    updateAll();
   }
 }
 
@@ -160,10 +269,14 @@ void Controller::activate(){
     
     int currentEvent;
     if(activeMonsters[PRIMARY] -> isEventCapable()){
-      currentEvent = random(LAST_EVENT);
+      if(activeMonsters[PRIMARY] -> agedOut()){
+        currentEvent = EVO_EVENT;
+      } else {
+        currentEvent = random(LAST_EVENT);
+      }
     } else {
       currentEvent = IDLE_EVENT;
-    }
+      }
     
     switch(currentEvent){
       case IDLE_EVENT:
@@ -174,6 +287,9 @@ void Controller::activate(){
         break;
       case VISITOR_EVENT:
         visitorEvent();
+        break;
+      case EVO_EVENT:
+        evoEvent(PRIMARY);
         break;
     }
   }

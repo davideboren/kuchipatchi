@@ -20,6 +20,7 @@ Egg::Egg(MonsterName name, const uint8_t *bitmap1, const uint8_t *bitmap2, const
 	nextMonster = next;
 
   eventsAllowed = false;
+  currentTask = STAND;
 
   queueStand();
 }

@@ -19,6 +19,7 @@ class Monster{
     int frameDir;
 
     bool eventsAllowed;
+    bool underwater;
     
     unsigned int monsterAge;
     unsigned int monsterLifespan;
