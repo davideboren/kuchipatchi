@@ -13,7 +13,9 @@ MoverMon::MoverMon(){
   yPos = 32;
 }
 
-MoverMon::MoverMon(const uint8_t *bitmap1, const uint8_t *bitmap2, MonsterStage stage, unsigned int age, unsigned int lifespan, MonsterName next){
+MoverMon::MoverMon(MonsterName name, const uint8_t *bitmap1, const uint8_t *bitmap2, MonsterStage stage, unsigned int age, unsigned int lifespan, MonsterName next){
+  myName = name;
+  
   bmp1 = bitmap1;
   bmp2 = bitmap2;
   currentBmp = bitmap1;

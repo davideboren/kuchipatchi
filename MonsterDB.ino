@@ -49,7 +49,7 @@ Monster* MonsterDB::newMonster(MonsterName name){
     case EGG:
       return new Egg(name, getSprite1(name), getSprite2(name), getSprite3(name),0,getMonsterLifespan(name), getNextMonster(name));
     case MOVER:
-      return new MoverMon(getSprite1(name),getSprite2(name),getMonsterStage(name),0,getMonsterLifespan(name),getNextMonster(name));
+      return new MoverMon(name, getSprite1(name),getSprite2(name),getMonsterStage(name),0,getMonsterLifespan(name),getNextMonster(name));
       break;
     case SITTER:
       if(getSprite1(name) == getSprite2(name)){

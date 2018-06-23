@@ -11,7 +11,7 @@ class MoverMon : public Monster{
   //int xBoundL, xBoundR;
 
   public:
-    MoverMon(const uint8_t *bitmap1, const uint8_t *bitmap2, MonsterStage stage, unsigned int age, unsigned int lifespan, MonsterName next);
+    MoverMon(MonsterName name, const uint8_t *bitmap1, const uint8_t *bitmap2, MonsterStage stage, unsigned int age, unsigned int lifespan, MonsterName next);
     MoverMon();
     ~MoverMon();
     void queueWalk();
