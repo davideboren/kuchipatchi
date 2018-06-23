@@ -7,10 +7,11 @@
 #define MONSTER_H
 
 #include "Defs.h"
+#include "MoveInstruction.h"
 
 class Monster{
   protected:
-    const uint8_t *bmp1, *bmp2, *currentBmp;
+    const uint8_t *bmp1, *bmp2, *bmp3, *currentBmp;
     int xPos, yPos;
     int xDest;
     unsigned int monsterAge;
@@ -55,6 +56,7 @@ class Monster{
     void setSprite2(const uint8_t *bitmap2);
     void setXDir(int dir);
 
+    void doMove(MoveInstruction move);
     virtual void heartbeat();
 
     void setTask(MonsterTask task);
