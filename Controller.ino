@@ -139,7 +139,7 @@ void Controller::poopEvent(){
 }
 
 void Controller::idleEvent(){
-  for(int d = 0; d < 60; d++){
+  for(int d = 0; d < 30; d++){
     updateMonsters();
   }
 }
@@ -150,16 +150,22 @@ void Controller::activate(){
   //int monID = getSavedMonsterID();
 
   //amdb.addMonster(monID);
-  addMonster(DigiEgg1, PRIMARY);
+  /*addMonster(DigiEgg1, PRIMARY);
   while(1){
     updateMonsters();
-  }
+  }*/
 
-  /*addMonster(Kurotsubutchi, PRIMARY);
-  visitorEvent();
+  addMonster(DigiEgg1, PRIMARY);
   while(1){
-    int randEvent = random(LAST_EVENT);
-    switch(randEvent){
+    
+    int currentEvent;
+    if(activeMonsters[PRIMARY] -> isEventCapable()){
+      currentEvent = random(LAST_EVENT);
+    } else {
+      currentEvent = IDLE_EVENT;
+    }
+    
+    switch(currentEvent){
       case IDLE_EVENT:
         idleEvent();
         break;
@@ -170,5 +176,5 @@ void Controller::activate(){
         visitorEvent();
         break;
     }
-  }*/
+  }
 }

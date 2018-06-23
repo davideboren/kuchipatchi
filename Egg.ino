@@ -18,6 +18,10 @@ Egg::Egg(MonsterName name, const uint8_t *bitmap1, const uint8_t *bitmap2, const
 	monsterLifespan = lifespan;
 
 	nextMonster = next;
+
+  eventsAllowed = false;
+
+  queueStand();
 }
 
 void Egg::queueHatch1(){

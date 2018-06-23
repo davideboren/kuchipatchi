@@ -53,9 +53,9 @@ Monster* MonsterDB::newMonster(MonsterName name){
       break;
     case SITTER:
       if(getSprite1(name) == getSprite2(name)){
-        return new Sitter(getSprite1(name),getMonsterStage(name),0,getMonsterLifespan(name),getNextMonster(name));
+        return new Sitter(name, getSprite1(name),getMonsterStage(name),0,getMonsterLifespan(name),getNextMonster(name));
       } else {
-        return new Sitter(getSprite1(name), getSprite2(name),getMonsterStage(name), 0,getMonsterLifespan(name),getNextMonster(name));
+        return new Sitter(name, getSprite1(name), getSprite2(name),getMonsterStage(name), 0,getMonsterLifespan(name),getNextMonster(name));
       }
       break;
     case FLOATER:
@@ -66,6 +66,7 @@ Monster* MonsterDB::newMonster(MonsterName name){
 }
 
 MonsterName MonsterDB::getRandomMonster(MonsterStage stage){
+  Serial.println(stage);
   MonsterName rando;
   do{
     rando = static_cast<MonsterName>(random(LAST_MON_NAME));

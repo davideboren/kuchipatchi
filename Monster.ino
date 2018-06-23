@@ -56,6 +56,10 @@ MonsterStage Monster::getMonsterStage(){
   return monStage;
 }
 
+bool Monster::isEventCapable(){
+  return eventsAllowed;
+}
+
 //Setters
 void Monster::setXPos(int x){
   xPos = x;
@@ -89,6 +93,7 @@ void Monster::setXDir(int dir){
 }
 
 void Monster::doMove(MoveInstruction move){
+  //Serial.println("Entered doMove");
 
   if(move.xDir != 0){
     xDir = move.xDir;
@@ -131,11 +136,11 @@ void Monster::goTo(int x){
 //Age Functions
 void Monster::updateAge(){
   monsterAge+=5;
-  Serial.print("Age Updated: ");Serial.println(monsterAge);
+  Serial.print("Age: "); Serial.print(monsterAge); Serial.print("/"); Serial.println(monsterLifespan);
 }
 
 bool Monster::agedOut(){
-  if( (monsterAge >= monsterLifespan) && currentTask == IDLE){
+  if( (monsterAge >= monsterLifespan) && currentTask != GOTO){
     return true;
   } else {
     return false;
