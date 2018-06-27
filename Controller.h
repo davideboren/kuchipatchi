@@ -5,6 +5,7 @@
  */
 
 #include "Monster.h"
+#include "ScreenFX.h"
 #include "MonsterDB.h"
 
 class Controller{
@@ -17,14 +18,27 @@ class Controller{
     int xBoundL_vis, xBoundR_vis;
 
     Monster* activeMonsters[10];
+    ScreenFX* activeFX[3];
+    
     void addMonster(MonsterName name, ActiveMonsterSlot slot);
     void deleteMonster(int slot);
     void evolveMonster(int slot);
+    void evoEvent(int slot);
     void sendMonsterToPos(int slot, int x);
     void visitorEvent();
     void poopEvent();
+    void flushPoop(int poopXPos);
     void idleEvent();
+    
     void updateMonsters();
+    void hupdateMonsters();
+    void drawMonsterFrames();
+    
+    void updateFX();
+    void drawFXFrames();
+    void deleteFX(int slot);
+    
+    void updateAll();
 
   public:
     Controller();

@@ -18,6 +18,11 @@ Egg::Egg(MonsterName name, const uint8_t *bitmap1, const uint8_t *bitmap2, const
 	monsterLifespan = lifespan;
 
 	nextMonster = next;
+
+  eventsAllowed = false;
+  currentTask = STAND;
+
+  queueStand();
 }
 
 void Egg::queueHatch1(){
@@ -45,32 +50,6 @@ void Egg::queueStand(){
 	moveInstrQueue[3].setMove(0,0,0,0,2);
 
 	moveInstrQueuePos = 0;
-}
-
-void Egg::doMove(MoveInstruction move){
-
-	if(move.xDir != 0){
-		xDir = move.xDir;
-	}
-
-	if(move.yDir != 0){
-		yDir = move.yDir;
-	}
-
-	xPos = xPos + xDir*move.xDist;
-	yPos = yPos + yDir*move.yDist;
-
-	switch(move.sprite){
-		case 1:
-			currentBmp = bmp1;
-			break;
-		case 2:
-			currentBmp = bmp2;
-			break;
-		case 3:
-			currentBmp = bmp3;
-			break;
-	}
 }
 
 void Egg::heartbeat(){

@@ -7,21 +7,28 @@
 #define MONSTER_H
 
 #include "Defs.h"
+#include "MoveInstruction.h"
 
 class Monster{
   protected:
-    const uint8_t *bmp1, *bmp2, *currentBmp;
+    const uint8_t *bmp1, *bmp2, *bmp3, *currentBmp;
     int xPos, yPos;
     int xDest;
+    int xDir; //-1 == facing left, 1 == facing right
+    int yDir;
+    int frameDir;
+
+    bool eventsAllowed;
+    bool underwater;
+    
     unsigned int monsterAge;
     unsigned int monsterLifespan;
 
-    int xDir; //-1 == facing left, 1 == facing right
-    int yDir;
     void updateAge();
 
-    MoveQueueAction moveQueue[4];
+    MoveInstruction moveQueue[4];
     int moveQueuePos;
+
 
     MonsterTask currentTask;
     bool taskDone;
@@ -33,13 +40,14 @@ class Monster{
     Monster(const uint8_t *bitmap1, const uint8_t *bitmap2);
     virtual ~Monster();
 
+    bool isEventCapable();
     int xBoundL, xBoundR;
     MonsterStage monStage;
     MonsterName myName;
 
     //Getters
     MonsterName getName();
-    Frame getFrame();
+    virtual Frame getFrame();
     int getXPos();
     int getYPos();
     int getXBoundL();
@@ -55,6 +63,7 @@ class Monster{
     void setSprite2(const uint8_t *bitmap2);
     void setXDir(int dir);
 
+    void doMove(MoveInstruction move);
     virtual void heartbeat();
 
     void setTask(MonsterTask task);

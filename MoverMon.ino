@@ -13,7 +13,9 @@ MoverMon::MoverMon(){
   yPos = 32;
 }
 
-MoverMon::MoverMon(const uint8_t *bitmap1, const uint8_t *bitmap2, MonsterStage stage, unsigned int age, unsigned int lifespan, MonsterName next){
+MoverMon::MoverMon(MonsterName name, const uint8_t *bitmap1, const uint8_t *bitmap2, MonsterStage stage, unsigned int age, unsigned int lifespan, MonsterName next){
+  myName = name;
+  
   bmp1 = bitmap1;
   bmp2 = bitmap2;
   currentBmp = bitmap1;
@@ -32,6 +34,10 @@ MoverMon::MoverMon(const uint8_t *bitmap1, const uint8_t *bitmap2, MonsterStage 
   monsterLifespan = lifespan;
 
   nextMonster = next;
+
+  eventsAllowed = true;
+
+  queueStand();
 }
 
 MoverMon::~MoverMon(){
@@ -39,23 +45,21 @@ MoverMon::~MoverMon(){
 }
 
 void MoverMon::queueWalk(){
-  moveQueue[0] = MOVE_X_SPRITE_1;
-  moveQueue[1] = MOVE_X_SPRITE_1;
-  moveQueue[2] = MOVE_X_SPRITE_2;
-  moveQueue[3] = MOVE_X_SPRITE_2;
+  moveQueue[0].setMove(4,0,0,0,1);
+  moveQueue[1].setMove(4,0,0,0,1);
+  moveQueue[2].setMove(4,0,0,0,2);
+  moveQueue[3].setMove(4,0,0,0,2);
 
   moveQueuePos = 0;
-  Serial.println("Queued Walk");
 }
 
 void MoverMon::queueStand(){
-  moveQueue[0] = WAIT_SPRITE_1;
-  moveQueue[1] = WAIT_SPRITE_2;
-  moveQueue[2] = WAIT_SPRITE_1;
-  moveQueue[3] = WAIT_SPRITE_2;
+  moveQueue[0].setMove(0,0,0,0,1);
+  moveQueue[1].setMove(0,0,0,0,2);
+  moveQueue[2].setMove(0,0,0,0,1);
+  moveQueue[3].setMove(0,0,0,0,2);
 
   moveQueuePos = 0;
-  Serial.println("Queued Stand");
 }
 
 void MoverMon::idleRoutine(){
@@ -112,23 +116,8 @@ void MoverMon::heartbeat(){
       standRoutine();
       break;
   }
-
-  switch(moveQueue[moveQueuePos]){
-    case MOVE_X_SPRITE_1: //Move with sprite 1
-      currentBmp = bmp1;
-      xPos += xDir*4;
-      break;
-    case MOVE_X_SPRITE_2: //Move with sprite 2
-      currentBmp = bmp2;
-      xPos += xDir*4;
-      break;
-    case WAIT_SPRITE_1: //Sit with sprite 1
-      currentBmp = bmp1;
-      break;
-    case WAIT_SPRITE_2: //Sit with sprite 2
-      currentBmp = bmp2;
-      break;
-  }
+  
+  doMove(moveQueue[moveQueuePos]);
   moveQueuePos++;
 }
 
