@@ -23,6 +23,10 @@ Monster::~Monster(){
 
 }
 
+void Monster::heartbeat(){
+  
+}
+
 //Getters
 MonsterName Monster::getName(){
   return myName;
