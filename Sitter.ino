@@ -1,13 +1,8 @@
 Sitter::Sitter(MonsterName name, const uint8_t *bitmap1, MonsterStage stage, unsigned int age, unsigned int lifespan, MonsterName next){
-
-  xPos = 48;
-  yPos = 32;
-
   bmp1 = bitmap1;
   bmp2 = bitmap1;
   currentBmp = bitmap1;
 
-  xDir = -1;
   frameDir = -1;
 
   moveQueuePos = 0;
@@ -27,14 +22,10 @@ Sitter::Sitter(MonsterName name, const uint8_t *bitmap1, MonsterStage stage, uns
 
 Sitter::Sitter(MonsterName name, const uint8_t *bitmap1, const uint8_t *bitmap2, MonsterStage stage, unsigned int age, unsigned int lifespan, MonsterName next){
 
-  xPos = 48;
-  yPos = 32;
-
   bmp1 = bitmap1;
   bmp2 = bitmap2;
   currentBmp = bitmap1;
 
-  xDir = -1;
   frameDir = -1;
 
   moveQueuePos = 0;
@@ -53,7 +44,7 @@ Sitter::Sitter(MonsterName name, const uint8_t *bitmap1, const uint8_t *bitmap2,
 }
 
 Frame Sitter::getFrame(){
-  return Frame(currentBmp,xPos,yPos,frameDir);
+  return Frame(currentBmp,coords.xPos,coords.yPos,frameDir);
 }
 
 void Sitter::queueStand(){
@@ -82,14 +73,14 @@ void Sitter::idleRoutine(){
 }
 
 void Sitter::gotoRoutine(){
-  int xOffset = xDest - xPos;
+  int xOffset = coords.xDest - coords.xPos;
 
   if(xOffset == 0){
     taskDone = true;
     currentTask = STAND;
     queueStand();
   } else if(moveQueuePos > 3) {
-      xOffset < 0 ? xDir = -1 : xDir = 1;
+      xOffset < 0 ? coords.xDir = -1 : coords.xDir = 1;
       queueWalk();
     }
 }

@@ -6,17 +6,12 @@
 
 //Constructors
 Monster::Monster(){
-  xPos = 56;
-  yPos = 32;
 }
 
 Monster::Monster(const uint8_t *bitmap1, const uint8_t *bitmap2){
   bmp1 = bitmap1;
   bmp2 = bitmap2;
   currentBmp = bmp1;
-
-  xPos = 56; // Centered
-  yPos = 32;
 }
 
 Monster::~Monster(){
@@ -24,7 +19,7 @@ Monster::~Monster(){
 }
 
 void Monster::heartbeat(){
-  
+
 }
 
 //Getters
@@ -33,27 +28,27 @@ MonsterName Monster::getName(){
 }
 
 Frame Monster::getFrame(){
-  return Frame(currentBmp,xPos,yPos,xDir);
+  return Frame(currentBmp,coords.xPos,coords.yPos,coords.xDir);
 }
 
 int Monster::getXPos(){
-  return xPos;
+  return coords.xPos;
 }
 
 int Monster::getYPos(){
-  return yPos;
+  return coords.yPos;
 }
 
 int Monster::getXBoundL(){
-  return xBoundL;
+  return coords.xBoundL;
 }
 
 int Monster::getXBoundR(){
-  return xBoundR;
+  return coords.xBoundR;
 }
 
 int Monster::getPoopPos(){
-  return xPos + (xDir * 32);
+  return coords.xPos + (coords.xDir * 32);
 }
 
 MonsterStage Monster::getMonsterStage(){
@@ -66,16 +61,16 @@ bool Monster::isEventCapable(){
 
 //Setters
 void Monster::setXPos(int x){
-  xPos = x;
+  coords.xPos = x;
 }
 
 void Monster::setYPos(int y){
-  yPos = y;
+  coords.yPos = y;
 }
 
 void Monster::setBoundsX(int xL, int xR){
-  xBoundL = xL;
-  xBoundR = xR;
+  coords.xBoundL = xL;
+  coords.xBoundR = xR;
 }
 
 void Monster::setSprite1(const uint8_t *bitmap1){
@@ -93,22 +88,22 @@ void Monster::setTask(MonsterTask task){
 }
 
 void Monster::setXDir(int dir){
-  xDir = dir;
+  coords.xDir = dir;
 }
 
 void Monster::doMove(MoveInstruction move){
   //Serial.println("Entered doMove");
 
   if(move.xDir != 0){
-    xDir = move.xDir;
+    coords.xDir = move.xDir;
   }
 
   if(move.yDir != 0){
-    yDir = move.yDir;
+    coords.yDir = move.yDir;
   }
 
-  xPos = xPos + xDir*move.xDist;
-  yPos = yPos + yDir*move.yDist;
+  coords.xPos = coords.xPos + coords.xDir*move.xDist;
+  coords.yPos = coords.yPos + coords.yDir*move.yDist;
 
   switch(move.sprite){
     case 1:
@@ -128,11 +123,11 @@ bool Monster::taskComplete(){
 }
 
 void Monster::goTo(int x){
-  if(xPos == x){
+  if(coords.xPos == x){
     taskDone = true;
   } else {
     setTask(GOTO);
-    xDest = x;
+    coords.xDest = x;
     moveQueuePos = 4;
   }
 }

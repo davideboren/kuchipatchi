@@ -12,11 +12,8 @@
 
 class Monster{
   protected:
+    MonsterCoordinates coords;
     const uint8_t *bmp1, *bmp2, *bmp3, *currentBmp;
-    int xPos, yPos;
-    int xDest;
-    int xDir; //-1 == facing left, 1 == facing right
-    int yDir;
     int frameDir;
 
     bool eventsAllowed;
@@ -42,7 +39,6 @@ class Monster{
     virtual ~Monster();
 
     bool isEventCapable();
-    int xBoundL, xBoundR;
     MonsterStage monStage;
     MonsterName myName;
 

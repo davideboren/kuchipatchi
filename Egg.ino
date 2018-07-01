@@ -2,15 +2,10 @@ Egg::Egg(MonsterName name, const uint8_t *bitmap1, const uint8_t *bitmap2, const
 
 	myName = name;
 
-	xPos = 48;
-	yPos = 32;
-
 	bmp1 = bitmap1;
 	bmp2 = bitmap2;
 	bmp3 = bitmap3;
 	currentBmp = bmp1;
-
-	xDir = -1;
 
 	moveInstrQueuePos = 0;
 
