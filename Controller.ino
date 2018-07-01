@@ -8,7 +8,7 @@
 Controller::Controller(){
 
   MonsterDB mdb;
-
+  
   frameDelay = 500;
   offFrameSlack = 16;
 
