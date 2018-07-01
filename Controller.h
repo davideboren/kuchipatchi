@@ -5,7 +5,7 @@
  */
 
 #include "Monster.h"
-#include "ScreenFX.h"
+#include "fx/ScreenFX.h"
 #include "MonsterDB.h"
 
 class Controller{

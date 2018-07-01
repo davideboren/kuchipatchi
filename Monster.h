@@ -8,6 +8,7 @@
 
 #include "Defs.h"
 #include "MoveInstruction.h"
+#include "MonsterCoordinates.h"
 
 class Monster{
   protected:
@@ -20,7 +21,7 @@ class Monster{
 
     bool eventsAllowed;
     bool underwater;
-    
+
     unsigned int monsterAge;
     unsigned int monsterLifespan;
 

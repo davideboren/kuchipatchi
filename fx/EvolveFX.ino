@@ -1,6 +1,6 @@
 EvolveFX::EvolveFX(){
-	spr = evolve2;
-	
+	spr = evolve;
+
 	numActiveFrames = 0;
 }
 
