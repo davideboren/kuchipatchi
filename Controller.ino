@@ -96,25 +96,6 @@ void Controller::saveMonsterID(int id){
 }
 
 void Controller::updateMonsters(){
-  display.clearDisplay();
-  for(int monSlot = PRIMARY; monSlot != LAST_MON_SLOT; monSlot++){
-    if(activeMonsters[monSlot] != NULL){
-
-      activeMonsters[monSlot] -> heartbeat();
-
-      if(activeMonsters[monSlot] -> agedOut() && monSlot != POOP){
-        evolveMonster(monSlot);
-        monSlot--;
-      } else {
-        drawFrame(activeMonsters[monSlot] -> getFrame());
-      }
-    }
-  }
-  display.display();
-  delay(frameDelay);
-}
-
-void Controller::hupdateMonsters(){
   for(int monSlot = PRIMARY; monSlot != LAST_MON_SLOT; monSlot++){
     if(activeMonsters[monSlot] != NULL){
       activeMonsters[monSlot] -> heartbeat();
@@ -160,7 +141,7 @@ void Controller::deleteFX(int slot){
 
 void Controller::updateAll(){
   display.clearDisplay();
-  hupdateMonsters();
+  updateMonsters();
   updateFX();
   drawMonsterFrames();
   drawFXFrames();
@@ -173,13 +154,12 @@ void Controller::updateAll(){
   drawFXFrames();
   display.display();
   delay(250);
-  
+
 }
 
 void Controller::sendMonsterToPos(int slot, int x){
   activeMonsters[slot] -> goTo(x);
   while(!activeMonsters[slot] -> taskComplete()){
-    //updateMonsters();
     updateAll();
   }
 }
@@ -197,7 +177,6 @@ void Controller::visitorEvent(){
   activeMonsters[VISITOR] -> setTask(IDLE);
 
   for(int i = 0; i < 10; i++){
-    //updateMonsters();
     updateAll();
   }
 
@@ -223,7 +202,6 @@ void Controller::poopEvent(){
   }
 
   while(!activeMonsters[POOP] -> agedOut()){
-    //updateMonsters();
     updateAll();
   }
   flushPoop(dropZone);
@@ -235,7 +213,7 @@ void Controller::poopEvent(){
 
 void Controller::flushPoop(int poopXPos){
   activeFX[FLUSH_FX_SLOT] = mdb.newFX(FLUSH_FX);
-  
+
   while(!activeFX[FLUSH_FX_SLOT] -> finished()){
     if(activeMonsters[POOP] != NULL && activeFX[FLUSH_FX_SLOT] -> getEffectPos() <= poopXPos){
       deleteMonster(POOP);
@@ -248,25 +226,15 @@ void Controller::flushPoop(int poopXPos){
 
 void Controller::idleEvent(){
   for(int d = 0; d < 30; d++){
-    //updateMonsters();
     updateAll();
   }
 }
 
 void Controller::activate(){
 
-  //saveMonsterID(idKurotsubutchi);
-  //int monID = getSavedMonsterID();
-
-  //amdb.addMonster(monID);
-  /*addMonster(DigiEgg1, PRIMARY);
-  while(1){
-    updateMonsters();
-  }*/
-
   addMonster(DigiEgg1, PRIMARY);
   while(1){
-    
+
     int currentEvent;
     if(activeMonsters[PRIMARY] -> isEventCapable()){
       if(activeMonsters[PRIMARY] -> agedOut()){
@@ -277,7 +245,7 @@ void Controller::activate(){
     } else {
       currentEvent = IDLE_EVENT;
       }
-    
+
     switch(currentEvent){
       case IDLE_EVENT:
         idleEvent();

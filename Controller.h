@@ -19,7 +19,7 @@ class Controller{
 
     Monster* activeMonsters[10];
     ScreenFX* activeFX[3];
-    
+
     void addMonster(MonsterName name, ActiveMonsterSlot slot);
     void deleteMonster(int slot);
     void evolveMonster(int slot);
@@ -29,15 +29,14 @@ class Controller{
     void poopEvent();
     void flushPoop(int poopXPos);
     void idleEvent();
-    
+
     void updateMonsters();
-    void hupdateMonsters();
     void drawMonsterFrames();
-    
+
     void updateFX();
     void drawFXFrames();
     void deleteFX(int slot);
-    
+
     void updateAll();
 
   public:
