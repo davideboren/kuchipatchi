@@ -23,14 +23,10 @@
 #include "MonsterRef.h"
 #include "MonsterDB.h"
 
-#include "fx/ScreenFX.h"
-#include "fx/ScreenFX.ino"
-#include "fx/EvolveFX.h"
-#include "fx/EvolveFX.ino"
-#include "fx/BubbleFX.h"
-#include "fx/BubbleFX.ino"
-#include "fx/FlusherFX.h"
-#include "fx/FlusherFX.ino"
+#include "ScreenFX.h"
+#include "EvolveFX.h"
+#include "BubbleFX.h"
+#include "FlusherFX.h"
 
 #define OLED_RESET 4
 Adafruit_SSD1306 display(OLED_RESET);
