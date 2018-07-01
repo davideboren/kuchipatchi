@@ -6,9 +6,9 @@
  #include <EEPROM.h>
 
 Controller::Controller(){
-
+//fart
   MonsterDB mdb;
-  
+
   frameDelay = 500;
   offFrameSlack = 16;
 
