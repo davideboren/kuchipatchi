@@ -9,9 +9,9 @@ Monster::Monster(){
 }
 
 Monster::Monster(const uint8_t *bitmap1, const uint8_t *bitmap2){
-  bmp1 = bitmap1;
-  bmp2 = bitmap2;
-  currentBmp = bmp1;
+  dna.bmp1 = bitmap1;
+  dna.bmp2 = bitmap2;
+  currentBmp = dna.bmp1;
 }
 
 Monster::~Monster(){
@@ -24,7 +24,7 @@ void Monster::heartbeat(){
 
 //Getters
 MonsterName Monster::getName(){
-  return myName;
+  return dna.myName;
 }
 
 Frame Monster::getFrame(){
@@ -52,7 +52,7 @@ int Monster::getPoopPos(){
 }
 
 MonsterStage Monster::getMonsterStage(){
-  return monStage;
+  return dna.monsterStage;
 }
 
 bool Monster::isEventCapable(){
@@ -71,15 +71,6 @@ void Monster::setYPos(int y){
 void Monster::setBoundsX(int xL, int xR){
   coords.xBoundL = xL;
   coords.xBoundR = xR;
-}
-
-void Monster::setSprite1(const uint8_t *bitmap1){
-  bmp1 = bitmap1;
-  currentBmp = bmp1;
-}
-
-void Monster::setSprite2(const uint8_t *bitmap2){
-  bmp2 = bitmap2;
 }
 
 void Monster::setTask(MonsterTask task){
@@ -107,13 +98,13 @@ void Monster::doMove(MoveInstruction move){
 
   switch(move.sprite){
     case 1:
-      currentBmp = bmp1;
+      currentBmp = dna.bmp1;
       break;
     case 2:
-      currentBmp = bmp2;
+      currentBmp = dna.bmp2;
       break;
     case 3:
-      currentBmp = bmp3;
+      currentBmp = dna.bmp3;
       break;
   }
 }
@@ -135,11 +126,11 @@ void Monster::goTo(int x){
 //Age Functions
 void Monster::updateAge(){
   monsterAge+=5;
-  Serial.print("Age: "); Serial.print(monsterAge); Serial.print("/"); Serial.println(monsterLifespan);
+  Serial.print("Age: "); Serial.print(monsterAge); Serial.print("/"); Serial.println(dna.monsterLifespan);
 }
 
 bool Monster::agedOut(){
-  if( (monsterAge >= monsterLifespan) && currentTask != GOTO){
+  if( (monsterAge >= dna.monsterLifespan) && currentTask != GOTO){
     return true;
   } else {
     return false;
@@ -147,5 +138,6 @@ bool Monster::agedOut(){
 }
 
 MonsterName Monster::getNextMonsterName(){
-  return nextMonster;
+  int i = random(2);
+  return dna.nextMonster[i];
 }

@@ -1,40 +1,13 @@
-Sitter::Sitter(MonsterName name, const uint8_t *bitmap1, MonsterStage stage, unsigned int age, unsigned int lifespan, MonsterName next){
-  bmp1 = bitmap1;
-  bmp2 = bitmap1;
-  currentBmp = bitmap1;
+Sitter::Sitter(MonsterRef ref, unsigned int age){
+  dna = ref;
+  
+  currentBmp = dna.bmp1;
 
   frameDir = -1;
 
   moveQueuePos = 0;
 
-  monStage = stage;
   monsterAge = age;
-  monsterLifespan = lifespan;
-
-  nextMonster = next;
-
-  currentTask = IDLE;
-
-  eventsAllowed = true;
-
-  queueStand();
-}
-
-Sitter::Sitter(MonsterName name, const uint8_t *bitmap1, const uint8_t *bitmap2, MonsterStage stage, unsigned int age, unsigned int lifespan, MonsterName next){
-
-  bmp1 = bitmap1;
-  bmp2 = bitmap2;
-  currentBmp = bitmap1;
-
-  frameDir = -1;
-
-  moveQueuePos = 0;
-
-  monStage = stage;
-  monsterAge = age;
-  monsterLifespan = lifespan;
-
-  nextMonster = next;
 
   currentTask = IDLE;
 
@@ -88,7 +61,7 @@ void Sitter::gotoRoutine(){
 void Sitter::heartbeat(){
   updateAge();
 
-  if(bmp1 == bmp2){
+  if(dna.bmp1 == dna.bmp2){
    frameDir *= -1;
   }
 

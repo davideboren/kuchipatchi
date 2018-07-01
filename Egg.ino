@@ -1,18 +1,12 @@
-Egg::Egg(MonsterName name, const uint8_t *bitmap1, const uint8_t *bitmap2, const uint8_t *bitmap3, unsigned int age, unsigned int lifespan, MonsterName next){
+Egg::Egg(MonsterRef ref, unsigned int age){
 
-	myName = name;
-
-	bmp1 = bitmap1;
-	bmp2 = bitmap2;
-	bmp3 = bitmap3;
-	currentBmp = bmp1;
+	dna = ref;
+  
+	currentBmp = dna.bmp1;
 
 	moveInstrQueuePos = 0;
 
 	monsterAge = age;
-	monsterLifespan = lifespan;
-
-	nextMonster = next;
 
   eventsAllowed = false;
   currentTask = STAND;
@@ -50,9 +44,9 @@ void Egg::queueStand(){
 void Egg::heartbeat(){
 	updateAge();
 
-	if (monsterLifespan - monsterAge == 40){
+	if (dna.monsterLifespan - monsterAge == 40){
 		queueHatch1();
-	} else if (monsterLifespan - monsterAge == 20){
+	} else if (dna.monsterLifespan - monsterAge == 20){
 		queueHatch2();
 	} else if (moveInstrQueuePos > 3){
 		queueStand();

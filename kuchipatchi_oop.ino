@@ -10,7 +10,6 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 #include <EEPROM.h>
-#include <vector>
 
 #include "Frame.h"
 #include "Defs.h"

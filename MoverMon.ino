@@ -4,26 +4,18 @@
  * AI for monster that moves left to right
  */
 MoverMon::MoverMon(){
-  monsterAge = 0;
-  monsterLifespan = 500;
 }
 
-MoverMon::MoverMon(MonsterName name, const uint8_t *bitmap1, const uint8_t *bitmap2, MonsterStage stage, unsigned int age, unsigned int lifespan, MonsterName next){
-  myName = name;
-
-  bmp1 = bitmap1;
-  bmp2 = bitmap2;
-  currentBmp = bitmap1;
+MoverMon::MoverMon(MonsterRef ref, unsigned int age){
+  dna = ref;
+  
+  currentBmp = dna.bmp1;
 
   currentTask = IDLE;
 
   moveQueuePos = 0;
 
-  monStage = stage;
   monsterAge = age;
-  monsterLifespan = lifespan;
-
-  nextMonster = next;
 
   eventsAllowed = true;
 
@@ -75,7 +67,7 @@ void MoverMon::gotoRoutine(){
     taskDone = true;
     currentTask = STAND;
     queueStand();
-    if(currentBmp == bmp1){
+    if(currentBmp == dna.bmp1){
       moveQueuePos++; //to avoid hanging on the same sprite twice
     }
   } else if(moveQueuePos > 3) {

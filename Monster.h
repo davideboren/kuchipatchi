@@ -9,18 +9,21 @@
 #include "Defs.h"
 #include "MoveInstruction.h"
 #include "MonsterCoordinates.h"
+#include "MonsterRef.h"
 
 class Monster{
   protected:
     MonsterCoordinates coords;
-    const uint8_t *bmp1, *bmp2, *bmp3, *currentBmp;
+
+    MonsterRef dna;
+    
+    const uint8_t *currentBmp;
+    
     int frameDir;
 
     bool eventsAllowed;
-    bool underwater;
 
     unsigned int monsterAge;
-    unsigned int monsterLifespan;
 
     void updateAge();
 
@@ -39,8 +42,6 @@ class Monster{
     virtual ~Monster();
 
     bool isEventCapable();
-    MonsterStage monStage;
-    MonsterName myName;
 
     //Getters
     MonsterName getName();

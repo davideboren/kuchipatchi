@@ -9,7 +9,7 @@
 class MoverMon : public Monster{
 
   public:
-    MoverMon(MonsterName name, const uint8_t *bitmap1, const uint8_t *bitmap2, MonsterStage stage, unsigned int age, unsigned int lifespan, MonsterName next);
+    MoverMon(MonsterRef ref, unsigned int age);
     MoverMon();
     ~MoverMon();
     void queueWalk();

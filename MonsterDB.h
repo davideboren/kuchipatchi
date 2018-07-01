@@ -5,7 +5,6 @@
 #include "Monster.h"
 struct MonsterDB{
   MonsterRef monsterRepo[10];
-  int lifespans[LAST_STAGE];
   MonsterDB();
 
   bool oceanTrue;
@@ -15,7 +14,6 @@ struct MonsterDB{
   const uint8_t *   getSprite2(MonsterName name);
   const uint8_t *   getSprite3(MonsterName name);
   MonsterType   getMonsterType(MonsterName name);
-  unsigned int  getMonsterLifespan(MonsterName name);
   MonsterName getNextMonster(MonsterName name);
   MonsterStage getMonsterStage(MonsterName name);
   bool isUnderwater(MonsterName name);

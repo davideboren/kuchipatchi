@@ -2,34 +2,25 @@ MonsterDB::MonsterDB(){
 
   oceanTrue = true;
   oceanFalse = false;
-  
 
-  lifespans[EGG_STAGE] =      100;
-  lifespans[BABY_STAGE] =     200;
-  lifespans[TODDLER_STAGE] =  200;
-  lifespans[TEEN_STAGE] =     200;
-  lifespans[ADULT_STAGE] =    200;
-  lifespans[POOP_STAGE] =     200;
-  lifespans[SHIP_STAGE] =     100;
-
-  monsterRepo[DigiEgg1] =       MonsterRef(degg1,degg2,degg3,EGG,EGG_STAGE,oceanFalse,Kurotsubutchi,Kurotsubutchi);
-  monsterRepo[Kurotsubutchi] =  MonsterRef(kurotsubutchi1,kurotsubutchi2,MOVER,BABY_STAGE,oceanTrue,Kuchipatchi,Mimitchi);
-  monsterRepo[Kuchipatchi] =    MonsterRef(kuchipatchi1,kuchipatchi2,MOVER,ADULT_STAGE,oceanFalse,Kurotsubutchi,Kurotsubutchi);
-  monsterRepo[Mimitchi] =       MonsterRef(mimitchi1,SITTER,ADULT_STAGE,oceanFalse,Kurotsubutchi,Kurotsubutchi);
-  monsterRepo[Poop] =           MonsterRef(poop1, poop2, SITTER, POOP_STAGE,oceanFalse, Poop, Poop);
+  monsterRepo[DigiEgg1] =       MonsterRef(DigiEgg1,degg1,degg2,degg3,EGG,EGG_STAGE,oceanFalse,Kurotsubutchi,Kurotsubutchi);
+  monsterRepo[Kurotsubutchi] =  MonsterRef(Kurotsubutchi,kurotsubutchi1,kurotsubutchi2,kurotsubutchi2,MOVER,BABY_STAGE,oceanTrue,Kuchipatchi,Mimitchi);
+  monsterRepo[Kuchipatchi] =    MonsterRef(Kuchipatchi,kuchipatchi1,kuchipatchi2,kuchipatchi2,MOVER,ADULT_STAGE,oceanFalse,Kurotsubutchi,Kurotsubutchi);
+  monsterRepo[Mimitchi] =       MonsterRef(Mimitchi,mimitchi1,mimitchi1,mimitchi1,SITTER,ADULT_STAGE,oceanFalse,Kurotsubutchi,Kurotsubutchi);
+  monsterRepo[Poop] =           MonsterRef(Poop,poop1, poop2,poop2, SITTER, POOP_STAGE,oceanFalse, Poop, Poop);
 
 }
 
 const uint8_t * MonsterDB::getSprite1(MonsterName name){
-  return monsterRepo[name].sprite1;
+  return monsterRepo[name].bmp1;
 }
 
 const uint8_t * MonsterDB::getSprite2(MonsterName name){
-  return monsterRepo[name].sprite2;
+  return monsterRepo[name].bmp2;
 }
 
 const uint8_t * MonsterDB::getSprite3(MonsterName name){
-  return monsterRepo[name].sprite3;
+  return monsterRepo[name].bmp3;
 }
 
 MonsterType MonsterDB::getMonsterType(MonsterName name){
@@ -44,10 +35,6 @@ bool MonsterDB::isUnderwater(MonsterName name){
   return monsterRepo[name].oceanType;
 }
 
-unsigned int MonsterDB::getMonsterLifespan(MonsterName name){
-  return lifespans[monsterRepo[name].monsterStage];
-}
-
 MonsterName MonsterDB::getNextMonster(MonsterName name){
   return random(2)?monsterRepo[name].nextMonster[0]:monsterRepo[name].nextMonster[1];
 }
@@ -55,16 +42,12 @@ MonsterName MonsterDB::getNextMonster(MonsterName name){
 Monster* MonsterDB::newMonster(MonsterName name){
   switch(getMonsterType(name)){
     case EGG:
-      return new Egg(name, getSprite1(name), getSprite2(name), getSprite3(name),0,getMonsterLifespan(name), getNextMonster(name));
+      return new Egg(monsterRepo[name],0);
     case MOVER:
-      return new MoverMon(name, getSprite1(name),getSprite2(name),getMonsterStage(name),0,getMonsterLifespan(name),getNextMonster(name));
+      return new MoverMon(monsterRepo[name],0);
       break;
     case SITTER:
-      if(getSprite1(name) == getSprite2(name)){
-        return new Sitter(name, getSprite1(name),getMonsterStage(name),0,getMonsterLifespan(name),getNextMonster(name));
-      } else {
-        return new Sitter(name, getSprite1(name), getSprite2(name),getMonsterStage(name), 0,getMonsterLifespan(name),getNextMonster(name));
-      }
+      return new Sitter(monsterRepo[name],0);
       break;
     case FLOATER:
       Serial.println("got floater");
