@@ -16,9 +16,9 @@ class Monster{
     MonsterCoordinates coords;
 
     MonsterRef dna;
-    
+
     const uint8_t *currentBmp;
-    
+
     int frameDir;
 
     bool eventsAllowed;
@@ -38,7 +38,6 @@ class Monster{
 
     //Constructors
     Monster();
-    Monster(const uint8_t *bitmap1, const uint8_t *bitmap2);
     virtual ~Monster();
 
     bool isEventCapable();

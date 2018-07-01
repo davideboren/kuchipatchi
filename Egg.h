@@ -10,9 +10,6 @@
 #include "MoveInstruction.h"
 
 class Egg : public Monster{
-	private:
-		MoveInstruction moveInstrQueue[4];
-		int moveInstrQueuePos;
 	public:
 
 		Egg();

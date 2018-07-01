@@ -8,17 +8,7 @@
 Monster::Monster(){
 }
 
-Monster::Monster(const uint8_t *bitmap1, const uint8_t *bitmap2){
-  dna.bmp1 = bitmap1;
-  dna.bmp2 = bitmap2;
-  currentBmp = dna.bmp1;
-}
-
 Monster::~Monster(){
-
-}
-
-void Monster::heartbeat(){
 
 }
 
@@ -82,9 +72,13 @@ void Monster::setXDir(int dir){
   coords.xDir = dir;
 }
 
+void Monster::heartbeat(){
+}
+
 void Monster::doMove(MoveInstruction move){
   coords.applyMoveInstruction(move);
   switchSprite(move);
+  moveQueuePos++;
 }
 
 void Monster::switchSprite(MoveInstruction move)

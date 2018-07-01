@@ -8,7 +8,7 @@ MoverMon::MoverMon(){
 
 MoverMon::MoverMon(MonsterRef ref, unsigned int age){
   dna = ref;
-  
+
   currentBmp = dna.bmp1;
 
   currentTask = IDLE;
@@ -100,7 +100,6 @@ void MoverMon::heartbeat(){
   }
 
   doMove(moveQueue[moveQueuePos]);
-  moveQueuePos++;
 }
 
 bool MoverMon::inBounds(){

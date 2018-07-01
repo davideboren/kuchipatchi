@@ -1,6 +1,6 @@
 Sitter::Sitter(MonsterRef ref, unsigned int age){
   dna = ref;
-  
+
   currentBmp = dna.bmp1;
 
   frameDir = -1;
@@ -78,5 +78,4 @@ void Sitter::heartbeat(){
   }
 
   doMove(moveQueue[moveQueuePos]);
-  moveQueuePos++;
 }
