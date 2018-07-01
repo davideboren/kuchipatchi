@@ -62,6 +62,7 @@ class Monster{
     void setXDir(int dir);
 
     void doMove(MoveInstruction move);
+    void switchSprite(MoveInstruction move);
     virtual void heartbeat();
 
     void setTask(MonsterTask task);

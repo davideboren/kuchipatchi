@@ -83,19 +83,12 @@ void Monster::setXDir(int dir){
 }
 
 void Monster::doMove(MoveInstruction move){
-  //Serial.println("Entered doMove");
+  coords.applyMoveInstruction(move);
+  switchSprite(move);
+}
 
-  if(move.xDir != 0){
-    coords.xDir = move.xDir;
-  }
-
-  if(move.yDir != 0){
-    coords.yDir = move.yDir;
-  }
-
-  coords.xPos = coords.xPos + coords.xDir*move.xDist;
-  coords.yPos = coords.yPos + coords.yDir*move.yDist;
-
+void Monster::switchSprite(MoveInstruction move)
+{
   switch(move.sprite){
     case 1:
       currentBmp = dna.bmp1;

@@ -9,6 +9,8 @@ struct MonsterCoordinates {
   int xDest;
 
   MonsterCoordinates();
+  void applyMoveInstruction(MoveInstruction move);
+  
 };
 
 #endif
