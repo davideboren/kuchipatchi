@@ -20,15 +20,6 @@ Frame Sitter::getFrame(){
   return Frame(currentBmp,coords.xPos,coords.yPos,frameDir);
 }
 
-void Sitter::queueStand(){
-  moveQueue[0].setMove(0,0,0,0,1);
-  moveQueue[1].setMove(0,0,0,0,2);
-  moveQueue[2].setMove(0,0,0,0,1);
-  moveQueue[3].setMove(0,0,0,0,2);
-
-  moveQueuePos = 0;
-}
-
 void Sitter::queueWalk(){
   moveQueue[0].setMove(4,0,0,0,1);
   moveQueue[1].setMove(4,0,0,0,2);
@@ -77,5 +68,5 @@ void Sitter::heartbeat(){
       break;
   }
 
-  doMove(moveQueue[moveQueuePos]);
+  doMove();
 }

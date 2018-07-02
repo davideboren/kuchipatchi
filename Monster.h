@@ -25,18 +25,16 @@ class Monster{
 
     unsigned int monsterAge;
 
-    void updateAge();
-
     MoveInstruction moveQueue[4];
     int moveQueuePos;
-
 
     MonsterTask currentTask;
     bool taskDone;
 
-  public:
+    void updateAge();
+    void queueStand();
 
-    //Constructors
+  public:
     Monster();
     virtual ~Monster();
 
@@ -56,13 +54,11 @@ class Monster{
     void setXPos(int x);
     void setYPos(int y);
     void setBoundsX(int xL, int xR);
-    void setSprite1(const uint8_t *bitmap1);
-    void setSprite2(const uint8_t *bitmap2);
     void setXDir(int dir);
 
-    void doMove(MoveInstruction move);
-    void switchSprite(MoveInstruction move);
     virtual void heartbeat();
+    void doMove();
+    void switchSprite(MoveInstruction move);
 
     void setTask(MonsterTask task);
     bool taskComplete();

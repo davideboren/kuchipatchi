@@ -73,11 +73,15 @@ void Monster::setXDir(int dir){
 }
 
 void Monster::heartbeat(){
+
 }
 
-void Monster::doMove(MoveInstruction move){
-  coords.applyMoveInstruction(move);
-  switchSprite(move);
+void Monster::doMove(){
+  MoveInstruction nextMove = moveQueue[moveQueuePos];
+
+  coords.applyMoveInstruction(nextMove);
+  switchSprite(nextMove);
+
   moveQueuePos++;
 }
 
@@ -94,6 +98,15 @@ void Monster::switchSprite(MoveInstruction move)
       currentBmp = dna.bmp3;
       break;
   }
+}
+
+void Monster::queueStand(){
+	moveQueue[0].setMove(0,0,0,0,1);
+	moveQueue[1].setMove(0,0,0,0,2);
+	moveQueue[2].setMove(0,0,0,0,1);
+	moveQueue[3].setMove(0,0,0,0,2);
+
+	moveQueuePos = 0;
 }
 
 bool Monster::taskComplete(){

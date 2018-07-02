@@ -32,15 +32,6 @@ void Egg::queueHatch2(){
 	moveQueuePos = 0;
 }
 
-void Egg::queueStand(){
-	moveQueue[0].setMove(0,0,0,0,1);
-	moveQueue[1].setMove(0,0,0,0,2);
-	moveQueue[2].setMove(0,0,0,0,1);
-	moveQueue[3].setMove(0,0,0,0,2);
-
-	moveQueuePos = 0;
-}
-
 void Egg::heartbeat(){
 	updateAge();
 
@@ -52,5 +43,5 @@ void Egg::heartbeat(){
 		queueStand();
 	}
 
-	doMove(moveQueue[moveQueuePos]);
+	doMove();
 }

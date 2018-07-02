@@ -13,7 +13,6 @@ class MoverMon : public Monster{
     MoverMon();
     ~MoverMon();
     void queueWalk();
-    void queueStand();
     void idleRoutine();
     void gotoRoutine();
     void standRoutine();

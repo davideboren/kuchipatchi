@@ -35,15 +35,6 @@ void MoverMon::queueWalk(){
   moveQueuePos = 0;
 }
 
-void MoverMon::queueStand(){
-  moveQueue[0].setMove(0,0,0,0,1);
-  moveQueue[1].setMove(0,0,0,0,2);
-  moveQueue[2].setMove(0,0,0,0,1);
-  moveQueue[3].setMove(0,0,0,0,2);
-
-  moveQueuePos = 0;
-}
-
 void MoverMon::idleRoutine(){
   //Choose next move
   if(moveQueuePos > 3){
@@ -99,7 +90,7 @@ void MoverMon::heartbeat(){
       break;
   }
 
-  doMove(moveQueue[moveQueuePos]);
+  doMove();
 }
 
 bool MoverMon::inBounds(){

@@ -14,9 +14,8 @@ class Sitter : public Monster{
     Sitter(MonsterRef ref, unsigned int age);
 
     Frame getFrame();
-    
+
     void heartbeat();
-    void queueStand();
     void queueWalk();
     void idleRoutine();
     void gotoRoutine();
