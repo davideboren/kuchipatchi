@@ -16,6 +16,9 @@ class Controller{
     int eMonsterIdAddr = 0;
 	
     int frameDelay;
+	
+	int eventDurationInMinutes = 10;
+	int eventDurationInCycles = eventDurationInMinutes*60*2;
 
     int xBoundL_vis, xBoundR_vis;
 
@@ -41,6 +44,8 @@ class Controller{
     void deleteFX(int slot);
 
     void updateAll();
+	
+	Events generateRandomEvent();
 
   public:
     Controller();

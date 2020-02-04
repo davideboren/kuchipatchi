@@ -171,12 +171,12 @@ void Controller::evoEvent(int slot){
   sendMonsterToPos(slot, 48);
   activeFX[EVOLVE_FX_SLOT] = mdb.newFX(EVOLVE_FX);
   activeMonsters[slot] -> setTask(STAND);
-  for(int i = 0; i < 10; i++){
+  for(int i = 0; i < eventDurationInMinutes/2; i++){
     updateAll();
   }
   evolveMonster(slot);
   activeMonsters[slot] -> setTask(STAND);
-  for(int i = 0; i < 10; i++){
+  for(int i = 0; i < eventDurationInMinutes/2; i++){
     updateAll();
   }
   deleteFX(EVOLVE_FX_SLOT);
@@ -185,7 +185,6 @@ void Controller::evoEvent(int slot){
 
 void Controller::evoEventNoAnim(int slot){
   evolveMonster(slot);
-  //activeMonsters[slot] -> setTask(IDLE);
 }
 
 void Controller::visitorEvent(){
@@ -200,7 +199,7 @@ void Controller::visitorEvent(){
   activeMonsters[PRIMARY] -> setTask(IDLE);
   activeMonsters[VISITOR] -> setTask(IDLE);
 
-  for(int i = 0; i < 10; i++){
+  for(int i = 0; i < eventDurationInMinutes; i++){
     updateAll();
   }
 
@@ -249,17 +248,26 @@ void Controller::flushPoop(int poopXPos){
 }
 
 void Controller::idleEvent(){
-  for(int d = 0; d < 30; d++){
+  for(int d = 0; d < eventDurationInCycles; d++){
     updateAll();
   }
+}
+
+Events Controller::generateRandomEvent(){
+	if(random(100) > 20){
+		return IDLE_EVENT;
+	} else {
+		return random(NUM_RANDOM_EVENTS);
+	}
 }
 
 void Controller::activate(){
 	
 	loadSavedMonster();
+	//addMonster(TamaEgg1,PRIMARY);
 	
 	//Always idle for a moment before entering event loop
-	idleEvent();
+	//idleEvent();
 	
 	while(1){
 
@@ -272,7 +280,7 @@ void Controller::activate(){
 		} else if (!activeMonsters[PRIMARY] -> isEventCapable()){
 			currentEvent = IDLE_EVENT;
 		} else {
-			currentEvent = random(NUM_RANDOM_EVENTS);
+			currentEvent = generateRandomEvent();
 		}
 
 		switch(currentEvent){

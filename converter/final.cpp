@@ -51,7 +51,7 @@ monsterRepo[Angewomon] =
 		ADULT_STAGE,
 		oceanFalse,
 		MonsterList(idMainFrame)
-	);,
+	);
 monsterRepo[Ashigyotchi] = 
 	MonsterRef(
 		Ashigyotchi,
@@ -69,7 +69,7 @@ monsterRepo[Atlurkabuterimon] =
 		ADULT_STAGE,
 		oceanFalse,
 		MonsterList(idMainFrame)
-	);,
+	);
 monsterRepo[Babytchi] = 
 	MonsterRef(
 		Babytchi,
@@ -96,6 +96,7 @@ monsterRepo[Betamon] =
 		TEEN_STAGE,
 		oceanTrue,
 		MonsterList(idShellmon,idSeadramon,idIkkakumon,idGesomon)
+	);
 monsterRepo[Bill] = 
 	MonsterRef(
 		Bill,
@@ -131,7 +132,7 @@ monsterRepo[Cherubimon] =
 		ADULT_STAGE,
 		oceanFalse,
 		MonsterList(idMainFrame)
-	);,
+	);
 monsterRepo[Debirudori] = 
 	MonsterRef(
 		Debirudori,
@@ -167,7 +168,7 @@ monsterRepo[Demon] =
 		ADULT_STAGE,
 		oceanFalse,
 		MonsterList(idMainFrame)
-	);,
+	);
 monsterRepo[Deviltchi] = 
 	MonsterRef(
 		Deviltchi,
@@ -194,7 +195,7 @@ monsterRepo[Digitamamon] =
 		ADULT_STAGE,
 		oceanFalse,
 		MonsterList(idMainFrame)
-	);,
+	);
 monsterRepo[Dolphmon] = 
 	MonsterRef(
 		Dolphmon,
@@ -220,7 +221,8 @@ monsterRepo[Drimogemon] =
 		MOVER,
 		ADULT_STAGE,
 		oceanFalse,
-		MonsterList(idMonzaemon,idMainframe) //REVISIT,
+		MonsterList(idMonzaemon,idMainframe)
+	);
 monsterRepo[Dukemon] = 
 	MonsterRef(
 		Dukemon,
@@ -229,7 +231,7 @@ monsterRepo[Dukemon] =
 		ADULT_STAGE,
 		oceanFalse,
 		MonsterList(idMainFrame)
-	);,
+	);
 monsterRepo[Elecmon] = 
 	MonsterRef(
 		Elecmon,
@@ -247,7 +249,7 @@ monsterRepo[Etemon] =
 		ADULT_STAGE,
 		oceanFalse,
 		MonsterList(idMainFrame)
-	);,
+	);
 monsterRepo[Extyranomon] = 
 	MonsterRef(
 		Extyranomon,
@@ -256,7 +258,7 @@ monsterRepo[Extyranomon] =
 		ADULT_STAGE,
 		oceanFalse,
 		MonsterList(idMainFrame)
-	);,
+	);
 monsterRepo[Flymon] = 
 	MonsterRef(
 		Flymon,
@@ -273,7 +275,8 @@ monsterRepo[Frigimon] =
 		MOVER,
 		ADULT_STAGE,
 		oceanFalse,
-		MonsterList(idMonzaemon, idMainframe) //REVISIT,
+		MonsterList(idMonzaemon, idMainframe)
+	);
 monsterRepo[Futagodebiru] = 
 	MonsterRef(
 		Futagodebiru,
@@ -282,7 +285,7 @@ monsterRepo[Futagodebiru] =
 		ADULT_STAGE,
 		oceanFalse,
 		MonsterList(idShip)
-	);,
+	);
 monsterRepo[Futagotenshi] = 
 	MonsterRef(
 		Futagotenshi,
@@ -291,7 +294,7 @@ monsterRepo[Futagotenshi] =
 		ADULT_STAGE,
 		oceanFalse,
 		MonsterList(idShip)
-	);,
+	);
 monsterRepo[Gabumon] = 
 	MonsterRef(
 		Gabumon,
@@ -345,7 +348,7 @@ monsterRepo[Ginjirotenshi] =
 		ADULT_STAGE,
 		oceanFalse,
 		MonsterList(idShip)
-	);,
+	);
 monsterRepo[Giromon] = 
 	MonsterRef(
 		Giromon,
@@ -354,7 +357,7 @@ monsterRepo[Giromon] =
 		ADULT_STAGE,
 		oceanFalse,
 		MonsterList(idMainFrame)
-	);,
+	);
 monsterRepo[Gizamon] = 
 	MonsterRef(
 		Gizamon,
@@ -444,6 +447,7 @@ monsterRepo[Hikotchi] =
 		TEEN_STAGE,
 		oceanFalse,
 		MonsterList(idAndrotchi,idTakotchi,idKuchipatchi,idHiratchi)
+	);
 monsterRepo[Hinotamatchi] = 
 	MonsterRef(
 		Hinotamatchi,
@@ -470,6 +474,8 @@ monsterRepo[Holyangemon] =
 		ADULT_STAGE,
 		oceanFalse,
 		MonsterList(idSeraphimon,idSeraphimon,idSeraphimon,idMainframe)
+		
+	);
 monsterRepo[Hyurutchi] = 
 	MonsterRef(
 		Hyurutchi,
@@ -487,6 +493,7 @@ monsterRepo[Ichigotchi] =
 		TEEN_STAGE,
 		oceanFalse,
 		MonsterList(idMametchi,idMemetchi,idBunbuntchi,idWooltchi)
+	);
 monsterRepo[Ikkakumon] = 
 	MonsterRef(
 		Ikkakumon,
@@ -495,6 +502,7 @@ monsterRepo[Ikkakumon] =
 		ADULT_STAGE,
 		oceanFalse,
 		MonsterList(idZudomon,idZudomon,idWhamon,idMegaseadramon)
+	);
 monsterRepo[Kabodebitchi] = 
 	MonsterRef(
 		Kabodebitchi,
@@ -503,7 +511,7 @@ monsterRepo[Kabodebitchi] =
 		ADULT_STAGE,
 		oceanFalse,
 		MonsterList(idShip)
-	);,
+	);
 monsterRepo[Kabuterimon] = 
 	MonsterRef(
 		Kabuterimon,
@@ -511,7 +519,8 @@ monsterRepo[Kabuterimon] =
 		MOVER,
 		ADULT_STAGE,
 		oceanFalse,
-		MonsterList(idAndromon, idVademon, idAtlurkabuterimon) //REVISIT,
+		MonsterList(idAndromon, idVademon, idAtlurkabuterimon)
+	);
 monsterRepo[Kaitchi] = 
 	MonsterRef(
 		Kaitchi,
@@ -547,7 +556,7 @@ monsterRepo[Kingdeviltchi] =
 		ADULT_STAGE,
 		oceanFalse,
 		MonsterList(idShip)
-	);,
+	);
 monsterRepo[Kingyotchi] = 
 	MonsterRef(
 		Kingyotchi,
@@ -556,6 +565,7 @@ monsterRepo[Kingyotchi] =
 		TEEN_STAGE,
 		oceanTrue,
 		MonsterList(idTaiyakitchi,idKaitchi,idKujiratchi,idAshigyotchi)
+	);
 monsterRepo[Koromon] = 
 	MonsterRef(
 		Koromon,
@@ -591,6 +601,7 @@ monsterRepo[Kuchitamatchi] =
 		TEEN_STAGE,
 		oceanFalse,
 		MonsterList(idGinjirotchi,idKuchipatchi,idNyorotchi,idTakotchi)
+	);
 monsterRepo[Kujiratchi] = 
 	MonsterRef(
 		Kujiratchi,
@@ -608,6 +619,7 @@ monsterRepo[Kunemon] =
 		TEEN_STAGE,
 		oceanFalse,
 		MonsterList(idSukamon,idKuwagamon,idOgremon,idFlymon)
+	);
 monsterRepo[Kuragetchi] = 
 	MonsterRef(
 		Kuragetchi,
@@ -625,7 +637,7 @@ monsterRepo[Kuridebitchi] =
 		ADULT_STAGE,
 		oceanFalse,
 		MonsterList(idShip)
-	);,
+	);
 monsterRepo[Kuriten] = 
 	MonsterRef(
 		Kuriten,
@@ -652,6 +664,7 @@ monsterRepo[Kuwagamon] =
 		ADULT_STAGE,
 		oceanFalse,
 		MonsterList(idVademon,idMamemon,idAndromon) //REVISIT,
+	);
 monsterRepo[Ladydevimon] = 
 	MonsterRef(
 		Ladydevimon,
@@ -669,6 +682,7 @@ monsterRepo[Leomon] =
 		ADULT_STAGE,
 		oceanFalse,
 		MonsterList(idSabreleomon, idSabreleomon, idEtemon, idPiximon)
+	);
 monsterRepo[Lillithmon] = 
 	MonsterRef(
 		Lillithmon,
@@ -677,7 +691,7 @@ monsterRepo[Lillithmon] =
 		ADULT_STAGE,
 		oceanFalse,
 		MonsterList(idMainFrame)
-	);,
+	);
 monsterRepo[Mamemon] = 
 	MonsterRef(
 		Mamemon,
@@ -686,7 +700,7 @@ monsterRepo[Mamemon] =
 		ADULT_STAGE,
 		oceanFalse,
 		MonsterList(idMainFrame)
-	);,
+	);
 monsterRepo[Mametchi] = 
 	MonsterRef(
 		Mametchi,
@@ -704,6 +718,7 @@ monsterRepo[Marutchi] =
 		CHILD_STAGE,
 		oceanFalse,
 		MonsterList(idKuchitamatchi,idTamatchi,idYoungmametchi,idPropellertchi)
+	);
 monsterRepo[Maruten] = 
 	MonsterRef(
 		Maruten,
@@ -739,7 +754,7 @@ monsterRepo[Megadramon] =
 		ADULT_STAGE,
 		oceanFalse,
 		MonsterList(idMainFrame)
-	);,
+	);
 monsterRepo[Megalogrowlmon] = 
 	MonsterRef(
 		Megalogrowlmon,
@@ -802,7 +817,7 @@ monsterRepo[Metalpiranimon] =
 		ADULT_STAGE,
 		oceanTrue,
 		MonsterList(idMainFrame)
-	);,
+	);
 monsterRepo[Metalseadramon] = 
 	MonsterRef(
 		Metalseadramon,
@@ -811,7 +826,7 @@ monsterRepo[Metalseadramon] =
 		ADULT_STAGE,
 		oceanTrue,
 		MonsterList(idMainFrame)
-	);,
+	);
 monsterRepo[Metaltyranomon] = 
 	MonsterRef(
 		Metaltyranomon,
@@ -856,6 +871,7 @@ monsterRepo[Mojyamon] =
 		ADULT_STAGE,
 		oceanFalse,
 		MonsterList(idMainframe,idPiximon)//REVISIT,
+	);
 monsterRepo[Monzaemon] = 
 	MonsterRef(
 		Monzaemon,
@@ -864,7 +880,7 @@ monsterRepo[Monzaemon] =
 		ADULT_STAGE,
 		oceanFalse,
 		MonsterList(idMainFrame)
-	);,
+	);
 monsterRepo[Mugendramon] = 
 	MonsterRef(
 		Mugendramon,
@@ -873,7 +889,7 @@ monsterRepo[Mugendramon] =
 		ADULT_STAGE,
 		oceanFalse,
 		MonsterList(idMainFrame)
-	);,
+	);
 monsterRepo[Ningyotchi] = 
 	MonsterRef(
 		Ningyotchi,
@@ -909,6 +925,7 @@ monsterRepo[Obaketchi] =
 		BABY_STAGE,
 		oceanFalse,
 		MonsterList(idMaruten,idMaruten,idDeviltchi,idZukidebitchi)
+	);
 monsterRepo[Oceanegg] = 
 	MonsterRef(
 		Oceanegg,
@@ -926,6 +943,7 @@ monsterRepo[Ogremon] =
 		ADULT_STAGE,
 		oceanFalse,
 		MonsterList(idDigitamamon,idPhantomon,idEtemon,idGiromon)
+	);
 monsterRepo[Omegamon] = 
 	MonsterRef(
 		Omegamon,
@@ -934,7 +952,7 @@ monsterRepo[Omegamon] =
 		ADULT_STAGE,
 		oceanFalse,
 		MonsterList(idMainFrame)
-	);,
+	);
 monsterRepo[Oniontchi] = 
 	MonsterRef(
 		Oniontchi,
@@ -943,6 +961,7 @@ monsterRepo[Oniontchi] =
 		TEEN_STAGE,
 		oceanFalse,
 		MonsterList(idZuccitchi,idDorotchi,idHanatchi,idKusatchi)
+	);
 monsterRepo[Otototchi] = 
 	MonsterRef(
 		Otototchi,
@@ -951,6 +970,7 @@ monsterRepo[Otototchi] =
 		TEEN_STAGE,
 		oceanTrue,
 		MonsterList(idKeropyontchi,idTaiyakitchi,idKujiratchi,idKaitchi)
+	);
 monsterRepo[Oyajidebiru] = 
 	MonsterRef(
 		Oyajidebiru,
@@ -994,7 +1014,8 @@ monsterRepo[Pitchmon] =
 		MOVER,
 		BABY_STAGE,
 		oceanTrue,
-		MonsterList(idPukamon,,
+		MonsterList(idPukamon)
+	);
 monsterRepo[Piximon] = 
 	MonsterRef(
 		Piximon,
@@ -1003,7 +1024,7 @@ monsterRepo[Piximon] =
 		ADULT_STAGE,
 		oceanFalse,
 		MonsterList(idMainFrame)
-	);,
+	);
 monsterRepo[Planktontchi] = 
 	MonsterRef(
 		Planktontchi,
@@ -1011,7 +1032,8 @@ monsterRepo[Planktontchi] =
 		MOVER,
 		BABY_STAGE,
 		oceanTrue,
-		MonsterList(idKuragetchi,,
+		MonsterList(idKuragetchi)
+	);
 monsterRepo[Pochitchi] = 
 	MonsterRef(
 		Pochitchi,
@@ -1074,7 +1096,7 @@ monsterRepo[Pumpmon] =
 		ADULT_STAGE,
 		oceanFalse,
 		MonsterList(idMainFrame)
-	);,
+	);
 monsterRepo[Sabotenshi] = 
 	MonsterRef(
 		Sabotenshi,
@@ -1083,7 +1105,7 @@ monsterRepo[Sabotenshi] =
 		ADULT_STAGE,
 		oceanFalse,
 		MonsterList(idShip)
-	);,
+	);
 monsterRepo[Sabreleomon] = 
 	MonsterRef(
 		Sabreleomon,
@@ -1092,7 +1114,7 @@ monsterRepo[Sabreleomon] =
 		ADULT_STAGE,
 		oceanFalse,
 		MonsterList(idMainFrame)
-	);,
+	);
 monsterRepo[Salamon] = 
 	MonsterRef(
 		Salamon,
@@ -1109,7 +1131,8 @@ monsterRepo[Seadramon] =
 		MOVER,
 		ADULT_STAGE,
 		oceanTrue,
-		MonsterList(idMegaseadramon,,
+		MonsterList(idMegaseadramon)
+	);
 monsterRepo[Seraphimon] = 
 	MonsterRef(
 		Seraphimon,
@@ -1118,7 +1141,7 @@ monsterRepo[Seraphimon] =
 		ADULT_STAGE,
 		oceanFalse,
 		MonsterList(idMainFrame)
-	);,
+	);
 monsterRepo[Shakomon] = 
 	MonsterRef(
 		Shakomon,
@@ -1199,6 +1222,7 @@ monsterRepo[Tamatchi] =
 		TEEN_STAGE,
 		oceanFalse,
 		MonsterList(idMasktchi,idGinjirotchi,idBunbuntchi,idKuchipatchi)
+	);
 monsterRepo[Tarakotchi] = 
 	MonsterRef(
 		Tarakotchi,
@@ -1225,6 +1249,7 @@ monsterRepo[Tentomon] =
 		TEEN_STAGE,
 		oceanFalse,
 		MonsterList(idKabuterimon,idKabuterimon,idKuwagamon,idFlymon)
+	);
 monsterRepo[Tokomon] = 
 	MonsterRef(
 		Tokomon,
@@ -1242,6 +1267,7 @@ monsterRepo[Tongaritchi] =
 		TEEN_STAGE,
 		oceanFalse,
 		MonsterList(idHashizotchi,idDorotchi,idMemetchi,idPochitchi)
+	);
 monsterRepo[Tonmarutchi] = 
 	MonsterRef(
 		Tonmarutchi,
@@ -1268,6 +1294,7 @@ monsterRepo[Tyranomon] =
 		ADULT_STAGE,
 		oceanFalse,
 		MonsterList(idMegadramon,idMetaltyranomon,idMetaltyranomon,idMamemon)
+	);
 monsterRepo[Ufotchi] = 
 	MonsterRef(
 		Ufotchi,
@@ -1276,6 +1303,7 @@ monsterRepo[Ufotchi] =
 		TEEN_STAGE,
 		oceanFalse,
 		MonsterList(idBunbuntchi,idDorotchi,idZuccitchi,idMemetchi)
+	);
 monsterRepo[Unimon] = 
 	MonsterRef(
 		Unimon,
@@ -1293,7 +1321,7 @@ monsterRepo[Vademon] =
 		ADULT_STAGE,
 		oceanFalse,
 		MonsterList(idMainFrame)
-	);,
+	);
 monsterRepo[Vamdemon] = 
 	MonsterRef(
 		Vamdemon,
@@ -1302,6 +1330,7 @@ monsterRepo[Vamdemon] =
 		ADULT_STAGE,
 		oceanFalse,
 		MonsterList(idDemon,idDemon,idDemon,idMainframe)
+	);
 monsterRepo[Wargreymon] = 
 	MonsterRef(
 		Wargreymon,
@@ -1310,6 +1339,7 @@ monsterRepo[Wargreymon] =
 		ADULT_STAGE,
 		oceanFalse,
 		MonsterList(idOmegamon,idOmegamon,idOmegamon,idMainframe)
+	);
 monsterRepo[Weregarurumon] = 
 	MonsterRef(
 		Weregarurumon,
@@ -1317,7 +1347,8 @@ monsterRepo[Weregarurumon] =
 		MOVER,
 		ADULT_STAGE,
 		oceanFalse,
-		MonsterList(idMetalgarurumon,,
+		MonsterList(idMetalgarurumon)
+	);
 monsterRepo[Whamon] = 
 	MonsterRef(
 		Whamon,
@@ -1344,6 +1375,7 @@ monsterRepo[Youngmametchi] =
 		TEEN_STAGE,
 		oceanFalse,
 		MonsterList(idMametchi,idMasktchi,idMasukutchi,idGozarutchi)
+	);
 monsterRepo[Youngmimitchi] = 
 	MonsterRef(
 		Youngmimitchi,
@@ -1352,6 +1384,7 @@ monsterRepo[Youngmimitchi] =
 		TEEN_STAGE,
 		oceanFalse,
 		MonsterList(idMimitchi,idMemetchi,idPochitchi,idWooltchi)
+	);
 monsterRepo[Zatchi] = 
 	MonsterRef(
 		Zatchi,
@@ -1378,7 +1411,7 @@ monsterRepo[Zudomon] =
 		ADULT_STAGE,
 		oceanTrue,
 		MonsterList(idMainFrame)
-	);,
+	);
 monsterRepo[Zukidebitchi] = 
 	MonsterRef(
 		Zukidebitchi,

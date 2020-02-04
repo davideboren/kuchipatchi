@@ -30,10 +30,10 @@ enum MonsterStage {
 };
 
 enum Events {
-  IDLE_EVENT,
   POOP_EVENT,
   VISITOR_EVENT,
   NUM_RANDOM_EVENTS,
+  IDLE_EVENT,
   EVO_EVENT,
   EVO_EVENT_NO_ANIM
 };

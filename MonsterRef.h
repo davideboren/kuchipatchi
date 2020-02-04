@@ -7,6 +7,7 @@
 struct MonsterRef{
 
   unsigned int lifespans[LAST_STAGE];
+  int lifespanScaler = 120;
   
   MonsterName myName;
   const uint8_t *bmp1, *bmp2, *bmp3;
@@ -19,6 +20,7 @@ struct MonsterRef{
 
   MonsterRef();
   MonsterRef(MonsterName myname, const uint8_t *s1, const uint8_t *s2, const uint8_t *s3, MonsterType type, MonsterStage stage, bool isUnderwater, MonsterList evolist);
+  MonsterRef(MonsterName myname, const uint8_t *s1, const uint8_t *s2, MonsterType type, MonsterStage stage, bool isUnderwater, MonsterList evolist);
 
 };
 
