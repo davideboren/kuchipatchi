@@ -46,7 +46,7 @@ MonsterDB::MonsterDB(){
 	monsterRepo[Kaitchi] =
 		MonsterRef(
 			Kaitchi,
-			kaitchi1,kaitchi1,kaitchi2,
+			kaitchi2,kaitchi2,kaitchi1,
 			SITTER,
 			ADULT_STAGE,
 			oceanTrue,
@@ -58,7 +58,7 @@ MonsterDB::MonsterDB(){
 			Koromon,
 			koromon1,koromon2,koromon1,
 			MOVER,
-			TODDLER_STAGE,
+			CHILD_STAGE,
 			oceanFalse,
 			MonsterList(Betamon,Gizamon)
 		);

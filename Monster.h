@@ -33,6 +33,7 @@ class Monster{
 
     void updateAge();
     void queueStand();
+	void queuePoop();
 
   public:
     Monster();

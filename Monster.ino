@@ -131,14 +131,14 @@ void Monster::queueStand(){
 	moveQueuePos = 0;
 }
 
-/*void Monster::queuePoop(){
-	moveQueue[0].setMove(2,0,-1,0,1);
-	moveQueue[1].setMove(2,0,1,0,1);
-	moveQueue[2].setMove(2,0,-1,0,1);
-	moveQueue[3].setMove(2,0,0,0,1);
+void Monster::queuePoop(){
+	moveQueue[0].setMove(-2,0,0,0,2);
+	moveQueue[1].setMove(2,0,0,0,2);
+	moveQueue[2].setMove(-2,0,0,0,2);
+	moveQueue[3].setMove(2,0,0,0,2);
 	
 	moveQueuePos = 0;
-}*/
+}
 
 bool Monster::taskComplete(){
   return taskDone;

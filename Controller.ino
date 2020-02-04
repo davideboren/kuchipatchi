@@ -255,8 +255,11 @@ void Controller::idleEvent(){
 }
 
 void Controller::activate(){
-	//addMonster(Kurotsubutchi,PRIMARY);
+	
 	loadSavedMonster();
+	
+	//Always idle for a moment before entering event loop
+	idleEvent();
 	
 	while(1){
 

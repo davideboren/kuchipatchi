@@ -50,9 +50,9 @@ void Sitter::gotoRoutine(){
 void Sitter::heartbeat(){
   updateAge();
 
-  if(dna.bmp1 == dna.bmp2){
+  /*if(dna.bmp1 == dna.bmp2){
    frameDir *= -1;
-  }
+  }*/
 
   switch(currentTask){
     case IDLE:

@@ -21,7 +21,7 @@ enum MonsterType {
 enum MonsterStage {
   EGG_STAGE,
   BABY_STAGE,
-  TODDLER_STAGE,
+  CHILD_STAGE,
   TEEN_STAGE,
   ADULT_STAGE,
   POOP_STAGE,
