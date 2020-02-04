@@ -3,10 +3,10 @@ MonsterDB::MonsterDB(){
   oceanTrue = true;
   oceanFalse = false;
 
-	monsterRepo[DigiEgg1] =       
+	monsterRepo[Digiegg] =       
 		MonsterRef(
-			DigiEgg1,
-			degg1,degg2,degg3,
+			Digiegg,
+			digiegg1,digiegg2,digiegg3,
 			EGG,
 			EGG_STAGE,
 			oceanFalse,
@@ -20,7 +20,7 @@ MonsterDB::MonsterDB(){
 			SITTER,
 			DEATH_STAGE,
 			oceanFalse,
-			MonsterList(DigiEgg1,TamaEgg1,Oceanegg,Obaketchi)
+			MonsterList(Digiegg,Tamaegg,Oceanegg,Obaketchi)
 		);
 
 	monsterRepo[Poop] =           
@@ -735,7 +735,7 @@ MonsterDB::MonsterDB(){
 			SITTER,
 			DEATH_STAGE,
 			oceanFalse,
-			MonsterList(DigiEgg1,TamaEgg1,Oceanegg)
+			MonsterList(Digiegg,Tamaegg,Oceanegg)
 		);
 	monsterRepo[Mamemon] = 
 		MonsterRef(
@@ -1212,7 +1212,7 @@ MonsterDB::MonsterDB(){
 			MOVER,
 			DEATH_STAGE,
 			oceanFalse,
-			MonsterList(DigiEgg1,TamaEgg1,Oceanegg)
+			MonsterList(Digiegg,Tamaegg,Oceanegg)
 		);
 	monsterRepo[Shirobabytchi] = 
 		MonsterRef(
@@ -1268,10 +1268,10 @@ MonsterDB::MonsterDB(){
 			oceanFalse,
 			MonsterList(Pukuten,Taraten)
 		);
-	monsterRepo[TamaEgg1] =
+	monsterRepo[Tamaegg] =
 		MonsterRef(
-			TamaEgg1,
-			tegg1,tegg2,tegg3,
+			Tamaegg,
+			tamaegg1,tamaegg2,tamaegg3,
 			EGG,
 			EGG_STAGE,
 			oceanFalse,

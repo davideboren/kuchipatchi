@@ -10,8 +10,7 @@ stageDec = []
 varDec = []
 
 #These sprites don't need stage declarations or enums
-banlist = ["blank", "bubble", "degg", "evolve", "flusher", "hatch", \
-			"poop", "tegg"]
+banlist = ["blank", "bubble", "evolve", "flusher" ]
 
 for r, d, f in os.walk("sprite"):
 	for file in f:
@@ -71,12 +70,12 @@ for sprite in sorted(spriteList):
 
 	varDec.append("\nstatic const unsigned char PROGMEM " + spriteName + " [] = {\n" + byteString + "\n};")
 	
-spriteEnumString = spriteEnumString + "idEgg,\n"
+spriteEnumString = spriteEnumString + "  LAST_MON_NAME\n"
 spriteEnumString = spriteEnumString + "};\n"
 
-spriteFile = open("./sprites.h","w")
+spriteFile = open("../sprites.h","w")
 spriteFile.write(spriteEnumString)
 spriteFile.write("\n".join(varDec))
 
-stageFile = open("./stagetemplates.h","w")
-stageFile.write("\n".join(stageDec))
+#stageFile = open("./stagetemplates.h","w")
+#stageFile.write("\n".join(stageDec))

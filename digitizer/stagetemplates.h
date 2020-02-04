@@ -22,10 +22,6 @@
       tamaStageMover(angewomon1,angewomon2,16,lifespanSave,lifespan);
       EEPROM.put(0,stager());
       break;
-    case Angewomon_:
-      tamaStageMover(angewomon2_2,16,lifespanSave,lifespan);
-      EEPROM.put(0,stager());
-      break;
     case Ashigyotchi:
       tamaStageMover(ashigyotchi1,ashigyotchi2,16,lifespanSave,lifespan);
       EEPROM.put(0,stager());
@@ -84,6 +80,10 @@
       break;
     case Devimon:
       tamaStageMover(devimon1,devimon2,devimon3,16,lifespanSave,lifespan);
+      EEPROM.put(0,stager());
+      break;
+    case Digiegg:
+      tamaStageMover(digiegg1,digiegg2,digiegg3,16,lifespanSave,lifespan);
       EEPROM.put(0,stager());
       break;
     case Digitamamon:
@@ -482,6 +482,10 @@
       tamaStageMover(pochitchi1,pochitchi2,pochitchi3,16,lifespanSave,lifespan);
       EEPROM.put(0,stager());
       break;
+    case Poop:
+      tamaStageMover(poop1,poop2,16,lifespanSave,lifespan);
+      EEPROM.put(0,stager());
+      break;
     case Poyomon:
       tamaStageMover(poyomon1,poyomon2,16,lifespanSave,lifespan);
       EEPROM.put(0,stager());
@@ -560,6 +564,10 @@
       break;
     case Takoten:
       tamaStageMover(takoten1,takoten2,takoten3,16,lifespanSave,lifespan);
+      EEPROM.put(0,stager());
+      break;
+    case Tamaegg:
+      tamaStageMover(tamaegg1,tamaegg2,tamaegg3,16,lifespanSave,lifespan);
       EEPROM.put(0,stager());
       break;
     case Tamatchi:
