@@ -17,28 +17,33 @@ MoverMon::MoverMon(MonsterRef ref, unsigned int age){
 
   monsterAge = age;
 
-  eventsAllowed = true;
-
   queueStand();
 }
 
 MoverMon::~MoverMon(){
-  Serial.println("Tearing down a monster");
 }
 
 void MoverMon::queueWalk(){
-  moveQueue[0].setMove(4,0,0,0,1);
-  moveQueue[1].setMove(4,0,0,0,1);
-  moveQueue[2].setMove(4,0,0,0,2);
-  moveQueue[3].setMove(4,0,0,0,2);
+	int specialFrame;
+	
+	if(random(3) == 1){
+		specialFrame = 3;
+	} else {
+		specialFrame = 1;
+	}
 
-  moveQueuePos = 0;
+	moveQueue[0].setMove(4,0,0,0,specialFrame);
+	moveQueue[1].setMove(4,0,0,0,specialFrame);
+	moveQueue[2].setMove(4,0,0,0,2);
+	moveQueue[3].setMove(4,0,0,0,2);
+
+	moveQueuePos = 0;
 }
 
 void MoverMon::idleRoutine(){
   //Choose next move
   if(moveQueuePos > 3){
-    Serial.println("Entered moveQueue");
+    //Serial.println("Entered moveQueue");
     random(8)?queueWalk():queueStand();
   }
 
@@ -47,7 +52,7 @@ void MoverMon::idleRoutine(){
   } else if(coords.xPos >= coords.xBoundR){
     coords.xDir = -1;
   } else if(!random(12) && inBounds()){
-    coords.xDir = -1;
+    coords.xDir *= -1;
   }
 }
 
@@ -74,7 +79,7 @@ void MoverMon::standRoutine(){
 }
 
 void MoverMon::heartbeat(){
-  Serial.println("Heartbeat received");
+  //Serial.println("Heartbeat received");
 
   updateAge();
 

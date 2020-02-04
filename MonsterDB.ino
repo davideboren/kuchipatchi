@@ -2,12 +2,106 @@ MonsterDB::MonsterDB(){
 
   oceanTrue = true;
   oceanFalse = false;
+  
+	monsterRepo[Betamon] =
+		MonsterRef(
+			Betamon,
+			betamon1,betamon2,betamon1,
+			MOVER,
+			TEEN_STAGE,
+			oceanTrue,
+			MonsterList(Kaitchi)
+		);
 
-  monsterRepo[DigiEgg1] =       MonsterRef(DigiEgg1,degg1,degg2,degg3,EGG,EGG_STAGE,oceanFalse,Kurotsubutchi,Kurotsubutchi);
-  monsterRepo[Kurotsubutchi] =  MonsterRef(Kurotsubutchi,kurotsubutchi1,kurotsubutchi2,kurotsubutchi2,MOVER,BABY_STAGE,oceanTrue,Kuchipatchi,Mimitchi);
-  monsterRepo[Kuchipatchi] =    MonsterRef(Kuchipatchi,kuchipatchi1,kuchipatchi2,kuchipatchi2,MOVER,ADULT_STAGE,oceanFalse,Kurotsubutchi,Kurotsubutchi);
-  monsterRepo[Mimitchi] =       MonsterRef(Mimitchi,mimitchi1,mimitchi1,mimitchi1,SITTER,ADULT_STAGE,oceanFalse,Kurotsubutchi,Kurotsubutchi);
-  monsterRepo[Poop] =           MonsterRef(Poop,poop1, poop2,poop2, SITTER, POOP_STAGE,oceanFalse, Poop, Poop);
+	monsterRepo[DigiEgg1] =       
+		MonsterRef(
+			DigiEgg1,
+			degg1,degg2,degg3,
+			EGG,
+			EGG_STAGE,
+			oceanFalse,
+			MonsterList(Kurotsubutchi)
+		);
+		
+	monsterRepo[Gizamon] =
+		MonsterRef(
+			Gizamon,
+			gizamon1,gizamon2,gizamon3,
+			MOVER,
+			TEEN_STAGE,
+			oceanFalse,
+			MonsterList(Mimitchi,Kuchipatchi)
+		);
+  
+	monsterRepo[Grave] =
+		MonsterRef(
+			Grave,
+			grave1,grave2,grave1,
+			SITTER,
+			DEATH_STAGE,
+			oceanFalse,
+			MonsterList(DigiEgg1)
+		);
+		
+	monsterRepo[Kaitchi] =
+		MonsterRef(
+			Kaitchi,
+			kaitchi1,kaitchi1,kaitchi2,
+			SITTER,
+			ADULT_STAGE,
+			oceanTrue,
+			MonsterList(Grave)
+		);
+		
+	monsterRepo[Koromon] =
+		MonsterRef(
+			Koromon,
+			koromon1,koromon2,koromon1,
+			MOVER,
+			TODDLER_STAGE,
+			oceanFalse,
+			MonsterList(Betamon,Gizamon)
+		);
+	
+	monsterRepo[Kurotsubutchi] =  
+		MonsterRef(
+			Kurotsubutchi,
+			kurotsubutchi1,kurotsubutchi2,kurotsubutchi1,
+			MOVER,
+			BABY_STAGE,
+			oceanFalse,
+			MonsterList(Koromon)
+		);
+	
+	monsterRepo[Kuchipatchi] =    
+		MonsterRef(
+			Kuchipatchi,
+			kuchipatchi1,kuchipatchi2,kuchipatchi3,
+			MOVER,
+			ADULT_STAGE,
+			oceanFalse,
+			MonsterList(Grave)
+		);
+		
+	monsterRepo[Mimitchi] =       
+		MonsterRef(
+			Mimitchi,
+			mimitchi1,mimitchi2,mimitchi1,
+			SITTER,
+			ADULT_STAGE,
+			oceanFalse,
+			MonsterList(Grave)
+		);
+		
+	monsterRepo[Poop] =           
+		MonsterRef(
+			Poop,
+			poop1,poop2,poop1, 
+			SITTER,
+			POOP_STAGE,
+			oceanFalse, 
+			MonsterList(Poop)
+		);
 
 }
 
@@ -33,10 +127,6 @@ MonsterStage MonsterDB::getMonsterStage(MonsterName name){
 
 bool MonsterDB::isUnderwater(MonsterName name){
   return monsterRepo[name].oceanType;
-}
-
-MonsterName MonsterDB::getNextMonster(MonsterName name){
-  return random(2)?monsterRepo[name].nextMonster[0]:monsterRepo[name].nextMonster[1];
 }
 
 Monster* MonsterDB::newMonster(MonsterName name){

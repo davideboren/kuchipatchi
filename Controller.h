@@ -7,12 +7,14 @@
 #include "Monster.h"
 #include "ScreenFX.h"
 #include "MonsterDB.h"
+#include <EEPROM.h>
 
 class Controller{
   private:
     int offFrameSlack;
 
     int eMonsterIdAddr = 0;
+	
     int frameDelay;
 
     int xBoundL_vis, xBoundR_vis;
@@ -24,6 +26,7 @@ class Controller{
     void deleteMonster(int slot);
     void evolveMonster(int slot);
     void evoEvent(int slot);
+	void evoEventNoAnim(int slot);
     void sendMonsterToPos(int slot, int x);
     void visitorEvent();
     void poopEvent();
@@ -43,7 +46,11 @@ class Controller{
     Controller();
     MonsterDB mdb;
     void drawFrame(Frame f);
-    int getSavedMonsterID();
-    void saveMonsterID(int id);
+	
+	void saveMonster();
+	MonsterName getSavedMonsterName();
+	unsigned int getSavedMonsterAge();
+	void loadSavedMonster();
+	
     void activate();
 };

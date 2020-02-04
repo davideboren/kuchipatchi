@@ -49,12 +49,14 @@ class Monster{
     int getXBoundR();
     int getPoopPos();
     MonsterStage getMonsterStage();
+	unsigned int getMonsterAge();
 
     //Setters
     void setXPos(int x);
     void setYPos(int y);
     void setBoundsX(int xL, int xR);
     void setXDir(int dir);
+	void setAge(unsigned int age);
 
     virtual void heartbeat();
     void doMove();

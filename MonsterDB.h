@@ -4,7 +4,7 @@
 #include "MonsterRef.h"
 #include "Monster.h"
 struct MonsterDB{
-  MonsterRef monsterRepo[10];
+  MonsterRef monsterRepo[LAST_MON_NAME];
   MonsterDB();
 
   bool oceanTrue;
@@ -14,7 +14,6 @@ struct MonsterDB{
   const uint8_t *   getSprite2(MonsterName name);
   const uint8_t *   getSprite3(MonsterName name);
   MonsterType   getMonsterType(MonsterName name);
-  MonsterName getNextMonster(MonsterName name);
   MonsterStage getMonsterStage(MonsterName name);
   bool isUnderwater(MonsterName name);
   Monster* newMonster(MonsterName name);

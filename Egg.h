@@ -15,6 +15,7 @@ class Egg : public Monster{
 		Egg();
 		Egg(MonsterRef ref, unsigned int age);
 
+		void queueStand();
 		void queueHatch1();
 		void queueHatch2();
 

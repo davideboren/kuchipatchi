@@ -3,13 +3,13 @@
  *
  * Coordinates all on screen entities
  */
- #include <EEPROM.h>
+ 
 
 Controller::Controller(){
 
   MonsterDB mdb;
 
-  frameDelay = 500;
+  frameDelay = 200;
   offFrameSlack = 16;
 
   xBoundL_vis = 64;
@@ -69,30 +69,31 @@ void Controller::evolveMonster(int slot){
   activeMonsters[slot] -> setBoundsX(currentXBoundL, currentXBoundR);
 }
 
-void Controller::evoEvent(int slot){
-  sendMonsterToPos(slot, 48);
-  activeFX[EVOLVE_FX_SLOT] = mdb.newFX(EVOLVE_FX);
-  for(int i = 0; i < 10; i++){
-    updateAll();
-  }
-  evolveMonster(slot);
-  activeMonsters[slot] -> setTask(STAND);
-  for(int i = 0; i < 10; i++){
-    updateAll();
-  }
-  deleteFX(EVOLVE_FX_SLOT);
-  activeMonsters[slot] -> setTask(IDLE);
+void Controller::saveMonster(){
+	MonsterName monName = activeMonsters[PRIMARY] -> getName();
+	unsigned int monAge = activeMonsters[PRIMARY] -> getMonsterAge();
+	
+	EEPROM.put(0,monName);
+	EEPROM.put(32,monAge);
+}
+MonsterName Controller::getSavedMonsterName(){
+	MonsterName savedMonName;
+	EEPROM.get(0,savedMonName);
+	return savedMonName;
 }
 
-int Controller::getSavedMonsterID(){
-  int id = 1;
-  EEPROM.get(eMonsterIdAddr,id);
-  Serial.print("EEPROM returned monster ID: "); Serial.println(id);
-  return id;
+unsigned int Controller::getSavedMonsterAge(){
+	unsigned int monAge;
+	EEPROM.get(32,monAge);
+	return monAge;
 }
 
-void Controller::saveMonsterID(int id){
-  EEPROM.put(eMonsterIdAddr,id);
+void Controller::loadSavedMonster(){
+	MonsterName savedMon = getSavedMonsterName();
+	unsigned int savedMonAge = getSavedMonsterAge();
+	
+	addMonster(savedMon, PRIMARY);
+	activeMonsters[PRIMARY] -> setAge(savedMonAge);
 }
 
 void Controller::updateMonsters(){
@@ -100,10 +101,10 @@ void Controller::updateMonsters(){
     if(activeMonsters[monSlot] != NULL){
       activeMonsters[monSlot] -> heartbeat();
 
-      if(activeMonsters[monSlot] -> agedOut() && !activeMonsters[monSlot] -> isEventCapable()){
-        evolveMonster(monSlot);
-        monSlot--;
-      }
+      //if(monSlot == PRIMARY && activeMonsters[monSlot] -> agedOut()){
+      //  evolveMonster(monSlot);
+      //  monSlot--;
+      //}
     }
   }
 }
@@ -140,20 +141,22 @@ void Controller::deleteFX(int slot){
 }
 
 void Controller::updateAll(){
-  display.clearDisplay();
-  updateMonsters();
-  updateFX();
-  drawMonsterFrames();
-  drawFXFrames();
-  display.display();
-  delay(250);
+	display.clearDisplay();
+	updateMonsters();
+	updateFX();
+	drawMonsterFrames();
+	drawFXFrames();
+	display.display();
+	delay(frameDelay);
 
-  display.clearDisplay();
-  updateFX();
-  drawMonsterFrames();
-  drawFXFrames();
-  display.display();
-  delay(250);
+	display.clearDisplay();
+	updateFX();
+	drawMonsterFrames();
+	drawFXFrames();
+	display.display();
+	delay(frameDelay);
+
+	saveMonster();
 
 }
 
@@ -162,6 +165,27 @@ void Controller::sendMonsterToPos(int slot, int x){
   while(!activeMonsters[slot] -> taskComplete()){
     updateAll();
   }
+}
+
+void Controller::evoEvent(int slot){
+  sendMonsterToPos(slot, 48);
+  activeFX[EVOLVE_FX_SLOT] = mdb.newFX(EVOLVE_FX);
+  activeMonsters[slot] -> setTask(STAND);
+  for(int i = 0; i < 10; i++){
+    updateAll();
+  }
+  evolveMonster(slot);
+  activeMonsters[slot] -> setTask(STAND);
+  for(int i = 0; i < 10; i++){
+    updateAll();
+  }
+  deleteFX(EVOLVE_FX_SLOT);
+  activeMonsters[slot] -> setTask(IDLE);
+}
+
+void Controller::evoEventNoAnim(int slot){
+  evolveMonster(slot);
+  //activeMonsters[slot] -> setTask(IDLE);
 }
 
 void Controller::visitorEvent(){
@@ -205,23 +229,23 @@ void Controller::poopEvent(){
     updateAll();
   }
   flushPoop(dropZone);
-  //deleteMonster(POOP);
 
   activeMonsters[PRIMARY] -> setBoundsX(0,96);
 
 }
 
 void Controller::flushPoop(int poopXPos){
-  activeFX[FLUSH_FX_SLOT] = mdb.newFX(FLUSH_FX);
+	
+	activeFX[FLUSH_FX_SLOT] = mdb.newFX(FLUSH_FX);
 
-  while(!activeFX[FLUSH_FX_SLOT] -> finished()){
-    if(activeMonsters[POOP] != NULL && activeFX[FLUSH_FX_SLOT] -> getEffectPos() <= poopXPos){
-      deleteMonster(POOP);
-    }
-    updateAll();
-  }
+	while(!activeFX[FLUSH_FX_SLOT] -> finished()){
+		if(activeMonsters[POOP] != NULL && activeFX[FLUSH_FX_SLOT] -> getEffectPos() <= poopXPos){
+		  deleteMonster(POOP);
+		}
+		updateAll();
+	}
 
-  deleteFX(FLUSH_FX_SLOT);
+	deleteFX(FLUSH_FX_SLOT);
 }
 
 void Controller::idleEvent(){
@@ -231,34 +255,44 @@ void Controller::idleEvent(){
 }
 
 void Controller::activate(){
+	//addMonster(Kurotsubutchi,PRIMARY);
+	loadSavedMonster();
+	
+	while(1){
 
-  addMonster(DigiEgg1, PRIMARY);
-  while(1){
+		int currentEvent;
+		
+		if(activeMonsters[PRIMARY] -> agedOut() && activeMonsters[PRIMARY] -> isEventCapable()){
+			currentEvent = EVO_EVENT;
+		} else if(activeMonsters[PRIMARY] -> agedOut() && !activeMonsters[PRIMARY] -> isEventCapable()){
+			currentEvent = EVO_EVENT_NO_ANIM;
+		} else if (!activeMonsters[PRIMARY] -> isEventCapable()){
+			currentEvent = IDLE_EVENT;
+		} else {
+			currentEvent = random(NUM_RANDOM_EVENTS);
+		}
 
-    int currentEvent;
-    if(activeMonsters[PRIMARY] -> isEventCapable()){
-      if(activeMonsters[PRIMARY] -> agedOut()){
-        currentEvent = EVO_EVENT;
-      } else {
-        currentEvent = random(LAST_EVENT);
-      }
-    } else {
-      currentEvent = IDLE_EVENT;
-      }
-
-    switch(currentEvent){
-      case IDLE_EVENT:
-        idleEvent();
-        break;
-      case POOP_EVENT:
-        poopEvent();
-        break;
-      case VISITOR_EVENT:
-        visitorEvent();
-        break;
-      case EVO_EVENT:
-        evoEvent(PRIMARY);
-        break;
-    }
+		switch(currentEvent){
+			case IDLE_EVENT:
+				Serial.println("Entering IDLE_EVENT case");
+				idleEvent();
+			break;
+			case POOP_EVENT:
+				Serial.println("Entering POOP_EVENT case");
+				poopEvent();
+			break;
+			case VISITOR_EVENT:
+				Serial.println("Entering VISITOR_EVENT case");
+				visitorEvent();
+			break;
+			case EVO_EVENT:
+				Serial.println("Entering EVO_EVENT case");
+				evoEvent(PRIMARY);
+			break;
+			case EVO_EVENT_NO_ANIM:
+				Serial.println("Entering EVO_EVENT_NO_ANIM case");
+				evoEventNoAnim(PRIMARY);
+			break;
+		}
   }
 }

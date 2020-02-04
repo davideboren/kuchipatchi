@@ -6,6 +6,7 @@
 
 //Constructors
 Monster::Monster(){
+	
 }
 
 Monster::~Monster(){
@@ -45,8 +46,17 @@ MonsterStage Monster::getMonsterStage(){
   return dna.monsterStage;
 }
 
+unsigned int Monster::getMonsterAge(){
+	return monsterAge;
+}
+
 bool Monster::isEventCapable(){
-  return eventsAllowed;
+  //return eventsAllowed;
+  if(dna.monsterStage == EGG_STAGE || dna.monsterStage == DEATH_STAGE || dna.monsterStage == POOP_STAGE){
+		return false;
+	} else {
+		return true;
+	}
 }
 
 //Setters
@@ -70,6 +80,10 @@ void Monster::setTask(MonsterTask task){
 
 void Monster::setXDir(int dir){
   coords.xDir = dir;
+}
+
+void Monster::setAge(unsigned int age){
+	monsterAge = age;
 }
 
 void Monster::heartbeat(){
@@ -101,13 +115,30 @@ void Monster::switchSprite(MoveInstruction move)
 }
 
 void Monster::queueStand(){
-	moveQueue[0].setMove(0,0,0,0,1);
+	int specialFrame;
+	
+	if(random(3) == 1){
+		specialFrame = 3;
+	} else {
+		specialFrame = 1;
+	}
+	
+	moveQueue[0].setMove(0,0,0,0,specialFrame);
 	moveQueue[1].setMove(0,0,0,0,2);
-	moveQueue[2].setMove(0,0,0,0,1);
+	moveQueue[2].setMove(0,0,0,0,specialFrame);
 	moveQueue[3].setMove(0,0,0,0,2);
 
 	moveQueuePos = 0;
 }
+
+/*void Monster::queuePoop(){
+	moveQueue[0].setMove(2,0,-1,0,1);
+	moveQueue[1].setMove(2,0,1,0,1);
+	moveQueue[2].setMove(2,0,-1,0,1);
+	moveQueue[3].setMove(2,0,0,0,1);
+	
+	moveQueuePos = 0;
+}*/
 
 bool Monster::taskComplete(){
   return taskDone;
@@ -126,18 +157,21 @@ void Monster::goTo(int x){
 //Age Functions
 void Monster::updateAge(){
   monsterAge+=5;
-  Serial.print("Age: "); Serial.print(monsterAge); Serial.print("/"); Serial.println(dna.monsterLifespan);
+  //Serial.print("Age: "); Serial.print(monsterAge); Serial.print("/"); Serial.println(dna.monsterLifespan);
 }
 
 bool Monster::agedOut(){
   if( (monsterAge >= dna.monsterLifespan) && currentTask != GOTO){
+	//Serial.print("Monster aged out: "); Serial.print(monsterAge); Serial.print("/"); Serial.println(dna.monsterLifespan);
     return true;
   } else {
+	Serial.print("Monster has not aged out: "); Serial.print(monsterAge); Serial.print("/"); Serial.println(dna.monsterLifespan);
     return false;
   }
 }
 
 MonsterName Monster::getNextMonsterName(){
-  int i = random(2);
-  return dna.nextMonster[i];
+  //int i = random(2);
+  //return dna.nextMonster[i];
+  return dna.evoList.getRandomMonsterName();
 }

@@ -11,8 +11,6 @@ Sitter::Sitter(MonsterRef ref, unsigned int age){
 
   currentTask = IDLE;
 
-  eventsAllowed = true;
-
   queueStand();
 }
 
