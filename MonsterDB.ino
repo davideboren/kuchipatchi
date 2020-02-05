@@ -515,7 +515,7 @@ MonsterDB::MonsterDB(){
 	monsterRepo[Hyurutchi] = 
 		MonsterRef(
 			Hyurutchi,
-			hyurutchi1,hyurutchi2,
+			hyurutchi1,hyurutchi2,hyurutchi3,
 			MOVER,
 			CHILD_STAGE,
 			oceanFalse,
@@ -1208,7 +1208,7 @@ MonsterDB::MonsterDB(){
 	monsterRepo[Ship] = 
 		MonsterRef(
 			Ship,
-			ship1,ship1,
+			ship1,ship2,
 			MOVER,
 			DEATH_STAGE,
 			oceanFalse,

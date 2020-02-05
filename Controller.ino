@@ -25,12 +25,60 @@ Controller::Controller(){
 
 }
 
-void Controller::drawFrame(Frame f){
-  if(f.xDir == -1){
-    display.drawScaledBitmap(f.xPos,f.yPos,f.bitmap,16,16,1,2);
-  } else if(f.xDir == 1){
-    display.drawReverseBitmap(f.xPos,f.yPos,f.bitmap,16,16,1,2);
+void Controller::activate(){
+	
+	loadSavedMonster();
+	//addMonster(botamon,PRIMARY);
+	
+	//Always idle for a moment before entering event loop
+	//idleEvent();
+	
+	while(1){
+
+		int currentEvent;
+		
+		if(activeMonsters[PRIMARY] -> agedOut() && activeMonsters[PRIMARY] -> isEventCapable()){
+			currentEvent = EVO_EVENT;
+		} else if(activeMonsters[PRIMARY] -> agedOut() && !activeMonsters[PRIMARY] -> isEventCapable()){
+			currentEvent = EVO_EVENT_NO_ANIM;
+		} else if (!activeMonsters[PRIMARY] -> isEventCapable()){
+			currentEvent = IDLE_EVENT;
+		} else {
+			currentEvent = generateRandomEvent();
+		}
+
+		switch(currentEvent){
+			case IDLE_EVENT:
+				Serial.println("Entering IDLE_EVENT case");
+				idleEvent();
+			break;
+			case POOP_EVENT:
+				Serial.println("Entering POOP_EVENT case");
+				poopEvent();
+			break;
+			case VISITOR_EVENT:
+				Serial.println("Entering VISITOR_EVENT case");
+				visitorEvent();
+			break;
+			case EVO_EVENT:
+				Serial.println("Entering EVO_EVENT case");
+				evoEvent(PRIMARY);
+			break;
+			case EVO_EVENT_NO_ANIM:
+				Serial.println("Entering EVO_EVENT_NO_ANIM case");
+				evoEventNoAnim(PRIMARY);
+			break;
+		}
   }
+}
+
+
+void Controller::loadSavedMonster(){
+	MonsterName savedMon = getSavedMonsterName();
+	unsigned int savedMonAge = getSavedMonsterAge();
+	
+	addMonster(savedMon, PRIMARY);
+	activeMonsters[PRIMARY] -> setAge(savedMonAge);
 }
 
 void Controller::addMonster(MonsterName name, ActiveMonsterSlot slot){
@@ -43,6 +91,22 @@ void Controller::addMonster(MonsterName name, ActiveMonsterSlot slot){
     else if(!mdb.isUnderwater(name) && activeFX[BUBBLE_FX_SLOT] != NULL){
       deleteFX(BUBBLE_FX_SLOT);
     }
+  }
+}
+
+Events Controller::generateRandomEvent(){
+	if(random(100) > 20){
+		return IDLE_EVENT;
+	} else {
+		return random(NUM_RANDOM_EVENTS);
+	}
+}
+
+void Controller::drawFrame(Frame f){
+  if(f.xDir == -1){
+    display.drawScaledBitmap(f.xPos,f.yPos,f.bitmap,16,16,1,2);
+  } else if(f.xDir == 1){
+    display.drawReverseBitmap(f.xPos,f.yPos,f.bitmap,16,16,1,2);
   }
 }
 
@@ -61,7 +125,6 @@ void Controller::evolveMonster(int slot){
 
   delete activeMonsters[slot];
 
-  //activeMonsters[slot] = mdb.newMonster(nextMon);
   addMonster(nextMon, static_cast<ActiveMonsterSlot>(slot));
 
   activeMonsters[slot] -> setXPos(currentX);
@@ -88,23 +151,10 @@ unsigned int Controller::getSavedMonsterAge(){
 	return monAge;
 }
 
-void Controller::loadSavedMonster(){
-	MonsterName savedMon = getSavedMonsterName();
-	unsigned int savedMonAge = getSavedMonsterAge();
-	
-	addMonster(savedMon, PRIMARY);
-	activeMonsters[PRIMARY] -> setAge(savedMonAge);
-}
-
 void Controller::updateMonsters(){
   for(int monSlot = PRIMARY; monSlot != LAST_MON_SLOT; monSlot++){
     if(activeMonsters[monSlot] != NULL){
       activeMonsters[monSlot] -> heartbeat();
-
-      //if(monSlot == PRIMARY && activeMonsters[monSlot] -> agedOut()){
-      //  evolveMonster(monSlot);
-      //  monSlot--;
-      //}
     }
   }
 }
@@ -160,33 +210,6 @@ void Controller::updateAll(){
 
 }
 
-void Controller::sendMonsterToPos(int slot, int x){
-  activeMonsters[slot] -> goTo(x);
-  while(!activeMonsters[slot] -> taskComplete()){
-    updateAll();
-  }
-}
-
-void Controller::evoEvent(int slot){
-  sendMonsterToPos(slot, 48);
-  activeFX[EVOLVE_FX_SLOT] = mdb.newFX(EVOLVE_FX);
-  activeMonsters[slot] -> setTask(STAND);
-  for(int i = 0; i < eventDurationInMinutes/2; i++){
-    updateAll();
-  }
-  evolveMonster(slot);
-  activeMonsters[slot] -> setTask(STAND);
-  for(int i = 0; i < eventDurationInMinutes/2; i++){
-    updateAll();
-  }
-  deleteFX(EVOLVE_FX_SLOT);
-  activeMonsters[slot] -> setTask(IDLE);
-}
-
-void Controller::evoEventNoAnim(int slot){
-  evolveMonster(slot);
-}
-
 void Controller::visitorEvent(){
   sendMonsterToPos(PRIMARY,24);
   activeMonsters[PRIMARY] -> setXDir(1);
@@ -199,7 +222,7 @@ void Controller::visitorEvent(){
   activeMonsters[PRIMARY] -> setTask(IDLE);
   activeMonsters[VISITOR] -> setTask(IDLE);
 
-  for(int i = 0; i < eventDurationInMinutes; i++){
+  for(int i = 0; i < eventDurationInCycles; i++){
     updateAll();
   }
 
@@ -211,6 +234,35 @@ void Controller::visitorEvent(){
   activeMonsters[PRIMARY] -> setTask(IDLE);
 
 }
+
+void Controller::sendMonsterToPos(int slot, int x){
+  activeMonsters[slot] -> goTo(x);
+  while(!activeMonsters[slot] -> taskComplete()){
+    updateAll();
+  }
+}
+
+void Controller::evoEvent(int slot){
+  sendMonsterToPos(slot, 48);
+  activeFX[EVOLVE_FX_SLOT] = mdb.newFX(EVOLVE_FX);
+  activeMonsters[slot] -> setTask(STAND);
+  for(int i = 0; i < eventDurationInCycles/4; i++){
+    updateAll();
+  }
+  evolveMonster(slot);
+  activeMonsters[slot] -> setTask(STAND);
+  for(int i = 0; i < eventDurationInCycles/4; i++){
+    updateAll();
+  }
+  deleteFX(EVOLVE_FX_SLOT);
+  activeMonsters[slot] -> setTask(IDLE);
+}
+
+void Controller::evoEventNoAnim(int slot){
+  evolveMonster(slot);
+}
+
+
 
 void Controller::poopEvent(){
   int dropZone = activeMonsters[PRIMARY] -> getPoopPos();
@@ -253,57 +305,6 @@ void Controller::idleEvent(){
   }
 }
 
-Events Controller::generateRandomEvent(){
-	if(random(100) > 20){
-		return IDLE_EVENT;
-	} else {
-		return random(NUM_RANDOM_EVENTS);
-	}
-}
 
-void Controller::activate(){
-	
-	loadSavedMonster();
-	//addMonster(TamaEgg1,PRIMARY);
-	
-	//Always idle for a moment before entering event loop
-	//idleEvent();
-	
-	while(1){
 
-		int currentEvent;
-		
-		if(activeMonsters[PRIMARY] -> agedOut() && activeMonsters[PRIMARY] -> isEventCapable()){
-			currentEvent = EVO_EVENT;
-		} else if(activeMonsters[PRIMARY] -> agedOut() && !activeMonsters[PRIMARY] -> isEventCapable()){
-			currentEvent = EVO_EVENT_NO_ANIM;
-		} else if (!activeMonsters[PRIMARY] -> isEventCapable()){
-			currentEvent = IDLE_EVENT;
-		} else {
-			currentEvent = generateRandomEvent();
-		}
 
-		switch(currentEvent){
-			case IDLE_EVENT:
-				Serial.println("Entering IDLE_EVENT case");
-				idleEvent();
-			break;
-			case POOP_EVENT:
-				Serial.println("Entering POOP_EVENT case");
-				poopEvent();
-			break;
-			case VISITOR_EVENT:
-				Serial.println("Entering VISITOR_EVENT case");
-				visitorEvent();
-			break;
-			case EVO_EVENT:
-				Serial.println("Entering EVO_EVENT case");
-				evoEvent(PRIMARY);
-			break;
-			case EVO_EVENT_NO_ANIM:
-				Serial.println("Entering EVO_EVENT_NO_ANIM case");
-				evoEventNoAnim(PRIMARY);
-			break;
-		}
-  }
-}
