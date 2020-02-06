@@ -17,6 +17,7 @@
 #include "Monster.h"
 #include "MonsterList.h"
 #include "MoverMon.h"
+#include "FloaterMon.h"
 #include "Sitter.h"
 #include "MoveInstruction.h"
 #include "Egg.h"

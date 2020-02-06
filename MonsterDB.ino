@@ -191,7 +191,7 @@ MonsterDB::MonsterDB(){
 		MonsterRef(
 			Debirumametchi,
 			debirumametchi1,debirumametchi2,debirumametchi3,
-			MOVER,
+			FLOATER,
 			ADULT_STAGE,
 			oceanFalse,
 			MonsterList(Ship,Ship,Kuridebitchi)
@@ -209,8 +209,8 @@ MonsterDB::MonsterDB(){
 		MonsterRef(
 			Deviltchi,
 			deviltchi1,deviltchi2,deviltchi3,
-			MOVER,
-			CHILD_STAGE,
+			FLOATER,
+			ADULT_STAGE,
 			oceanFalse,
 			MonsterList(Pukudebitchi,Ghostdeviltchi)
 		);
@@ -236,7 +236,7 @@ MonsterDB::MonsterDB(){
 		MonsterRef(
 			Dolphmon,
 			dolphmon1,dolphmon2,dolphmon3,
-			MOVER,
+			FLOATER,
 			ADULT_STAGE,
 			oceanTrue,
 			MonsterList(Whamon,Megaseadramon)
@@ -245,7 +245,7 @@ MonsterDB::MonsterDB(){
 		MonsterRef(
 			Dorotchi,
 			dorotchi1,dorotchi2,dorotchi3,
-			MOVER,
+			FLOATER,
 			ADULT_STAGE,
 			oceanFalse,
 			MonsterList(Ship,Grave)
@@ -299,7 +299,7 @@ MonsterDB::MonsterDB(){
 		MonsterRef(
 			Flymon,
 			flymon1,flymon2,flymon3,
-			MOVER,
+			FLOATER,
 			ADULT_STAGE,
 			oceanFalse,
 			MonsterList(Piximon,Phantomon,Monzaemon)
@@ -317,7 +317,7 @@ MonsterDB::MonsterDB(){
 		MonsterRef(
 			Futagodebiru,
 			futagodebiru1,futagodebiru2,
-			MOVER,
+			FLOATER,
 			ADULT_STAGE,
 			oceanFalse,
 			MonsterList(Ship)
@@ -326,7 +326,7 @@ MonsterDB::MonsterDB(){
 		MonsterRef(
 			Futagotenshi,
 			futagotenshi1,futagotenshi2,futagotenshi3,
-			MOVER,
+			FLOATER,
 			ADULT_STAGE,
 			oceanFalse,
 			MonsterList(Ship)
@@ -362,7 +362,7 @@ MonsterDB::MonsterDB(){
 		MonsterRef(
 			Ghostdeviltchi,
 			ghostdeviltchi1,ghostdeviltchi2,ghostdeviltchi3,
-			MOVER,
+			FLOATER,
 			TEEN_STAGE,
 			oceanFalse,
 			MonsterList(Debirudori,Kabodebitchi)
@@ -380,7 +380,7 @@ MonsterDB::MonsterDB(){
 		MonsterRef(
 			Ginjirotenshi,
 			ginjirotenshi1,ginjirotenshi2,ginjirotenshi3,
-			MOVER,
+			FLOATER,
 			ADULT_STAGE,
 			oceanFalse,
 			MonsterList(Ship)
@@ -451,7 +451,7 @@ MonsterDB::MonsterDB(){
 	monsterRepo[Hanatchi] = 
 		MonsterRef(
 			Hanatchi,
-			hanatchi1,hanatchi2,
+			hanatchi1,hanatchi2,hanatchi3,
 			MOVER,
 			ADULT_STAGE,
 			oceanFalse,
@@ -479,7 +479,7 @@ MonsterDB::MonsterDB(){
 		MonsterRef(
 			Hikotchi,
 			hikotchi1,hikotchi2,
-			MOVER,
+			FLOATER,
 			TEEN_STAGE,
 			oceanFalse,
 			MonsterList(Androtchi,Takotchi,Kuchipatchi,Hiratchi)
@@ -487,7 +487,7 @@ MonsterDB::MonsterDB(){
 	monsterRepo[Hinotamatchi] = 
 		MonsterRef(
 			Hinotamatchi,
-			hinotamatchi1,hinotamatchi2,
+			hinotamatchi1,hinotamatchi2,hinotamatchi3,
 			MOVER,
 			TEEN_STAGE,
 			oceanFalse,
@@ -543,7 +543,7 @@ MonsterDB::MonsterDB(){
 		MonsterRef(
 			Kabodebitchi,
 			kabodebitchi1,kabodebitchi2,kabodebitchi3,
-			MOVER,
+			FLOATER,
 			ADULT_STAGE,
 			oceanFalse,
 			MonsterList(Ship)
@@ -588,7 +588,7 @@ MonsterDB::MonsterDB(){
 		MonsterRef(
 			Kingdeviltchi,
 			kingdeviltchi1,kingdeviltchi2,kingdeviltchi3,
-			MOVER,
+			FLOATER,
 			ADULT_STAGE,
 			oceanFalse,
 			MonsterList(Ship)
@@ -597,7 +597,7 @@ MonsterDB::MonsterDB(){
 		MonsterRef(
 			Kingyotchi,
 			kingyotchi1,kingyotchi2,
-			MOVER,
+			FLOATER,
 			TEEN_STAGE,
 			oceanTrue,
 			MonsterList(Taiyakitchi,Kaitchi,Kujiratchi,Ashigyotchi)
@@ -615,7 +615,7 @@ MonsterDB::MonsterDB(){
 		MonsterRef(
 			Kotoden,
 			kotoden1,kotoden2,kotoden3,
-			MOVER,
+			FLOATER,
 			TEEN_STAGE,
 			oceanFalse,
 			MonsterList(Kuriten,Ginjirotenshi)
@@ -660,7 +660,7 @@ MonsterDB::MonsterDB(){
 		MonsterRef(
 			Kuragetchi,
 			kuragetchi1,kuragetchi2,
-			MOVER,
+			FLOATER,
 			CHILD_STAGE,
 			oceanTrue,
 			MonsterList(Kingyotchi,Otototchi)
@@ -669,7 +669,7 @@ MonsterDB::MonsterDB(){
 		MonsterRef(
 			Kuridebitchi,
 			kuridebitchi1,kuridebitchi2,kuridebitchi3,
-			MOVER,
+			FLOATER,
 			ADULT_STAGE,
 			oceanFalse,
 			MonsterList(Ship)
@@ -678,7 +678,7 @@ MonsterDB::MonsterDB(){
 		MonsterRef(
 			Kuriten,
 			kuriten1,kuriten2,kuriten3,
-			MOVER,
+			FLOATER,
 			ADULT_STAGE,
 			oceanFalse,
 			MonsterList(Futagotenshi,Ship,Ship)
@@ -768,7 +768,7 @@ MonsterDB::MonsterDB(){
 		MonsterRef(
 			Maruten,
 			maruten1,maruten2,
-			MOVER,
+			FLOATER,
 			CHILD_STAGE,
 			oceanFalse,
 			MonsterList(Kotoden,Takoten)
@@ -939,7 +939,7 @@ MonsterDB::MonsterDB(){
 		MonsterRef(
 			Ningyotchi,
 			ningyotchi1,ningyotchi2,
-			MOVER,
+			FLOATER,
 			ADULT_STAGE,
 			oceanTrue,
 			MonsterList(Ship,Grave)
@@ -1011,7 +1011,7 @@ MonsterDB::MonsterDB(){
 		MonsterRef(
 			Otototchi,
 			otototchi1,otototchi2,
-			MOVER,
+			FLOATER,
 			TEEN_STAGE,
 			oceanTrue,
 			MonsterList(Keropyontchi,Taiyakitchi,Kujiratchi,Kaitchi)
@@ -1020,7 +1020,7 @@ MonsterDB::MonsterDB(){
 		MonsterRef(
 			Oyajidebiru,
 			oyajidebiru1,oyajidebiru2,
-			MOVER,
+			FLOATER,
 			TEEN_STAGE,
 			oceanFalse,
 			MonsterList(Kabodebitchi,Debirukotchi)
@@ -1047,7 +1047,7 @@ MonsterDB::MonsterDB(){
 		MonsterRef(
 			Picodevimon,
 			picodevimon1,picodevimon2,picodevimon3,
-			MOVER,
+			FLOATER,
 			TEEN_STAGE,
 			oceanFalse,
 			MonsterList(Devimon,Bakemon,Meramon)
@@ -1056,7 +1056,7 @@ MonsterDB::MonsterDB(){
 		MonsterRef(
 			Pitchmon,
 			pitchmon1,pitchmon2,pitchmon3,
-			MOVER,
+			FLOATER,
 			BABY_STAGE,
 			oceanTrue,
 			MonsterList(Pukamon)
@@ -1065,7 +1065,7 @@ MonsterDB::MonsterDB(){
 		MonsterRef(
 			Piximon,
 			piximon1,piximon2,piximon3,
-			MOVER,
+			FLOATER,
 			ADULT_STAGE,
 			oceanFalse,
 			MonsterList(Mainframe)
@@ -1074,7 +1074,7 @@ MonsterDB::MonsterDB(){
 		MonsterRef(
 			Planktontchi,
 			planktontchi1,planktontchi2,
-			MOVER,
+			FLOATER,
 			BABY_STAGE,
 			oceanTrue,
 			MonsterList(Kuragetchi)
@@ -1101,7 +1101,7 @@ MonsterDB::MonsterDB(){
 		MonsterRef(
 			Propellertchi,
 			propellertchi1,propellertchi2,propellertchi3,
-			MOVER,
+			FLOATER,
 			TEEN_STAGE,
 			oceanFalse,
 			MonsterList(Hiratchi,Nyorotchi,Masktchi)
@@ -1110,7 +1110,7 @@ MonsterDB::MonsterDB(){
 		MonsterRef(
 			Pukamon,
 			pukamon1,pukamon2,pukamon3,
-			MOVER,
+			FLOATER,
 			CHILD_STAGE,
 			oceanTrue,
 			MonsterList(Gomamon,Shakomon,Gizamon)
@@ -1128,7 +1128,7 @@ MonsterDB::MonsterDB(){
 		MonsterRef(
 			Pukuten,
 			pukuten1,pukuten2,
-			MOVER,
+			FLOATER,
 			ADULT_STAGE,
 			oceanFalse,
 			MonsterList(Ship,Ship,Futagotenshi)
@@ -1263,7 +1263,7 @@ MonsterDB::MonsterDB(){
 		MonsterRef(
 			Takoten,
 			takoten1,takoten2,takoten3,
-			MOVER,
+			FLOATER,
 			TEEN_STAGE,
 			oceanFalse,
 			MonsterList(Pukuten,Taraten)
@@ -1299,7 +1299,7 @@ MonsterDB::MonsterDB(){
 		MonsterRef(
 			Taraten,
 			taraten1,taraten2,
-			MOVER,
+			FLOATER,
 			ADULT_STAGE,
 			oceanFalse,
 			MonsterList(Sabotenshi,Ship,Ship)
@@ -1416,7 +1416,7 @@ MonsterDB::MonsterDB(){
 		MonsterRef(
 			Whamon,
 			whamon1,whamon2,whamon3,
-			MOVER,
+			FLOATER,
 			ADULT_STAGE,
 			oceanTrue,
 			MonsterList(Metalpiranimon,Mainframe)
@@ -1524,7 +1524,7 @@ Monster* MonsterDB::newMonster(MonsterName name){
       return new Sitter(monsterRepo[name],0);
       break;
     case FLOATER:
-      Serial.println("got floater");
+      return new FloaterMon(monsterRepo[name],0);
       break;
   }
   return NULL;

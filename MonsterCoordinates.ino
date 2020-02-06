@@ -3,7 +3,7 @@ MonsterCoordinates::MonsterCoordinates(){
   yPos = 32;
 
   xDir = -1;
-  yDir = 0;
+  yDir = 1;
 
   xBoundL = 0;
   xBoundR = 96;

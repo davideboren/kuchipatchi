@@ -98,7 +98,7 @@ Events Controller::generateRandomEvent(){
 	if(random(100) > 20){
 		return IDLE_EVENT;
 	} else {
-		return random(NUM_RANDOM_EVENTS);
+		return static_cast<Events>(random(NUM_RANDOM_EVENTS));
 	}
 }
 

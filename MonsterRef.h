@@ -7,7 +7,7 @@
 struct MonsterRef{
 
   unsigned int lifespans[LAST_STAGE];
-  int lifespanScaler = 120;
+  int lifespanScaler = 600;
   
   MonsterName myName;
   const uint8_t *bmp1, *bmp2, *bmp3;
