@@ -6,7 +6,7 @@
 
 #include "MonsterDB.h"
 
-class FloaterMon : public Monster{
+class FloaterMon : public MoverMon{
 
   public:
     FloaterMon(MonsterRef ref, unsigned int age);
@@ -15,9 +15,4 @@ class FloaterMon : public Monster{
     void queueWalk();
 	int generateFloatDist();
 	void queueStand();
-    void idleRoutine();
-    void gotoRoutine();
-    void standRoutine();
-    void heartbeat();
-    bool inBounds();
 };
