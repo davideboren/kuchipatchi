@@ -1,3 +1,7 @@
+Sitter::Sitter(){
+	
+}
+
 Sitter::Sitter(MonsterRef ref, unsigned int age){
   dna = ref;
 

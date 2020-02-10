@@ -128,7 +128,7 @@ void Controller::evolveMonster(int slot){
   addMonster(nextMon, static_cast<ActiveMonsterSlot>(slot));
 
   activeMonsters[slot] -> setXPos(currentX);
-  activeMonsters[slot] -> setYPos(currentY);
+  //activeMonsters[slot] -> setYPos(currentY);
   activeMonsters[slot] -> setBoundsX(currentXBoundL, currentXBoundR);
 }
 

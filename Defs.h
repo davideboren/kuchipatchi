@@ -15,6 +15,7 @@ enum MonsterType {
   EGG,
   MOVER,
   SITTER,
+  SHY_SITTER,
   FLOATER
 };
 

@@ -4,10 +4,10 @@ MonsterRef::MonsterRef(){
 
 MonsterRef::MonsterRef(MonsterName myname, const uint8_t *s1, const uint8_t *s2, const uint8_t *s3, MonsterType type, MonsterStage stage, bool isUnderwater, MonsterList evolist){
   lifespans[EGG_STAGE] =      	60*lifespanScaler;
-  lifespans[BABY_STAGE] =     		240*lifespanScaler;
-  lifespans[CHILD_STAGE] =  		300*lifespanScaler;
-  lifespans[TEEN_STAGE] =     		360*lifespanScaler;
-  lifespans[ADULT_STAGE] =     	360*lifespanScaler;
+  lifespans[BABY_STAGE] =     		200*lifespanScaler;
+  lifespans[CHILD_STAGE] =  		240*lifespanScaler;
+  lifespans[TEEN_STAGE] =     		300*lifespanScaler;
+  lifespans[ADULT_STAGE] =     	300*lifespanScaler;
   lifespans[POOP_STAGE] =     		10*lifespanScaler;
   lifespans[DEATH_STAGE] =     	60*lifespanScaler;
   
@@ -31,10 +31,10 @@ MonsterRef::MonsterRef(MonsterName myname, const uint8_t *s1, const uint8_t *s2,
 
 MonsterRef::MonsterRef(MonsterName myname, const uint8_t *s1, const uint8_t *s2, MonsterType type, MonsterStage stage, bool isUnderwater, MonsterList evolist){
   lifespans[EGG_STAGE] =      	60*lifespanScaler;
-  lifespans[BABY_STAGE] =     		240*lifespanScaler;
-  lifespans[CHILD_STAGE] =  		300*lifespanScaler;
-  lifespans[TEEN_STAGE] =     		360*lifespanScaler;
-  lifespans[ADULT_STAGE] =     	360*lifespanScaler;
+  lifespans[BABY_STAGE] =     		200*lifespanScaler;
+  lifespans[CHILD_STAGE] =  		240*lifespanScaler;
+  lifespans[TEEN_STAGE] =     		300*lifespanScaler;
+  lifespans[ADULT_STAGE] =     	300*lifespanScaler;
   lifespans[POOP_STAGE] =     		10*lifespanScaler;
   lifespans[DEATH_STAGE] =     	60*lifespanScaler;
   

@@ -18,6 +18,7 @@ FloaterMon::FloaterMon(MonsterRef ref, unsigned int age){
   monsterAge = age;
 
   queueStand();
+ 
 }
 
 FloaterMon::~FloaterMon(){
@@ -55,7 +56,7 @@ int FloaterMon::generateFloatDist(){
 	int floatDist = 0;
 	
 	bool floatUp;
-	if(random(5) > 2){
+	if(random(3) == 0){
 		floatUp = true;
 	} else {
 		floatUp = false;
@@ -67,7 +68,7 @@ int FloaterMon::generateFloatDist(){
 		}
 	} else {
 		if(getYPos() < 32){
-			return 2;
+			return 1;
 		}
 	}
 	return 0;

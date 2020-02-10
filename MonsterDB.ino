@@ -561,7 +561,7 @@ MonsterDB::MonsterDB(){
 		MonsterRef(
 			Kaitchi,
 			kaitchi1,kaitchi2,
-			SITTER,
+			SHY_SITTER,
 			ADULT_STAGE,
 			oceanTrue,
 			MonsterList(Ningyotchi,Ship)
@@ -1522,6 +1522,9 @@ Monster* MonsterDB::newMonster(MonsterName name){
       break;
     case SITTER:
       return new Sitter(monsterRepo[name],0);
+      break;
+	case SHY_SITTER:
+	  return new ShySitter(monsterRepo[name],0);
       break;
     case FLOATER:
       return new FloaterMon(monsterRepo[name],0);

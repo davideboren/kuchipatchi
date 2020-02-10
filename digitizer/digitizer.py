@@ -1,3 +1,7 @@
+# digitizer.py
+# This python script walks through sprites in ./sprite and automatically generates byte arrays 
+# and enums in ../sprites.h
+
 from PIL import Image
 import os
 import re
@@ -6,7 +10,7 @@ spriteList = []
 spriteEnumList = []
 spriteEnumString = "enum MonsterName {\n"
 
-stageDec = []
+#stageDec = []
 varDec = []
 
 #These sprites don't need stage declarations or enums
@@ -26,19 +30,9 @@ for sprite in sorted(spriteList):
 	#Add monster to enums and stage case list
 	if spriteNameNoDigits not in banlist:
 		if spriteEnum not in spriteEnumList:
-			#New sprite, so cap off previous stage declaration
-			if len(stageDec) != 0:
-				stageDec[-1] = stageDec[-1] + "16,lifespanSave,lifespan);\n      " + \
-									"EEPROM.put(0,stager());\n      break;"
-			
-			#add to enums and start stage declaration
+			#add to enums
 			spriteEnumList.append(spriteEnum)
 			spriteEnumString = spriteEnumString + "  " + spriteEnum + ",\n"
-			stageDec.append("    case " + spriteEnum + ":\n" + \
-							"      tamaStageMover(" + spriteName + ",")
-		elif spriteEnum in spriteEnumList:
-			stageDec[-1] = stageDec[-1] + spriteName + ","
-		
 		
 	print("Processing: " +spritePath)
 
@@ -76,6 +70,3 @@ spriteEnumString = spriteEnumString + "};\n"
 spriteFile = open("../sprites.h","w")
 spriteFile.write(spriteEnumString)
 spriteFile.write("\n".join(varDec))
-
-#stageFile = open("./stagetemplates.h","w")
-#stageFile.write("\n".join(stageDec))

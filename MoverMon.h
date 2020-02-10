@@ -12,7 +12,7 @@ class MoverMon : public Monster{
     MoverMon(MonsterRef ref, unsigned int age);
     MoverMon();
     ~MoverMon();
-    void queueWalk();
+    virtual void queueWalk();
     void idleRoutine();
     void gotoRoutine();
     void standRoutine();

@@ -32,7 +32,7 @@ class Monster{
     bool taskDone;
 
     void updateAge();
-    void queueStand();
+    virtual void queueStand();
 	void queuePoop();
 
   public:
