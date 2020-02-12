@@ -27,6 +27,7 @@
 #include "EvolveFX.h"
 #include "BubbleFX.h"
 #include "FlusherFX.h"
+#include "SnowFX.h"
 #include "ShySitter.h"
 
 #define OLED_RESET 4

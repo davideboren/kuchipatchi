@@ -31,7 +31,8 @@ void Controller::activate(){
 	//addMonster(botamon,PRIMARY);
 	
 	//Always idle for a moment before entering event loop
-	//idleEvent();
+	//activeFX[SNOW_FX_SLOT] = mdb.newFX(SNOW_FX);
+	idleEvent();
 	
 	while(1){
 
@@ -95,7 +96,7 @@ void Controller::addMonster(MonsterName name, ActiveMonsterSlot slot){
 }
 
 Events Controller::generateRandomEvent(){
-	if(random(100) > 20){
+	if(random(100) > 10){
 		return IDLE_EVENT;
 	} else {
 		return static_cast<Events>(random(NUM_RANDOM_EVENTS));
@@ -119,7 +120,7 @@ void Controller::evolveMonster(int slot){
   MonsterName nextMon = activeMonsters[slot] -> getNextMonsterName();
 
   int currentX = activeMonsters[slot] -> getXPos();
-  int currentY = activeMonsters[slot] -> getYPos();
+  //int currentY = activeMonsters[slot] -> getYPos();
   int currentXBoundL = activeMonsters[slot] -> getXBoundL();
   int currentXBoundR = activeMonsters[slot] -> getXBoundR();
 
@@ -259,7 +260,8 @@ void Controller::evoEvent(int slot){
 }
 
 void Controller::evoEventNoAnim(int slot){
-  evolveMonster(slot);
+	//sendMonsterToPos(slot, 48);
+	evolveMonster(slot);
 }
 
 

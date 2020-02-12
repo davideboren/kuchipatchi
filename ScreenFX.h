@@ -16,6 +16,7 @@ class ScreenFX{
 		
 		
 		ScreenFX();
+		virtual ~ScreenFX();
 		
 		virtual void heartbeat();
     virtual bool finished();

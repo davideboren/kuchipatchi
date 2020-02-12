@@ -14,7 +14,7 @@ spriteEnumString = "enum MonsterName {\n"
 varDec = []
 
 #These sprites don't need stage declarations or enums
-banlist = ["blank", "bubble", "evolve", "flusher" ]
+banlist = ["blank", "bubble", "evolve", "flusher", "dot" ]
 
 for r, d, f in os.walk("sprite"):
 	for file in f:

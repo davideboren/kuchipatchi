@@ -2,6 +2,10 @@ ScreenFX::ScreenFX(){
 
 }
 
+ScreenFX::~ScreenFX(){
+
+}
+
 void ScreenFX::heartbeat(){
 	Serial.println("Got FX base class heartbeat, something went wrong");
 }

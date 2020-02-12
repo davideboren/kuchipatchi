@@ -23,7 +23,7 @@ class Controller{
     int xBoundL_vis, xBoundR_vis;
 
     Monster* activeMonsters[10];
-    ScreenFX* activeFX[3];
+    ScreenFX* activeFX[LAST_FX_SLOT];
 
     void addMonster(MonsterName name, ActiveMonsterSlot slot);
     void deleteMonster(int slot);

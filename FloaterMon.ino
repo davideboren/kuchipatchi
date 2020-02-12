@@ -53,7 +53,6 @@ void FloaterMon::queueWalk(){
 }
 
 int FloaterMon::generateFloatDist(){
-	int floatDist = 0;
 	
 	bool floatUp;
 	if(random(3) == 0){

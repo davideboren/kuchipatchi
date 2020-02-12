@@ -1544,6 +1544,16 @@ ScreenFX* MonsterDB::newFX(FXType fx){
     case EVOLVE_FX:
       return new EvolveFX();
       break;
+	case SNOW_FX:
+      return new SnowFX();
+      break;
+	case LAST_FX:
+	  Serial.println("Attempting to create LAST_FX, something is wrong.");
+	  return new SnowFX();
+	  break;
+	default:
+	  Serial.println("newFX is defaulting. Something is wrong.");
+	  return new SnowFX();
   }
 }
 
