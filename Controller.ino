@@ -86,13 +86,46 @@ void Controller::addMonster(MonsterName name, ActiveMonsterSlot slot){
   activeMonsters[slot] = mdb.newMonster(name);
 
   if(slot == PRIMARY){
-    if(mdb.isUnderwater(name) && activeFX[BUBBLE_FX_SLOT] == NULL){
-      activeFX[BUBBLE_FX_SLOT] = mdb.newFX(BUBBLE_FX);
-    }
-    else if(!mdb.isUnderwater(name) && activeFX[BUBBLE_FX_SLOT] != NULL){
-      deleteFX(BUBBLE_FX_SLOT);
-    }
+	spawnBiomeFX(mdb.getMonsterBiome(name));  
   }
+}
+
+void Controller::spawnBiomeFX(Biome biome){
+	switch(biome){
+		case LAND:
+			break;
+		case OCEAN:
+			if(activeFX[BUBBLE_FX_SLOT] == NULL){
+				activeFX[BUBBLE_FX_SLOT] = mdb.newFX(BUBBLE_FX);
+			}
+			break;
+		case SNOW:
+			if(activeFX[SNOW_FX_SLOT] == NULL){
+				activeFX[SNOW_FX_SLOT] = mdb.newFX(SNOW_FX);
+			}
+			break;
+		default:
+			break;
+	}
+}
+
+void Controller::despawnBiomeFX(Biome biome){
+	switch(biome){
+		case LAND:
+			break;
+		case OCEAN:
+			if(activeFX[BUBBLE_FX_SLOT] != NULL){
+				deleteFX(BUBBLE_FX_SLOT);
+			}
+			break;
+		case SNOW:
+			if(activeFX[SNOW_FX_SLOT] != NULL){
+				deleteFX(BUBBLE_FX_SLOT);
+			}
+			break;
+		default:
+			break;
+	}
 }
 
 Events Controller::generateRandomEvent(){
@@ -112,8 +145,14 @@ void Controller::drawFrame(Frame f){
 }
 
 void Controller::deleteMonster(int slot){
-  delete activeMonsters[slot];
-  activeMonsters[slot] = NULL;
+	
+	if(slot == PRIMARY){
+		MonsterName currentMonster = activeMonsters[slot] -> getName();
+		despawnBiomeFX(mdb.getMonsterBiome(currentMonster));
+	}
+	
+	delete activeMonsters[slot];
+	activeMonsters[slot] = NULL;
 }
 
 void Controller::evolveMonster(int slot){

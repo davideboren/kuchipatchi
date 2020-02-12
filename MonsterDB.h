@@ -15,6 +15,7 @@ struct MonsterDB{
   const uint8_t *   getSprite3(MonsterName name);
   MonsterType   getMonsterType(MonsterName name);
   MonsterStage getMonsterStage(MonsterName name);
+  Biome getMonsterBiome(MonsterName name);
   bool isUnderwater(MonsterName name);
   Monster* newMonster(MonsterName name);
   ScreenFX* newFX(FXType fx);

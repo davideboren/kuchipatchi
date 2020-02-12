@@ -26,6 +26,8 @@ class Controller{
     ScreenFX* activeFX[LAST_FX_SLOT];
 
     void addMonster(MonsterName name, ActiveMonsterSlot slot);
+	void spawnBiomeFX(Biome biome);
+	void despawnBiomeFX(Biome biome);
     void deleteMonster(int slot);
     void evolveMonster(int slot);
     void evoEvent(int slot);

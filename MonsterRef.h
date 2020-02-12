@@ -14,13 +14,14 @@ struct MonsterRef{
   MonsterType monsterType;
   MonsterStage monsterStage;
   bool oceanType;
+  Biome biome;
   unsigned int monsterLifespan;
   
   MonsterList evoList;
 
   MonsterRef();
-  MonsterRef(MonsterName myname, const uint8_t *s1, const uint8_t *s2, const uint8_t *s3, MonsterType type, MonsterStage stage, bool isUnderwater, MonsterList evolist);
-  MonsterRef(MonsterName myname, const uint8_t *s1, const uint8_t *s2, MonsterType type, MonsterStage stage, bool isUnderwater, MonsterList evolist);
+  MonsterRef(MonsterName myname, const uint8_t *s1, const uint8_t *s2, const uint8_t *s3, MonsterType type, MonsterStage stage, Biome bio, MonsterList evolist);
+  MonsterRef(MonsterName myname, const uint8_t *s1, const uint8_t *s2, MonsterType type, MonsterStage stage, Biome bio, MonsterList evolist);
 
 };
 

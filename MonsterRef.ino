@@ -2,7 +2,7 @@ MonsterRef::MonsterRef(){
 
 }
 
-MonsterRef::MonsterRef(MonsterName myname, const uint8_t *s1, const uint8_t *s2, const uint8_t *s3, MonsterType type, MonsterStage stage, bool isUnderwater, MonsterList evolist){
+MonsterRef::MonsterRef(MonsterName myname, const uint8_t *s1, const uint8_t *s2, const uint8_t *s3, MonsterType type, MonsterStage stage, Biome bio, MonsterList evolist){
   lifespans[EGG_STAGE] =      	60*lifespanScaler;
   lifespans[BABY_STAGE] =     		200*lifespanScaler;
   lifespans[CHILD_STAGE] =  		240*lifespanScaler;
@@ -23,13 +23,13 @@ MonsterRef::MonsterRef(MonsterName myname, const uint8_t *s1, const uint8_t *s2,
 
   monsterLifespan = lifespans[stage];
 
-  oceanType = isUnderwater;
+  biome = bio;
   
   evoList = evolist;
 
 }
 
-MonsterRef::MonsterRef(MonsterName myname, const uint8_t *s1, const uint8_t *s2, MonsterType type, MonsterStage stage, bool isUnderwater, MonsterList evolist){
+MonsterRef::MonsterRef(MonsterName myname, const uint8_t *s1, const uint8_t *s2, MonsterType type, MonsterStage stage, Biome bio, MonsterList evolist){
   lifespans[EGG_STAGE] =      	60*lifespanScaler;
   lifespans[BABY_STAGE] =     		200*lifespanScaler;
   lifespans[CHILD_STAGE] =  		240*lifespanScaler;
@@ -50,7 +50,7 @@ MonsterRef::MonsterRef(MonsterName myname, const uint8_t *s1, const uint8_t *s2,
 
   monsterLifespan = lifespans[stage];
 
-  oceanType = isUnderwater;
+  biome = bio;
   
   evoList = evolist;
 
