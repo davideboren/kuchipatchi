@@ -51,7 +51,8 @@ MonsterList::MonsterList(MonsterName m1, MonsterName m2, MonsterName m3, Monster
 }
 
 MonsterName MonsterList::getRandomMonsterName(){
+	randomSeed(analogRead(0));
 	int randId = random(numNames);
-	return mlist[randId];
+	return static_cast<MonsterName>(mlist[randId]);
 }
 
