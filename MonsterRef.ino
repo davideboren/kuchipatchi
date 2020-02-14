@@ -8,6 +8,7 @@ MonsterRef::MonsterRef(MonsterName myname, const uint8_t *s1, const uint8_t *s2,
   lifespans[CHILD_STAGE] =  		240*lifespanScaler;
   lifespans[TEEN_STAGE] =     		300*lifespanScaler;
   lifespans[ADULT_STAGE] =     	300*lifespanScaler;
+  lifespans[ELDER_STAGE] =     	200*lifespanScaler;
   lifespans[POOP_STAGE] =     		10*lifespanScaler;
   lifespans[DEATH_STAGE] =     	60*lifespanScaler;
   
@@ -35,6 +36,7 @@ MonsterRef::MonsterRef(MonsterName myname, const uint8_t *s1, const uint8_t *s2,
   lifespans[CHILD_STAGE] =  		240*lifespanScaler;
   lifespans[TEEN_STAGE] =     		300*lifespanScaler;
   lifespans[ADULT_STAGE] =     	300*lifespanScaler;
+  lifespans[ELDER_STAGE] =     	200*lifespanScaler;
   lifespans[POOP_STAGE] =     		10*lifespanScaler;
   lifespans[DEATH_STAGE] =     	60*lifespanScaler;
   

@@ -415,11 +415,11 @@ MonsterDB::MonsterDB(){
 	monsterRepo[Gozarutchi] = 
 		MonsterRef(
 			Gozarutchi,
-			gozarutchi1,gozarutchi2,
+			gozarutchi1,gozarutchi2,gozarutchi3,
 			MOVER,
 			ADULT_STAGE,
 			LAND,
-			MonsterList(Ship,Grave)
+			MonsterList(Ship,Kashiratchi,Kashiratchi)
 		);
 	monsterRepo[Greymon] = 
 		MonsterRef(
@@ -565,6 +565,15 @@ MonsterDB::MonsterDB(){
 			ADULT_STAGE,
 			OCEAN,
 			MonsterList(Ningyotchi,Ship)
+		);
+	monsterRepo[Kashiratchi] = 
+		MonsterRef(
+			Kashiratchi,
+			kashiratchi1,kashiratchi2,
+			MOVER,
+			ELDER_STAGE,
+			LAND,
+			MonsterList(Grave,Ship)
 		);
 	monsterRepo[Keropyontchi] = 
 		MonsterRef(
@@ -1024,6 +1033,15 @@ MonsterDB::MonsterDB(){
 			TEEN_STAGE,
 			LAND,
 			MonsterList(Kabodebitchi,Debirukotchi)
+		);
+	monsterRepo[Oyajitchi] =
+		MonsterRef(
+			Oyajitchi,
+			oyajitchi1,oyajitchi2,oyajitchi3,
+			MOVER,
+			ELDER_STAGE,
+			LAND,
+			MonsterList(Ship,Grave)
 		);
 	monsterRepo[Patamon] = 
 		MonsterRef(
