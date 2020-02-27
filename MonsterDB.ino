@@ -533,10 +533,10 @@ MonsterDB::MonsterDB(){
 	monsterRepo[Ikkakumon] = 
 		MonsterRef(
 			Ikkakumon,
-			ikkakumon1,ikkakumon2,
+			ikkakumon1,ikkakumon2,ikkakumon3,
 			MOVER,
 			ADULT_STAGE,
-			LAND,
+			SNOW,
 			MonsterList(Zudomon,Zudomon,Whamon,Megaseadramon)
 		);
 	monsterRepo[Kabodebitchi] = 
@@ -1490,7 +1490,7 @@ MonsterDB::MonsterDB(){
 			zudomon1,zudomon2,
 			MOVER,
 			ADULT_STAGE,
-			OCEAN,
+			SNOW,
 			MonsterList(Mainframe)
 		);
 	monsterRepo[Zukidebitchi] = 
