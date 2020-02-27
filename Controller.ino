@@ -163,7 +163,8 @@ void Controller::evolveMonster(int slot){
   int currentXBoundL = activeMonsters[slot] -> getXBoundL();
   int currentXBoundR = activeMonsters[slot] -> getXBoundR();
 
-  delete activeMonsters[slot];
+  //delete activeMonsters[slot];
+  deleteMonster(slot);
 
   addMonster(nextMon, static_cast<ActiveMonsterSlot>(slot));
 
