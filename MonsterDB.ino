@@ -497,7 +497,7 @@ MonsterDB::MonsterDB(){
 		MonsterRef(
 			Hiratchi,
 			hiratchi1,hiratchi2,hiratchi3,
-			MOVER,
+			FLOATER,
 			ADULT_STAGE,
 			LAND,
 			MonsterList(Grave,Ship)
